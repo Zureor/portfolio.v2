@@ -192,6 +192,14 @@ export const Contact = () => {
             >
               Pinterest
             </Button>
+            <Button
+              secondary
+              data-visible={visible}
+              href="https://github.com/Zureor"
+              icon="github"
+            >
+              Github
+            </Button>
           </form>
           
         )}

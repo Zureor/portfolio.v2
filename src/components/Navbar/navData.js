@@ -15,6 +15,7 @@ export const navLinks = [
     label: 'Contact',
     pathname: '/contact',
   },
+
 ];
 
 export const socialLinks = [
@@ -24,9 +25,9 @@ export const socialLinks = [
     icon: 'facebook',
   },
   {
-    label: 'Instagram',
-    url: 'https://www.instagram.com/absolutely_not_shoaib',
-    icon: 'instagram',
+    label: 'Github',
+    url: 'https://github.com/Zureor',
+    icon: 'github',
   },
   {
     label: 'Linkedin',
