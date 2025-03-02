@@ -1,0 +1,44 @@
+---
+title: 'How I built this site'
+abstract: I originally migrated this portfolio site back in 2023, and since then it's evolved quite a bit. Recently I migrated from Create React App to Next.js and made some major upgrades in the process.
+date: '2024-04-02'
+banner: /static/hello-world-banner.jpg
+---
+
+## How it all started
+
+Back in 2023, I decided to update my portfolio site. I wanted something different, a site that captured the essence of the 80s and 90s Cyberpunk aesthetic. Movies like Ghost in the Shell (1995), The Matrix (1999), and Akira (1988) heavily influenced my design choices. You'll see nods to these films throughout the site, like the bold lettering on the homepage inspired by Katakana and the text decoding effect reminiscent of the "Digital rain" from The Matrix (which itself was inspired by Ghost in the Shell's opening credits). There's even a hidden tribute to Ghost in the Shell on my [404 page](/404).
+
+![A scene from Ghost in the Shell (1995) with the Major cloaking with thermoptic camouflage; the poster for Akira; The Matrix's digital rain effect](/static/inspiration.png)
+
+## From Remix to Next.js
+
+While Hamish's website leveraged Remix.js, I opted for Next.js to build my own. Remix is a great framework, but Next.js offered a better fit for my specific needs, particularly when it came to static site generation.
+
+## Rebuilding with Next.js
+
+I built the site using Next.js, a framework that offered the flexibility I needed for both static content and potentially incorporating server-side rendering functionalities in the future. For styling, I opted for react and three-js to achieve the desired look and feel. To create the interactive 3D elements on the homepage and throughout the site, I utilized models I designed for my own project.
+
+## Choosing Next.js
+
+Initially, I considered using frameworks like Remix.js, [list of other frameworks considered] for the project. However, after careful evaluation, I determined that Next.js best aligned with my goals, especially since I wanted to:
+
+- **Pre-render static content:** This is a strength of Next.js and improves initial page load speed.
+- **Maintain flexibility:** Next.js allows for the possibility of incorporating server-side rendering features in the future if needed.
+
+## Challenges and solutions
+
+Transitioning from Remix to Next.js involved some adjustments, but the overall process was manageable. Here are some of the hurdles I encountered:
+
+### 1. Route transitions
+
+Next.js removes styles from the previous page during route transitions, causing a sudden visual shift. This is a known issue with Next.js, and I implemented a temporary workaround based on a solution suggested in the Next.js GitHub repository.
+### 2. Scroll restoration
+
+Somewhat related to the route transitions, I had to opt out of both Next.js's and the native browser's scroll restoration in order to prevent the browser immediately scrolling to the top when the page started transitioning out. Next.js also doesn't appear to handle shifting focus when linking to the id of an element within the page, so I added that in for accessibility.
+
+## Looking back, and forward
+
+While I haven't made the code for this project public, I'm always happy to share my learnings and thought processes behind the design and development choices.
+
+I'm excited to keep evolving this website and experiment with new technologies. It will be fascinating to see how it transforms in the future!

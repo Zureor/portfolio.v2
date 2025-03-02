@@ -1,0 +1,26 @@
+
+
+  
+.education {
+  padding: 20px;
+  
+  text-align: center;
+}
+
+.timeline-item {
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5); /* Darker shadow for cyberpunk feel */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  justify-content: center;
+  min-width: 250px;
+  position: relative;
+  z-index: 1; /* Ensure text content remains above the mesh */
+  background: linear-gradient(to right, #111, #000); /* Subtle background gradient */
+  animation: background-gradient 10s ease-in-out infinite alternate;
+}
+

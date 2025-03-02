@@ -1,0 +1,20 @@
+<svg width="24" height="24" viewBox="0 0 24 24">
+   <defs>
+    <style>
+      .cls-1 {
+        fill-rule="evenodd";
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M4.15.5h15.7c2.02,0,3.65,1.64,3.65,3.65v15.7c0,2.01-1.63,3.65-3.65,3.65H4.15c-2.02,0-3.65-1.63-3.65-3.65V4.15C.5,2.13,2.13.5,4.15.5Z"/>
+    <circle class="cls-1" cx="18.84" cy="4.78" r="1.75"/>
+    <path class="cls-1" d="M11.9,7.53h0c2.54,0,4.61,2.06,4.61,4.61h0c0,2.43-1.97,4.39-4.39,4.39h0c-2.54,0-4.61-2.06-4.61-4.61h0c0-2.43,1.97-4.39,4.39-4.39Z"/>
+  
+  </svg>

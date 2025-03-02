@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule="evenodd";
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x=".5" y=".5" width="23" height="23" rx="3.79" ry="3.79"/>
+  <path class="cls-1" d="M17.75,3h3.07l-6.7,7.66,7.88,10.42h-6.17l-4.83-6.32-5.53,6.32h-3.07l7.17-8.19L2,3h6.33l4.37,5.78,5.05-5.78ZM16.68,19.24h1.7L7.41,4.74h-1.82l11.09,14.5Z"/>
+  
+</svg>
