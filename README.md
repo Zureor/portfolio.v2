@@ -18,12 +18,6 @@ Once it's done start up a local server with:
 npm run dev
 ```
 
-To view the components storybook:
-
-```bash
-npm run storybook
-```
-
 To create a production build:
 
 ```bash
