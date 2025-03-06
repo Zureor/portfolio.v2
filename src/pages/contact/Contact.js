@@ -171,7 +171,7 @@ export const Contact = () => {
             <Button
               secondary
               data-visible={visible}
-              href="https://www.linkedin.com/in/evan-ahmed-shoaib-28928b215"
+              href="https://www.linkedin.com/in/md-shoaib-rana-28928b215/"
               icon="linkedin"
             >
               Linkedin

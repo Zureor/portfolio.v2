@@ -31,7 +31,7 @@ export const socialLinks = [
   },
   {
     label: 'Linkedin',
-    url: 'https://www.linkedin.com/in/evan-ahmed-shoaib-28928b215',
+    url: 'https://www.linkedin.com/in/md-shoaib-rana-28928b215/',
     icon: 'linkedin',
   },
 ];
