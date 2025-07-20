@@ -10,6 +10,7 @@ import sliceTexture from 'assets/slice-app.jpg';
 import sprTextureLarge from 'assets/spr-lesson-builder-dark.jpg';
 import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from 'assets/spr-lesson-builder-dark.jpg';
+import github from 'assets/github.jpg';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -27,10 +28,11 @@ export const Home = () => {
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
+  const projectFour = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, projectFour, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -138,6 +140,26 @@ export const Home = () => {
           textures: [
             {
               srcSet: [sprTexture, sprTextureLarge],
+              placeholder: sprTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-4"
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
+        index={4}
+        title="Other Projects"
+        description=""
+        buttonText="View project"
+        buttonLink="/projects/github"
+        model={{
+          type: 'laptop',
+          alt: 'Smart Sparrow lesson builder',
+          textures: [
+            {
+              srcSet: [github, github],
               placeholder: sprTexturePlaceholder,
             },
           ],
