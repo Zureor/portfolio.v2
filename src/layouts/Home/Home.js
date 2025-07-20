@@ -10,7 +10,7 @@ import sliceTexture from 'assets/slice-app.jpg';
 import sprTextureLarge from 'assets/spr-lesson-builder-dark.jpg';
 import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from 'assets/spr-lesson-builder-dark.jpg';
-import github from 'assets/github.jpg';
+import github from 'assets/github.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
