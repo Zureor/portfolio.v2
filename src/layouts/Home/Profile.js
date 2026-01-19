@@ -29,11 +29,11 @@ const ProfileText = ({ visible, titleId }) => (
       about new projects, so feel free to drop me a line.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Currently, I work as a Digital Marketer at <Link href="https://www.ibcs-primax.com/education/">IBCS-Primax</Link>, where I apply my technical skills to 
-      enhance digital outreach and engagement. In pursuit of my BSc in CSE, I strategically utilize my 
-      skills as a part-time freelancer to garner practical experience and continuously refine my programming prowess.
-      Being comfortable with code allows me to rapidly prototype and validate experiences. If 
-      you’re interested in the tools and software I use check out my <Link href="/uses">uses page</Link>.
+      Currently, I work as a Packaging Coordinator at <Link href="https://allportcs.com/pac-d/">PacD</Link>, handling
+      quality control, generating reports, and developing web applications. I also work as a Digital Marketer
+      at <Link href="https://www.ibcs-primax.com/education/">IBCS-Primax</Link>, applying my technical skills to
+      enhance digital outreach. In pursuit of my BSc in CSE, I continuously refine my programming prowess
+      through practical experience. If you're interested in the tools and software I use, check out my <Link href="/uses">uses page</Link>.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       Beyond coding, I indulge in a diverse array of entertainment, immersing myself in 
@@ -42,7 +42,7 @@ const ProfileText = ({ visible, titleId }) => (
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       This portfolio stands as a testament to my capabilities and underscores my unwavering 
-      dedication to the dynamic realm of technology.{' '}<Link href="/projects/volkihar-knight">Learn More About Me</Link>.
+      dedication to the dynamic realm of technology.{' '}<Link href="/about_me">Learn More About Me</Link>.
       I’m always down for hearing about new projects, so feel free to drop me a line.
       
     </Text>

@@ -26,18 +26,18 @@ import {
 } from 'layouts/Project';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
-import styles from './Slice.module.css';
+import styles from './Zahoor.module.css';
 
 const title = 'Zahoor';
 const description =
   'In collaboration with Zahoor, a Bangladeshi online fashion boutique, I designed and developed their e-commerce website.';
 const roles = ['User Research', 'Interface Design', 'Backend Development'];
 
-export const Slice = () => {
+export const Zahoor = () => {
   return (
     <Fragment>
       <Meta title={title} prefix="Projects" description={description} />
-      <ProjectContainer className={styles.slice}>
+      <ProjectContainer className={styles.zahoor}>
         <ProjectBackground
           src={sliceBackground}
           srcSet={`${sliceBackground.src} 1280w, ${sliceBackground.src} 2560w`}

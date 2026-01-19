@@ -1,0 +1,217 @@
+.aboutMe {
+  --maxWidthL: var(--maxWidthM);
+}
+
+.section {
+  opacity: 0;
+  padding-top: var(--space2XL);
+  padding-bottom: var(--space2XL);
+  margin-top: var(--space2XL);
+
+  &:global {
+    animation: fadeIn 1s ease 0.5s forwards;
+  }
+
+  & + & {
+    margin-top: 0;
+  }
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space2XL);
+  width: 100%;
+}
+
+.skillCategory {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceM);
+}
+
+.skillBar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXS);
+}
+
+.skillName {
+  font-size: var(--fontSizeBodyS);
+  font-weight: var(--fontWeightMedium);
+  color: rgb(var(--rgbText) / 0.9);
+}
+
+.skillBarContainer {
+  width: 100%;
+  height: 8px;
+  background: rgb(var(--rgbText) / 0.1);
+  border-radius: var(--borderRadiusRound);
+  overflow: hidden;
+  position: relative;
+}
+
+.skillProgress {
+  height: 100%;
+  background: linear-gradient(90deg, rgb(var(--rgbAccent)), rgb(var(--rgbPrimary)));
+  border-radius: var(--borderRadiusRound);
+  transition: width 1.2s var(--bezierFastoutSlowin);
+}
+
+.skillPercentage {
+  font-size: var(--fontSizeBodyXS);
+  color: rgb(var(--rgbText) / 0.6);
+  text-align: right;
+}
+
+/* Timeline Styles */
+.timelineGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space3XL);
+  width: 100%;
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.timelineColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceL);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceL);
+  position: relative;
+  padding-left: var(--spaceL);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--rgbAccent)),
+      rgb(var(--rgbPrimary) / 0.3)
+    );
+    border-radius: var(--borderRadiusRound);
+  }
+}
+
+.timelineItem {
+  position: relative;
+  padding: var(--spaceM);
+  background: rgb(var(--rgbText) / 0.03);
+  border-radius: var(--borderRadius);
+  border: 1px solid rgb(var(--rgbText) / 0.08);
+  transition: all var(--durationM) var(--bezierFastoutSlowin);
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--spaceL) * -1 - 4px);
+    top: var(--spaceL);
+    width: 10px;
+    height: 10px;
+    background: rgb(var(--rgbAccent));
+    border-radius: 50%;
+    border: 2px solid rgb(var(--rgbBackground));
+    transition: transform var(--durationS) var(--bezierFastoutSlowin);
+  }
+
+  &:hover {
+    background: rgb(var(--rgbText) / 0.06);
+    border-color: rgb(var(--rgbAccent) / 0.3);
+    transform: translateX(4px);
+
+    &::before {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.timelineItemExpanded {
+  background: rgb(var(--rgbText) / 0.05);
+  border-color: rgb(var(--rgbAccent) / 0.4);
+}
+
+.timelineDate {
+  font-size: var(--fontSizeBodyXS);
+  font-weight: var(--fontWeightBold);
+  color: rgb(var(--rgbAccent));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 var(--spaceXS) 0;
+}
+
+.timelineTitle {
+  font-size: var(--fontSizeBodyM);
+  font-weight: var(--fontWeightMedium);
+  color: rgb(var(--rgbText));
+  margin: 0 0 var(--spaceXS) 0;
+}
+
+.timelineSubtitle {
+  font-size: var(--fontSizeBodyS);
+  color: rgb(var(--rgbText) / 0.7);
+  margin: 0;
+}
+
+.timelineDetails {
+  margin-top: var(--spaceM);
+  padding-top: var(--spaceM);
+  border-top: 1px solid rgb(var(--rgbText) / 0.08);
+  overflow: hidden;
+  transition: all var(--durationM) var(--bezierFastoutSlowin);
+  max-height: 0;
+  opacity: 0;
+}
+
+.timelineDetailsExpanded {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.timelineResponsibilities {
+  font-size: var(--fontSizeBodyXS);
+  font-weight: var(--fontWeightMedium);
+  color: rgb(var(--rgbText) / 0.8);
+  margin: 0 0 var(--spaceS) 0;
+}
+
+.timelineList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXS);
+}
+
+.timelineListItem {
+  font-size: var(--fontSizeBodyXS);
+  color: rgb(var(--rgbText) / 0.7);
+  padding-left: var(--spaceM);
+  position: relative;
+
+  &::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: rgb(var(--rgbAccent));
+  }
+}
+
+.downloadSection {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space2XL);
+}
