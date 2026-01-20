@@ -1,8 +1,8 @@
 # Personal portfolio
 
-[![Site preview](/public/site-preview.png)](http://shoaib.portfolio.s3-website-us-east-1.amazonaws.com/)
+[![Site preview](/public/site-preview.png)](https://ev1shoaib.netlify.app)
 
-My design portfolio to showcase a few projects. Built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](http://shoaib.portfolio.s3-website-us-east-1.amazonaws.com/).
+My design portfolio to showcase a few projects. Built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://ev1shoaib.netlify.app).
 
 ## Install & run
 
@@ -26,10 +26,22 @@ npm run build
 
 ## Deployment
 
-I've set up the site using AWS for hosting and serverless functions. You'll need an AWS account and the AWS CLI installed in order to deploy.
+The site is hosted on [Netlify](https://www.netlify.com/). Deployments happen automatically when you push to the main branch, or you can deploy manually using the Netlify CLI.
 
-Deploy the site to s3:
+### Automatic Deployment
+Simply push to the `main` branch and Netlify will build and deploy automatically.
+
+### Manual Deployment
+Install the Netlify CLI and deploy:
 
 ```bash
+npm install -g netlify-cli
+netlify login
 npm run deploy
+```
+
+For preview deployments (without publishing to production):
+
+```bash
+npm run deploy:preview
 ```

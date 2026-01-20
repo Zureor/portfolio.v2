@@ -108,6 +108,14 @@
       top: 10%;
       left: 0;
     }
+
+    @nest .summary[data-alternate='true'] & {
+      left: -14%;
+
+      @media (--mediaTablet) {
+        left: 0;
+      }
+    }
   }
 
   &[data-device='phone'] {
@@ -163,6 +171,19 @@
 
     @media (--mediaMobile) {
       right: 0;
+    }
+
+    @nest .summary[data-alternate='true'] & {
+      right: auto;
+      left: -36%;
+
+      @media (--mediaTablet) {
+        left: -10%;
+      }
+
+      @media (--mediaMobile) {
+        left: 0;
+      }
     }
   }
 

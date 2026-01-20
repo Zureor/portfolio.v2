@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "homepage": "http://shoaib.portfolio.s3-website-us-east-1.amazonaws.com/",
+  "homepage": "https://ev1shoaib.netlify.app",
   "description": "Portfolio site for Shoaib",
   "repository": "",
   "author": "Shoaib <ev1shoaib@gmail.com>",
@@ -54,9 +54,9 @@
     "dev": "next dev",
     "build": "next build",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
-    "deploy": "aws s3 sync --delete build/ s3://shoaib.portfolio",
-    "deploy:storybook": "aws s3 sync --delete build-storybook s3://ev1shoaib-portfolio-storybook",
-    "deploy:functions": "cd functions && npm run deploy",
+    "deploy": "netlify deploy --prod",
+    "deploy:preview": "netlify deploy",
+    "deploy:storybook": "netlify deploy --dir=build-storybook",
     "start": "next start",
     "test": "echo 'write some tests'",
     "storybook": "start-storybook -p 9009 -h localhost"

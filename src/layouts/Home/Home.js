@@ -7,6 +7,9 @@ import gamestackTexture from 'assets/gamestack-login.jpg';
 import sliceTextureLarge from 'assets/slice-app.jpg';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app.jpg';
+import campushubTexture from 'assets/campushub/homepage-dark.png';
+import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
+import campushubTexturePlaceholder from 'assets/campushub/homepage-dark.png';
 import github from 'assets/github.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
@@ -25,10 +28,11 @@ export const Home = () => {
   const projectTwo = useRef();
   const projectThree = useRef();
   const projectFour = useRef();
+  const projectFive = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectTwo, projectThree, projectFour, details];
+    const sections = [intro, projectTwo, projectThree, projectFour, projectFive, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -78,9 +82,30 @@ export const Home = () => {
       />
       <ProjectSummary
         id="project-1"
+        sectionRef={projectTwo}
+        visible={visibleSections.includes(projectTwo.current)}
+        index={1}
+        title="SEU CampusHub"
+        description="A modern, dynamic event management platform tailored for Southeast University students and administrators. Discover, Register, and Manage Campus Events."
+        buttonText="View project"
+        buttonLink="/projects/campushub"
+        model={{
+          type: 'laptop',
+          alt: 'SEU CampusHub Homepage',
+          textures: [
+            {
+              srcSet: [campushubTexture, campushubTextureLarge],
+              placeholder: campushubTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-2"
+        alternate
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
-        index={1}
+        index={2}
         title="Zahoor"
         description="Zahoor is a Bangladeshi e-commerce destination, curating a diverse selection of products for discerning customers nationwide."
         buttonText="View project"
@@ -97,11 +122,10 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-2"
-        alternate
-        sectionRef={projectTwo}
-        visible={visibleSections.includes(projectTwo.current)}
-        index={2}
+        id="project-3"
+        sectionRef={projectFour}
+        visible={visibleSections.includes(projectFour.current)}
+        index={3}
         title="Relive"
         description="Introducing 'Relieve' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
         buttonText="Comming Soon"
@@ -121,11 +145,11 @@ export const Home = () => {
           ],
         }}
       />
-
       <ProjectSummary
         id="project-4"
-        sectionRef={projectFour}
-        visible={visibleSections.includes(projectFour.current)}
+        alternate
+        sectionRef={projectFive}
+        visible={visibleSections.includes(projectFive.current)}
         index={4}
         title="Other Projects"
         description=""
