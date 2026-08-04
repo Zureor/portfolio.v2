@@ -113,6 +113,11 @@
   transform: translateZ(0);
   isolation: isolate;
 
+  /* Fades the whole composite out before the clip edge. The scrim alone leaves
+     the last rows a fraction short of opaque, and the hard clip at
+     --imageHeight then shows as a thin seam against the page background. */
+  mask-image: linear-gradient(to bottom, rgb(0 0 0) 60%, transparent 100%);
+
   &[data-visible='true'] {
     opacity: 1;
   }
@@ -145,7 +150,10 @@
   position: absolute;
   inset: 0;
   z-index: var(--zIndex1);
-  background: linear-gradient(var(--background1), var(--background2));
+
+  /* Solid by 80% rather than at the very bottom, so no partially transparent
+     rows survive down to the clip edge. */
+  background: linear-gradient(var(--background1), var(--background2) 80%);
 }
 
 .header {

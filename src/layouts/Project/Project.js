@@ -63,9 +63,9 @@ export function ProjectHeader({
   );
 }
 
-export const ProjectContainer = ({ className, ...rest }) => (
-  <article className={classes(styles.project, className)} {...rest} />
-);
+export const ProjectContainer = forwardRef(({ className, ...rest }, ref) => (
+  <article className={classes(styles.project, className)} ref={ref} {...rest} />
+));
 
 export const ProjectSection = forwardRef(
   (

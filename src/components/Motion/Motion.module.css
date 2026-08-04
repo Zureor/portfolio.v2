@@ -1,0 +1,42 @@
+.magnetic {
+  display: inline-flex;
+}
+
+.tilt {
+  perspective: var(--perspective, 900px);
+}
+
+.tiltInner {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.spotlight {
+  position: relative;
+
+  /* Deliberately no `overflow: hidden`: the glow is inset so it cannot escape
+     anyway, and overflow would flatten the 3D space when a Tilt wraps this. */
+  transform-style: preserve-3d;
+}
+
+/* Sits under the panel content, which gets lifted by the rule below. */
+.spotlightGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+
+  /* Accent rather than primary: primary is near-black in the light theme, and a
+     dark radial under the cursor reads as a smudge over the text. */
+  background: radial-gradient(
+    var(--glowRadius, 300px) circle at var(--glowX, 50%) var(--glowY, 50%),
+    rgb(var(--rgbAccent) / 0.16),
+    transparent 70%
+  );
+}
+
+.spotlight > *:not(.spotlightGlow) {
+  position: relative;
+  z-index: 1;
+}

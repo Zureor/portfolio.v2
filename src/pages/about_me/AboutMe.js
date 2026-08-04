@@ -1,11 +1,11 @@
+import { useGSAP } from '@gsap/react';
 import { Button } from 'components/Button';
-import { DecoderText } from 'components/DecoderText';
-import { Divider } from 'components/Divider';
 import { Footer } from 'components/Footer';
-import { Heading } from 'components/Heading';
+import { Icon } from 'components/Icon';
 import { Meta } from 'components/Meta';
-import { Section } from 'components/Section';
 import { Text } from 'components/Text';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ProjectBackground,
   ProjectContainer,
@@ -13,276 +13,685 @@ import {
   ProjectSection,
   ProjectSectionContent,
   ProjectSectionHeading,
-  ProjectTextRow,
 } from 'layouts/Project';
-import { Fragment, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { Fragment, useRef } from 'react';
 import styles from './AboutMe.module.css';
 import usesBackgroundPlaceholder from 'assets/uses-background-placeholder.jpg';
 import usesBackground from 'assets/uses-background.mp4';
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const title = 'About Me';
-const description = 'My skills, education, and professional experience.';
+const description =
+  'Computer Science graduate working across business intelligence, data analytics and workflow automation.';
+// Kept distinct from the profile copy below so the page does not open by saying
+// the same sentence twice.
+const headline =
+  'My experience in analytics and automation, published research, and qualifications.';
 
-const skills = [
-  { skill: 'Python', percentage: 85 },
-  { skill: 'Java', percentage: 62 },
-  { skill: 'C#', percentage: 75 },
-  { skill: 'C', percentage: 70 },
-  { skill: 'HTML', percentage: 95 },
-  { skill: 'CSS', percentage: 80 },
-  { skill: 'Javascript', percentage: 65 },
-  { skill: 'PHP', percentage: 58 },
+const profile = [
+  'Computer Science graduate with experience in business intelligence, data analytics, and workflow automation. Skilled in Python, SQL, Power BI, and Excel, with hands-on experience developing reporting systems and data-driven solutions.',
+  'Actively exploring generative AI and local model deployment through personal projects, applying automation to real-world coding and productivity workflows.',
 ];
 
-const softskills = [
-  { skill: 'Unity', percentage: 75 },
-  { skill: 'Unreal Engine', percentage: 80 },
-  { skill: 'Cinema 4D', percentage: 75 },
-  { skill: 'Cisco Packet Tracer', percentage: 90 },
-  { skill: 'Adobe Photoshop', percentage: 80 },
-  { skill: 'Adobe Lightroom', percentage: 90 },
-  { skill: 'Adobe Illustrator', percentage: 60 },
-  { skill: 'Android Studio', percentage: 55 },
+const snapshot = [
+  { label: 'Based in', value: 'Gulshan, Dhaka, Bangladesh' },
+  { label: 'Focus', value: 'Business intelligence, analytics, automation' },
+  { label: 'Degree', value: 'BSc Computer Science & Engineering, CGPA 3.71' },
+  { label: 'Research', value: 'Explainable ML for clinical screening' },
 ];
 
-const testingSkills = [
-  { skill: 'SQA', percentage: 70 },
-  { skill: 'Manual Testing', percentage: 75 },
-];
-
-const aiSkills = [
-  { skill: 'Prompt Engineering', percentage: 85 },
-  { skill: 'ChatGPT / Claude', percentage: 90 },
-  { skill: 'AI Image Generation', percentage: 75 },
-  { skill: 'Machine Learning Basics', percentage: 60 },
-  { skill: 'AI-Assisted Development', percentage: 80 },
-];
-
-const educationData = [
+const experience = [
   {
-    id: 1,
-    date: 'Ongoing',
-    title: "Bachelor's in Computer Science and Engineering",
-    subtitle: 'Southeast University, Dhaka, Bangladesh',
-  },
-  {
-    id: 2,
-    date: '2021',
-    title: 'Diploma in Computer Engineering',
-    subtitle: 'Dhaka Polytechnic Institute',
-    details: 'CGPA: 3.45',
-  },
-  {
-    id: 3,
-    date: '2017',
-    title: 'SSC in Science',
-    subtitle: 'Rayhan School And College, Dhaka',
-    details: 'GPA: 5.00',
-  },
-];
-
-const experienceData = [
-  {
-    id: 1,
-    date: 'Aug 2025 - Present',
-    title: 'Packaging Coordinator',
-    subtitle: 'PacD (All Port Container Services)',
-    link: 'https://allportcs.com/pac-d/',
-    responsibilities: [
-      'QC every package from factory and approve/reject them for shipping',
-      'Generating reports for suppliers and factories',
-      'Creating web applications and Excel applications for pricing calculations',
-      'Generating reports and labels for clients and suppliers',
+    id: 'pacd',
+    period: '06/2025 - 08/2026',
+    role: 'Packaging Coordinator',
+    org: 'PACD, Allport Cargo Services USA',
+    location: 'Remote',
+    url: 'https://allportcs.com/pac-d/',
+    points: [
+      'Quality-controlled packaging and shipments for six Southeast Asian countries.',
+      'Analysed operational data and produced supplier, client and internal reports using Python, Excel VBA and PowerPoint.',
+      "Replaced legacy Excel VBA reporting with a Python system that auto-generates every supplier's monthly report and raw data, adding an expanded KPI set, visual analytics and multi-year trend analysis in place of single-month tables.",
+      'Built an automated Power Automate pipeline that distributes the monthly reports to every supplier without manual handling.',
+      'Developed a web-based carton price calculator and a shipment label generator, standardising labelling across suppliers in all six countries.',
     ],
   },
   {
-    id: 2,
-    date: 'Jul 2024 - Present',
-    title: 'Digital Marketer',
-    subtitle: 'IBCS-PRIMAX Software Limited',
-    responsibilities: [
-      'Maintaining social media and answering queries for courses and training programs',
-      'Handling trainee communications from students and corporate clients',
-      'Designing banners for social media and ceremonial activities',
-      'Lab assistant managing network connections and troubleshooting',
-      'Manual testing for Dhaka WASA\'s ERP system',
-      'Course coordination for individual and corporate clients',
+    id: 'ibcs',
+    period: '06/2024 - 07/2025',
+    role: 'Course Coordinator & Digital Marketing Executive',
+    org: 'IBCS-PRIMAX Software (Bangladesh) Limited',
+    location: 'Dhaka',
+    points: [
+      'Helped the company qualify as an approved training provider for the IsDB-BISEW IT Scholarship Programme, and won Pragati Life Insurance PLC as a corporate training client.',
+      'Engineered an interactive, website-style digital course catalog that clarified prerequisites and key insights, increasing client inquiries and course sign-ups by 30%.',
+      'Rewrote and updated outdated curricula across several courses.',
+      'Coordinated course schedules and trainee communications (largely polytechnic students); ran social media, inquiries and campaign artwork.',
     ],
   },
   {
-    id: 3,
-    date: 'May 2023 - Mar 2024',
-    title: 'Freelance Web Developer',
-    subtitle: 'Self-employed',
-    responsibilities: [
-      'Custom website design and development',
-      'Responsive web development for cross-device compatibility',
-      'E-commerce development with secure payment gateways',
-      'Website maintenance and updates',
+    id: 'freelance',
+    period: '06/2023 - 04/2024',
+    role: 'Freelance Web Developer',
+    org: 'Self-employed',
+    location: 'Remote',
+    points: [
+      'Custom, responsive website design and development, e-commerce builds with secure payment gateways, and ongoing site maintenance.',
     ],
   },
   {
-    id: 4,
-    date: 'Jul 2022 - Dec 2022',
-    title: 'Game Developer Intern',
-    subtitle: 'GameXltd',
-    responsibilities: [
-      'Created Unreal Engine blueprints for game mechanics',
-      'Developed 3D models for game assets',
-      'Provided game mechanics ideas and suggestions',
+    id: 'gamex',
+    period: '07/2022 - 04/2023',
+    role: 'Junior Software Developer (Intern)',
+    org: 'GameX Ltd',
+    location: 'Dhaka',
+    points: [
+      'Built Unreal Engine blueprints for game mechanics, produced 3D assets, and contributed gameplay design proposals.',
     ],
   },
   {
-    id: 5,
-    date: 'Nov 2021 - Mar 2022',
-    title: 'Network Engineer Intern',
-    subtitle: 'IT Bangladesh',
-    responsibilities: [
-      'Cisco router configurations and routing protocols',
-      'Developed complex network simulations',
-      'Troubleshooting and resolving network issues',
+    id: 'itbd',
+    period: '11/2021 - 03/2022',
+    role: 'Network Engineer (Intern)',
+    org: 'IT Bangladesh',
+    location: 'Dhaka',
+    points: [
+      'Configured Cisco routers and routing protocols, developed network simulations for scenario testing, and assisted in troubleshooting.',
     ],
   },
 ];
 
-// Skill Progress Bar Component
-const SkillBar = ({ skill, percentage }) => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
-
-  return (
-    <div ref={ref} className={styles.skillBar}>
-      <div className={styles.skillName}>
-        {skill}
-      </div>
-      <div className={styles.skillBarContainer}>
-        <div
-          className={styles.skillProgress}
-          style={{ width: inView ? `${percentage}%` : '0%' }}
-        />
-      </div>
-    </div>
-  );
+const publication = {
+  year: '2026',
+  authors: 'Rahman, M. M., Shacho, M. S. A., Rana, M. S., & Das, P. K.',
+  paperTitle:
+    'A Sensitivity-Optimised Ensemble Framework for Explainable Chronic Kidney Disease Screening',
+  venue:
+    '2026 IEEE International Conference on Circuit, Systems and Communication (ICCSC)',
+  status: 'Accepted for publication',
+  contribution:
+    'Led the technical work: research concept, model design and implementation of the sensitivity-optimised ensemble, explainability analysis and reference framework.',
 };
 
-// Timeline Item Component
-const TimelineItem = ({ item }) => {
-  const [expanded, setExpanded] = useState(false);
+const affiliation = {
+  period: '05/2025 - Present',
+  role: 'Presenter & International Communicator',
+  org: 'RoboLife Technologies',
+};
 
-  return (
-    <div
-      className={`${styles.timelineItem} ${expanded ? styles.timelineItemExpanded : ''}`}
-      onClick={() => setExpanded(!expanded)}
-    >
-      <p className={styles.timelineDate}>{item.date}</p>
-      <h4 className={styles.timelineTitle}>{item.title}</h4>
-      <p className={styles.timelineSubtitle}>{item.subtitle}</p>
-      {item.details && <p className={styles.timelineSubtitle}>{item.details}</p>}
-      {item.responsibilities && (
-        <div className={`${styles.timelineDetails} ${expanded ? styles.timelineDetailsExpanded : ''}`}>
-          <p className={styles.timelineResponsibilities}>Key Responsibilities:</p>
-          <ul className={styles.timelineList}>
-            {item.responsibilities.map((resp, idx) => (
-              <li key={idx} className={styles.timelineListItem}>{resp}</li>
-            ))}
-          </ul>
-        </div>
+const skillGroups = [
+  {
+    id: 'programming',
+    span: 'half',
+    name: 'Programming',
+    items: [
+      'Python',
+      'pandas',
+      'NumPy',
+      'matplotlib',
+      'SQL',
+      'C++',
+      'C#',
+      'JavaScript',
+      'HTML/CSS',
+    ],
+  },
+  {
+    id: 'analytics',
+    span: 'half',
+    name: 'Analytics & BI',
+    items: [
+      'Power BI',
+      'Excel (advanced)',
+      'VBA / macros',
+      'Dashboard & KPI design',
+      'Reporting automation',
+      'Data cleaning',
+    ],
+  },
+  {
+    id: 'ai',
+    span: 'half',
+    name: 'AI & Machine Learning',
+    items: [
+      'Prompt engineering',
+      'LLM APIs (OpenAI, Claude, Gemini)',
+      'RAG',
+      'AI agents & chatbots',
+      'scikit-learn',
+      'Explainable AI (SHAP)',
+      'AI-assisted development',
+    ],
+  },
+  {
+    id: 'automation',
+    span: 'half',
+    name: 'Automation',
+    items: [
+      'Power Automate',
+      'Python scripting',
+      'Email & document workflows',
+      'Internal web tools',
+      'WSL2 integration',
+    ],
+  },
+  {
+    id: 'tools',
+    span: 'full',
+    name: 'Tools',
+    items: [
+      'Git',
+      'Cisco networking',
+      'Photoshop & Lightroom',
+      'Cinema 4D',
+      'Unreal Engine',
+      'Canva',
+    ],
+  },
+];
+
+const education = [
+  {
+    id: 'bsc',
+    period: '2022 - 2026',
+    qualification: 'BSc in Computer Science & Engineering',
+    institution: 'Southeast University',
+    grade: '3.71',
+    gradeLabel: 'CGPA',
+  },
+  {
+    id: 'diploma',
+    period: '2017 - 2021',
+    qualification: 'Diploma in Computer Technology',
+    institution: 'Dhaka Polytechnic Institute',
+    grade: '3.31',
+    gradeLabel: 'CGPA',
+  },
+  {
+    id: 'ssc',
+    period: '2017',
+    qualification: 'SSC, Science',
+    institution: 'Rayhan School & College',
+    grade: '5.00',
+    gradeLabel: 'GPA',
+  },
+];
+
+const certifications = [
+  {
+    id: 'qa',
+    year: '2025',
+    name: 'Quality Assurance and Software Testing',
+    issuer: 'ICT Division, Bangladesh',
+    programme: 'Enhancing Digital Government and Economy (EDGE) Project',
+  },
+  {
+    id: 'ccna',
+    year: '2022',
+    name: 'Cisco Certified Network Associate',
+    issuer: 'IT Bangladesh',
+  },
+  {
+    id: 'gamedev',
+    year: '2022',
+    name: 'Mobile Game Development (Cross Platform)',
+    issuer: 'ICT Division, Bangladesh',
+    programme: 'Skill Development for Mobile Game and Application Project',
+  },
+];
+
+// Served straight from public/ rather than Google Drive, so the button hands
+// over the file instead of bouncing through a viewer page.
+const cvUrl = '/md-shoaib-rana-cv.pdf';
+const cvFileName = 'Md-Shoaib-Rana-CV.pdf';
+
+const ExperienceEntry = ({ item }) => (
+  <li className={styles.roleItem} data-reveal="role" data-hover="row">
+    <div className={styles.roleMarker} data-hover-marker aria-hidden="true" />
+    <p className={styles.rolePeriod}>{item.period}</p>
+    <h3 className={styles.roleTitle}>{item.role}</h3>
+    <p className={styles.roleOrg}>
+      {item.url ? (
+        <a
+          className={styles.roleOrgLink}
+          href={item.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {item.org}
+          <Icon className={styles.roleOrgIcon} icon="link" />
+        </a>
+      ) : (
+        item.org
       )}
-    </div>
-  );
-};
+      <span className={styles.roleLocation}>{item.location}</span>
+    </p>
+    <ul className={styles.rolePoints}>
+      {item.points.map(point => (
+        <li className={styles.rolePoint} key={point}>
+          {point}
+        </li>
+      ))}
+    </ul>
+  </li>
+);
 
 export function AboutMe() {
+  const root = useRef(null);
+  const spineRef = useRef(null);
+  const experienceRef = useRef(null);
+  const paperRef = useRef(null);
+  const glowRef = useRef(null);
+  const magnetRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia(root);
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Draws the career spine as you scroll, so the reader can tell how far
+        // through the chronology they are.
+        if (spineRef.current && experienceRef.current) {
+          gsap.fromTo(
+            spineRef.current,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: 'none',
+              transformOrigin: 'top center',
+              scrollTrigger: {
+                trigger: experienceRef.current,
+                start: 'top 70%',
+                end: 'bottom 80%',
+                scrub: 0.5,
+              },
+            }
+          );
+        }
+
+        // Reveals each entry as it enters, so the chronology arrives in order
+        // instead of all at once.
+        const revealBatch = selector =>
+          ScrollTrigger.batch(selector, {
+            start: 'top 88%',
+            // A reveal only needs to fire once; without this every item leaves
+            // a live ScrollTrigger recalculating on each scroll thereafter.
+            once: true,
+            onEnter: batch =>
+              gsap.to(batch, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                stagger: 0.08,
+                ease: 'power2.out',
+                // 'auto' rather than true so a reveal replay does not kill the
+                // hover tweens below, which drive different properties.
+                overwrite: 'auto',
+              }),
+          });
+
+        gsap.set('[data-reveal="role"]', { opacity: 0, y: 32 });
+        gsap.set('[data-reveal="stack"]', { opacity: 0, y: 24 });
+        gsap.set('[data-reveal="row"]', { opacity: 0, y: 20 });
+
+        revealBatch('[data-reveal="role"]');
+        revealBatch('[data-reveal="stack"]');
+        revealBatch('[data-reveal="row"]');
+
+        // Lifts the accepted paper against the scroll, marking it as the single
+        // strongest credential on the page.
+        gsap.to('[data-parallax="paper"]', {
+          yPercent: -12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '[data-parallax="paper"]',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.6,
+          },
+        });
+      });
+
+      // Hover work is pointer-only: on touch these events fire on tap and read
+      // as the page twitching under your finger.
+      mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
+        const scope = root.current;
+        const teardown = [];
+
+        const on = (element, type, handler) => {
+          element.addEventListener(type, handler);
+          teardown.push(() => element.removeEventListener(type, handler));
+        };
+
+        const query = selector => [...scope.querySelectorAll(selector)];
+
+        // Rows: nudging the hovered entry aside makes a long, dense list
+        // easier to keep your place in.
+        const rows = query('[data-hover="row"]');
+
+        rows.forEach(row => {
+          const marker = row.querySelector('[data-hover-marker]');
+          const grade = row.querySelector('[data-hover-grade]');
+
+          const enter = () => {
+            gsap.to(row, { x: 8, duration: 0.4, ease: 'power3.out' });
+            if (marker) {
+              gsap.to(marker, {
+                // Cancels the row's shift so the marker stays on the spine.
+                x: -8,
+                scale: 1.5,
+                rotate: 135,
+                duration: 0.45,
+                ease: 'back.out(2.2)',
+              });
+            }
+            if (grade) {
+              gsap.to(grade, { scale: 1.12, duration: 0.4, ease: 'power3.out' });
+            }
+          };
+
+          const leave = () => {
+            gsap.to(row, { x: 0, duration: 0.45, ease: 'power3.out' });
+            if (marker) {
+              gsap.to(marker, {
+                x: 0,
+                scale: 1,
+                rotate: 45,
+                duration: 0.45,
+                ease: 'power3.out',
+              });
+            }
+            if (grade) {
+              gsap.to(grade, { scale: 1, duration: 0.4, ease: 'power3.out' });
+            }
+          };
+
+          on(row, 'pointerenter', enter);
+          on(row, 'pointerleave', leave);
+        });
+
+        // Chips: a light lift confirms which one you are reading in a dense
+        // field of similar labels.
+        const chips = query('[data-hover="chip"]');
+
+        chips.forEach(chip => {
+          on(chip, 'pointerenter', () =>
+            gsap.to(chip, { y: -4, duration: 0.3, ease: 'power3.out' })
+          );
+          on(chip, 'pointerleave', () =>
+            gsap.to(chip, { y: 0, duration: 0.4, ease: 'power3.out' })
+          );
+        });
+
+        // Publication: a light that tracks the cursor, so the page's strongest
+        // credential is the one panel that reacts to you.
+        const paper = paperRef.current;
+        const glow = glowRef.current;
+
+        if (paper && glow) {
+          const setX = gsap.quickSetter(glow, '--glowX', 'px');
+          const setY = gsap.quickSetter(glow, '--glowY', 'px');
+          let bounds = null;
+
+          on(paper, 'pointerenter', () => {
+            bounds = paper.getBoundingClientRect();
+            gsap.to(glow, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+          });
+
+          on(paper, 'pointermove', event => {
+            if (!bounds) bounds = paper.getBoundingClientRect();
+            setX(event.clientX - bounds.left);
+            setY(event.clientY - bounds.top);
+          });
+
+          on(paper, 'pointerleave', () => {
+            bounds = null;
+            gsap.to(glow, { opacity: 0, duration: 0.5, ease: 'power2.out' });
+          });
+        }
+
+        // Download CV: the page's one real action leans toward the cursor.
+        const magnet = magnetRef.current;
+
+        if (magnet) {
+          const pull = gsap.utils.clamp(-16, 16);
+          const xTo = gsap.quickTo(magnet, 'x', { duration: 0.5, ease: 'power3' });
+          const yTo = gsap.quickTo(magnet, 'y', { duration: 0.5, ease: 'power3' });
+          let bounds = null;
+
+          on(magnet, 'pointerenter', () => {
+            bounds = magnet.getBoundingClientRect();
+          });
+
+          on(magnet, 'pointermove', event => {
+            if (!bounds) bounds = magnet.getBoundingClientRect();
+            xTo(pull((event.clientX - (bounds.left + bounds.width / 2)) * 0.4));
+            yTo(pull((event.clientY - (bounds.top + bounds.height / 2)) * 0.4));
+          });
+
+          on(magnet, 'pointerleave', () => {
+            bounds = null;
+            xTo(0);
+            yTo(0);
+          });
+        }
+
+        return () => {
+          teardown.forEach(off => off());
+
+          // Hover tweens are created after this context runs, so revert()
+          // does not know about them. Drop their inline styles by hand.
+          const hovered = [...rows, ...chips, magnet, glow].filter(Boolean);
+          const markers = query('[data-hover-marker], [data-hover-grade]');
+
+          gsap.killTweensOf([...hovered, ...markers]);
+          gsap.set([...hovered, ...markers], { clearProps: 'transform,opacity' });
+        };
+      });
+
+      return () => mm.revert();
+    },
+    { scope: root }
+  );
+
   return (
     <Fragment>
       <Meta title={title} prefix="About" description={description} />
-      <ProjectContainer className={styles.aboutMe}>
+      <ProjectContainer className={styles.aboutMe} ref={root}>
         <ProjectBackground
           src={{ src: usesBackground }}
           placeholder={usesBackgroundPlaceholder}
           opacity={0.7}
         />
-        <ProjectHeader
-          title={title}
-          description="A comprehensive overview of my technical skills, educational background, and professional journey."
-        />
+        <ProjectHeader title={title} description={headline} />
 
-        {/* Skills Section */}
+        {/* Profile: lead copy against a fixed-fact column */}
         <ProjectSection padding="none" className={styles.section}>
           <ProjectSectionContent>
-            <ProjectTextRow width="l">
-              <ProjectSectionHeading>Technical Skills</ProjectSectionHeading>
-            </ProjectTextRow>
-            <div className={styles.skillsGrid}>
-              <div className={styles.skillCategory}>
-                <Heading level={4} as="h3">Programming Languages</Heading>
-                {skills.map((item, index) => (
-                  <SkillBar key={index} skill={item.skill} percentage={item.percentage} />
+            <div className={styles.intro}>
+              <div className={styles.introLead}>
+                {profile.map(paragraph => (
+                  <Text as="p" size="l" key={paragraph}>
+                    {paragraph}
+                  </Text>
                 ))}
               </div>
-              <div className={styles.skillCategory}>
-                <Heading level={4} as="h3">Software & Tools</Heading>
-                {softskills.map((item, index) => (
-                  <SkillBar key={index} skill={item.skill} percentage={item.percentage} />
+              <dl className={styles.snapshot}>
+                {snapshot.map(fact => (
+                  <div className={styles.snapshotItem} key={fact.label}>
+                    <dt className={styles.snapshotLabel}>{fact.label}</dt>
+                    <dd className={styles.snapshotValue}>{fact.value}</dd>
+                  </div>
                 ))}
+              </dl>
+            </div>
+          </ProjectSectionContent>
+        </ProjectSection>
+
+        {/* Experience: sticky heading against a scrolling spine */}
+        <ProjectSection padding="none" className={styles.section}>
+          <ProjectSectionContent>
+            <div className={styles.spineLayout} ref={experienceRef}>
+              <div className={styles.spineAside}>
+                <ProjectSectionHeading>Experience</ProjectSectionHeading>
+                <Text as="p" size="s" secondary className={styles.spineNote}>
+                  Analytics, automation and delivery roles since 2021.
+                </Text>
               </div>
-              <div className={styles.skillCategory}>
-                <Heading level={4} as="h3">Testing & QA</Heading>
-                {testingSkills.map((item, index) => (
-                  <SkillBar key={index} skill={item.skill} percentage={item.percentage} />
-                ))}
+              <div className={styles.spineTrack}>
+                <div className={styles.spineRail} aria-hidden="true">
+                  <div className={styles.spineProgress} ref={spineRef} />
+                </div>
+                <ol className={styles.roleList}>
+                  {experience.map(item => (
+                    <ExperienceEntry item={item} key={item.id} />
+                  ))}
+                </ol>
               </div>
-              <div className={styles.skillCategory}>
-                <Heading level={4} as="h3">AI & Machine Learning</Heading>
-                {aiSkills.map((item, index) => (
-                  <SkillBar key={index} skill={item.skill} percentage={item.percentage} />
+            </div>
+          </ProjectSectionContent>
+        </ProjectSection>
+
+        {/* Publication: single full-width feature */}
+        <ProjectSection padding="none" className={styles.section}>
+          {/* Default width, not xl: .sectionInner centers its content, so a
+              wider block would sit further left than every other section. */}
+          <ProjectSectionContent>
+            <article className={styles.paper} data-parallax="paper" ref={paperRef}>
+              <div className={styles.paperGlow} ref={glowRef} aria-hidden="true" />
+              <div className={styles.paperMeta}>
+                <span className={styles.paperYear}>{publication.year}</span>
+                <span className={styles.paperStatus}>{publication.status}</span>
+              </div>
+              <div className={styles.paperBody}>
+                <ProjectSectionHeading className={styles.paperHeading}>
+                  Publication
+                </ProjectSectionHeading>
+                <h3 className={styles.paperTitle}>{publication.paperTitle}</h3>
+                <p className={styles.paperAuthors}>{publication.authors}</p>
+                <p className={styles.paperVenue}>{publication.venue}</p>
+                <p className={styles.paperContribution}>{publication.contribution}</p>
+              </div>
+            </article>
+          </ProjectSectionContent>
+        </ProjectSection>
+
+        {/* Skills: grouped chips, no invented proficiency scores */}
+        <ProjectSection padding="none" className={styles.section}>
+          <ProjectSectionContent>
+            <div className={styles.stack}>
+              <ProjectSectionHeading>Skills</ProjectSectionHeading>
+              <div className={styles.stackGrid}>
+                {skillGroups.map(group => (
+                  <section
+                    className={styles.stackGroup}
+                    data-reveal="stack"
+                    data-span={group.span}
+                    key={group.id}
+                  >
+                    <h3 className={styles.stackName}>{group.name}</h3>
+                    <ul className={styles.chipList}>
+                      {group.items.map(item => (
+                        <li className={styles.chip} data-hover="chip" key={item}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 ))}
               </div>
             </div>
           </ProjectSectionContent>
         </ProjectSection>
 
-        {/* Education & Experience Section */}
+        {/* Education and certifications: paired ledgers at different weights */}
         <ProjectSection padding="none" className={styles.section}>
           <ProjectSectionContent>
-            <ProjectTextRow width="l">
-              <ProjectSectionHeading>Education & Experience</ProjectSectionHeading>
-            </ProjectTextRow>
-            <div className={styles.timelineGrid}>
-              <div className={styles.timelineColumn}>
-                <Heading level={4} as="h3">Education</Heading>
-                <Divider />
-                <div className={styles.timeline}>
-                  {educationData.map((item) => (
-                    <TimelineItem key={item.id} item={item} />
+            <div className={styles.ledgerPair}>
+              <section className={styles.ledger}>
+                <ProjectSectionHeading>Education</ProjectSectionHeading>
+                <ul className={styles.ledgerList}>
+                  {education.map(item => (
+                    <li
+                      className={styles.ledgerRow}
+                      data-reveal="row"
+                      data-hover="row"
+                      key={item.id}
+                    >
+                      <div className={styles.ledgerMain}>
+                        <p className={styles.ledgerPeriod}>{item.period}</p>
+                        <h3 className={styles.ledgerTitle}>{item.qualification}</h3>
+                        <p className={styles.ledgerSub}>{item.institution}</p>
+                      </div>
+                      <p className={styles.ledgerGrade}>
+                        <span className={styles.ledgerGradeValue} data-hover-grade>
+                          {item.grade}
+                        </span>
+                        <span className={styles.ledgerGradeLabel}>{item.gradeLabel}</span>
+                      </p>
+                    </li>
                   ))}
-                </div>
-              </div>
-              <div className={styles.timelineColumn}>
-                <Heading level={4} as="h3">Experience</Heading>
-                <Divider />
-                <div className={styles.timeline}>
-                  {experienceData.map((item) => (
-                    <TimelineItem key={item.id} item={item} />
+                </ul>
+              </section>
+              <section className={styles.ledger}>
+                <ProjectSectionHeading>Certifications</ProjectSectionHeading>
+                <ul className={styles.ledgerList}>
+                  {certifications.map(item => (
+                    <li
+                      className={styles.ledgerRow}
+                      data-reveal="row"
+                      data-hover="row"
+                      key={item.id}
+                    >
+                      <div className={styles.ledgerMain}>
+                        <p className={styles.ledgerPeriod}>{item.year}</p>
+                        <h3 className={styles.ledgerTitle}>{item.name}</h3>
+                        <p className={styles.ledgerSub}>{item.issuer}</p>
+                        {!!item.programme && (
+                          <p className={styles.ledgerNote}>{item.programme}</p>
+                        )}
+                      </div>
+                    </li>
                   ))}
+                </ul>
+              </section>
+            </div>
+          </ProjectSectionContent>
+        </ProjectSection>
+
+        {/* Affiliation: single highlighted row */}
+        <ProjectSection padding="none" className={styles.section}>
+          <ProjectSectionContent>
+            <div className={styles.affiliation}>
+              <ProjectSectionHeading className={styles.affiliationHeading}>
+                Professional affiliation
+              </ProjectSectionHeading>
+              <div className={styles.affiliationRow} data-hover="row">
+                <p className={styles.affiliationPeriod}>{affiliation.period}</p>
+                <div>
+                  <h3 className={styles.affiliationRole}>{affiliation.role}</h3>
+                  <p className={styles.affiliationOrg}>{affiliation.org}</p>
                 </div>
               </div>
             </div>
           </ProjectSectionContent>
         </ProjectSection>
 
-        {/* Download CV Section */}
         <ProjectSection padding="none" className={styles.section}>
           <ProjectSectionContent>
-            <div className={styles.downloadSection}>
-              <Button
-                secondary
-                iconHoverShift
-                icon="chevronRight"
-                href="https://drive.google.com/uc?export=download&id=15TPtlE2wTTDpbH3K6FAUkG6zRZVoKt1j"
-              >
-                Download CV
-              </Button>
+            <div className={styles.outro}>
+              <div className={styles.magnet} ref={magnetRef}>
+                <Button
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href={cvUrl}
+                  download={cvFileName}
+                >
+                  Download CV
+                </Button>
+              </div>
             </div>
           </ProjectSectionContent>
         </ProjectSection>

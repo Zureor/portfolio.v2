@@ -1,0 +1,3 @@
+# The uses page was renamed to /stack. Keeps old links and search results working.
+/uses     /stack   301!
+/uses/    /stack/  301!
