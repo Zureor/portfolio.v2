@@ -1,0 +1,274 @@
+.stack {
+  --hairline: rgb(var(--rgbText) / 0.12);
+  --hairlineSoft: rgb(var(--rgbText) / 0.07);
+}
+
+.section {
+  opacity: 0;
+  padding-top: var(--space3XL);
+  padding-bottom: var(--space3XL);
+
+  &:global {
+    animation: fadeIn var(--durationXL) ease 400ms forwards;
+  }
+
+  @media (--mediaMobile) {
+    padding-top: var(--space2XL);
+    padding-bottom: var(--space2XL);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Agents: one assistant panel against a pair of coding CLIs
+   -------------------------------------------------------------------------- */
+
+.agents {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-areas:
+    'heading heading'
+    'assistant pair';
+  gap: var(--spaceXL) var(--space2XL);
+  align-items: start;
+
+  @media (--mediaTablet) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'heading'
+      'assistant'
+      'pair';
+  }
+}
+
+.agentsHeading {
+  grid-area: heading;
+  margin: 0;
+}
+
+/* The parallax wrappers are the grid items; the panels inside them fill. */
+.assistantPlane {
+  grid-area: assistant;
+  will-change: transform;
+}
+
+.pairPlane {
+  grid-area: pair;
+  will-change: transform;
+}
+
+.assistant {
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceL);
+  padding: var(--space2XL);
+  border: 1px solid var(--hairline);
+  border-left: 2px solid rgb(var(--rgbPrimary));
+  background: linear-gradient(
+    120deg,
+    rgb(var(--rgbPrimary) / 0.06),
+    rgb(var(--rgbText) / 0.02) 45%,
+    transparent
+  );
+
+  @media (--mediaMobile) {
+    padding: var(--spaceXL);
+  }
+}
+
+.assistantMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXS);
+}
+
+.assistantName {
+  margin: 0;
+  font-size: var(--fontSizeH3);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1.1;
+  color: var(--colorTextTitle);
+}
+
+.assistantRole {
+  margin: 0;
+  font-family: var(--monoFontStack);
+  font-size: var(--fontSizeBodyXS);
+  letter-spacing: 0.04em;
+  color: rgb(var(--rgbPrimary));
+}
+
+.assistantCopy {
+  margin: 0;
+  font-size: var(--fontSizeBodyM);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.78);
+}
+
+.agentPair {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXL);
+}
+
+.agent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceS);
+  padding-top: var(--spaceM);
+  border-top: 1px solid var(--hairline);
+}
+
+.agentName {
+  margin: 0;
+  font-size: var(--fontSizeH5);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1.2;
+  color: var(--colorTextTitle);
+}
+
+.agentCopy {
+  margin: 0;
+  font-size: var(--fontSizeBodyS);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Models: the argument, then the two providers
+   -------------------------------------------------------------------------- */
+
+.models {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXL);
+}
+
+.manifesto {
+  margin: 0;
+  max-width: 46ch;
+  line-height: 1.45;
+  color: rgb(var(--rgbText) / 0.9);
+  border-left: 2px solid rgb(var(--rgbPrimary));
+  padding-left: var(--spaceL);
+}
+
+.providerList {
+  list-style: none;
+  margin: var(--spaceM) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space2XL);
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+    gap: var(--spaceXL);
+  }
+}
+
+.provider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceS);
+  padding-top: var(--spaceM);
+  border-top: 1px solid var(--hairline);
+}
+
+.providerName {
+  margin: 0;
+  font-size: var(--fontSizeH5);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1.2;
+  color: var(--colorTextTitle);
+}
+
+.providerCopy {
+  margin: 0;
+  font-size: var(--fontSizeBodyS);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Build tools: paired keyed ledgers
+   -------------------------------------------------------------------------- */
+
+/* Stacked rather than side by side: two columns squeezed the value text into a
+   ~300px gutter, which wrapped every entry to four lines. */
+.craftPair {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space3XL);
+
+  @media (--mediaMobile) {
+    gap: var(--space2XL);
+  }
+}
+
+.craft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXL);
+}
+
+.rowList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--space2XL);
+  padding: var(--spaceL) 0;
+  align-items: baseline;
+
+  & + & {
+    border-top: 1px solid var(--hairlineSoft);
+  }
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+    gap: var(--spaceXS);
+  }
+}
+
+.rowLabel {
+  margin: 0;
+  font-family: var(--monoFontStack);
+  font-size: var(--fontSizeBodyXS);
+  letter-spacing: 0.04em;
+  color: rgb(var(--rgbText) / 0.5);
+}
+
+.rowValue {
+  font-size: var(--fontSizeBodyS);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.78);
+  max-width: 62ch;
+}
+
+/* --------------------------------------------------------------------------
+   Hardware and outro
+   -------------------------------------------------------------------------- */
+
+/* The rule spans the full column so the page keeps one measure to the bottom;
+   only the paragraph inside is capped to a readable line length. */
+.outro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spaceXL);
+  padding-top: var(--spaceXL);
+  border-top: 1px solid var(--hairline);
+}
+
+.outroCopy {
+  margin: 0;
+  max-width: 58ch;
+  color: rgb(var(--rgbText) / 0.8);
+}

@@ -10,9 +10,12 @@ function isExternalLink(href) {
   return href?.includes('://');
 }
 
-export const Button = forwardRef(({ href, ...rest }, ref) => {
-  if (isExternalLink(href) || !href) {
-    return <ButtonContent href={href} ref={ref} {...rest} />;
+export const Button = forwardRef(({ href, download, ...rest }, ref) => {
+  // A download points at a static file, not a route. Sending it through the
+  // router would have Next try to resolve it as a page instead of handing the
+  // file to the browser.
+  if (isExternalLink(href) || !href || download) {
+    return <ButtonContent href={href} download={download} ref={ref} {...rest} />;
   }
 
   return (

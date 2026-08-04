@@ -71,8 +71,8 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         title="Portfolio"
-        description="Design portfolio of Shoaib — a product designer working on web & mobile
-          apps with a focus on motion, experience design, and accessibility."
+        description="Portfolio of Md. Shoaib Rana, a Computer Science graduate working in
+          business intelligence, data analytics and workflow automation."
       />
       <Intro
         id="intro"
@@ -166,7 +166,7 @@ export const Home = () => {
           ],
         }}
       />
-      
+
       <Profile
         sectionRef={details}
         visible={visibleSections.includes(details.current)}

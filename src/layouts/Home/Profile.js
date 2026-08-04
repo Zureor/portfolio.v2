@@ -21,30 +21,33 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Greetings" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I'm Shoaib, a determined computer science student at <Link href="https://new.seu.edu.bd/">Southeast University</Link> in Dhaka, 
-      Bangladesh, driven by my passion for coding and relentless pursuit of innovative 
-      problem-solving.
-      This portfolio stands as a testament to my capabilities and underscores my unwavering 
-      dedication to the dynamic realm of technology. I’m always down for hearing
-      about new projects, so feel free to drop me a line.
+      I'm Shoaib, a Computer Science graduate working at the intersection of business
+      intelligence, data analytics, and automation. Most of my professional work involves
+      taking manual, repetitive processes and rebuilding them into systems that run on
+      their own, using Python, SQL, and Power BI as my main tools. I like the kind of work
+      where you find a process someone's been doing by hand for years and figure out how
+      to make it disappear into the background.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Currently, I work as a Packaging Coordinator at <Link href="https://allportcs.com/pac-d/">PacD</Link>, handling
-      quality control, generating reports, and developing web applications. I also work as a Digital Marketer
-      at <Link href="https://www.ibcs-primax.com/education/">IBCS-Primax</Link>, applying my technical skills to
-      enhance digital outreach. In pursuit of my BSc in CSE, I continuously refine my programming prowess
-      through practical experience. If you're interested in the tools and software I use, check out my <Link href="/uses">uses page</Link>.
+      Outside of that, I spend a lot of time on generative AI, particularly running models
+      locally instead of leaning on cloud APIs. That's led me down a path of building
+      small automation setups around local models, giving them memory, tool access, and
+      ways to control them remotely, mostly for my own coding and productivity workflows.
+      It's less about following AI trends and more about seeing what's actually possible
+      when you own the whole stack yourself.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      Beyond coding, I indulge in a diverse array of entertainment, immersing myself in 
-      compelling movies, anime, and TV series. To maintain equilibrium, I relish the strategic 
-      rigor of badminton and chess, keeping my mental faculties razor-sharp.
+      I'm also drawn to research, particularly where AI meets real-world problems that
+      carry actual stakes, not just benchmark scores. That's an ongoing thread for me, one
+      I expect to keep pulling on for a while.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      This portfolio stands as a testament to my capabilities and underscores my unwavering 
-      dedication to the dynamic realm of technology.{' '}<Link href="/about_me">Learn More About Me</Link>.
-      I’m always down for hearing about new projects, so feel free to drop me a line.
-      
+      Away from a screen, it's badminton, chess, and enough anime to embarrass myself if
+      you ask.
+    </Text>
+    <Text className={styles.description} data-visible={visible} size="l" as="p">
+      More on the <Link href="/about_me">about page</Link>, or check what's actually
+      running my setup on the <Link href="/stack">stack page</Link>.
     </Text>
   </Fragment>
 );
