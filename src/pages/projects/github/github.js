@@ -264,6 +264,44 @@ export const github = () => {
             </div>
           </ProjectSectionColumns>
         </ProjectSection>
+        <ProjectSection light>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>InvenTrack</ProjectSectionHeading>
+              <ProjectSectionText>
+                A full-stack inventory system for small and mid-sized
+                businesses: product catalogue with SKUs and reorder levels,
+                suppliers, purchase orders, and a dashboard that values the
+                whole inventory and flags what is running low.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                The part worth naming is the stock ledger. Every movement in,
+                out or as a correction writes through to the product&#8217;s
+                on-hand count in the same operation that records it, so the
+                audit trail and the quantity can never disagree with each
+                other. Stock is clamped at zero rather than allowed to go
+                negative.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Django 5 and Django REST Framework on the back end with JWT
+                auth against PostgreSQL, React 18 and Vite on the front, and an
+                Axios interceptor that refreshes an expired token and retries
+                the original request rather than bouncing the user to the login
+                screen.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                <Button
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/InvenTrack"
+                >
+                  View Source Code
+                </Button>
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
       </ProjectContainer>
       <Footer />
     </Fragment>
