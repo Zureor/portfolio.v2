@@ -110,3 +110,40 @@
     top: -5%;
   }
 }
+
+.featuredSection {
+  position: relative;
+}
+
+/* No `overflow` and no `opacity` below 1: both would flatten the 3D space
+   Depth establishes and collapse the layers onto one plane. */
+.featured {
+  width: 100%;
+  padding: var(--space2XL) 0;
+  border-top: 1px solid rgb(var(--rgbText) / 0.12);
+  border-bottom: 1px solid rgb(var(--rgbText) / 0.12);
+}
+
+.featuredLabel {
+  margin: 0 0 var(--spaceM);
+  font-family: var(--monoFontStack);
+  font-size: var(--fontSizeBodyXS);
+  letter-spacing: 0.04em;
+  color: rgb(var(--rgbPrimary));
+}
+
+.featuredTitle {
+  margin: 0 0 var(--spaceL);
+  font-size: var(--fontSizeH2);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1;
+  color: var(--colorTextTitle);
+}
+
+.featuredCopy {
+  margin: 0 0 var(--spaceXL);
+  max-width: 54ch;
+  font-size: var(--fontSizeBodyM);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.78);
+}

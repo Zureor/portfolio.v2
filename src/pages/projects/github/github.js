@@ -12,6 +12,7 @@ import perfume_dashboard from 'assets/projects/perfume_dash.png';
 import { Footer } from 'components/Footer';
 import { Image } from 'components/Image';
 import { Meta } from 'components/Meta';
+import { Depth } from 'components/Motion';
 
 import { Button } from 'components/Button';
 import {
@@ -49,6 +50,33 @@ export const github = () => {
         <ProjectHeader
           description={description}
         />
+        <ProjectSection className={styles.featuredSection} padding="top">
+          <ProjectSectionContent>
+            <Depth className={styles.featured} perspective={1100} travel={50}>
+              <p className={styles.featuredLabel} data-depth="20">
+                Currently building
+              </p>
+              <h2 className={styles.featuredTitle} data-depth="60">
+                liminal
+              </h2>
+              <p className={styles.featuredCopy} data-depth="30">
+                Calibrating LLM judges against human labels with Item Response
+                Theory, so a judge&#8217;s severity and length bias can be
+                separated from the quality it was supposed to be measuring.
+              </p>
+              <div data-depth="10">
+                <Button
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="/projects/liminal"
+                >
+                  Read the write-up
+                </Button>
+              </div>
+            </Depth>
+          </ProjectSectionContent>
+        </ProjectSection>
         <ProjectSection>
           <ProjectSectionColumns centered className={styles.columns}>
             <div className={styles.sidebarImages}>
