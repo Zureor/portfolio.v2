@@ -151,7 +151,116 @@ export const Liminal = () => {
         <ProjectSection className={styles.section}>
           <ProjectSectionContent>
             <ProjectTextRow width="l" stretch>
-              <ProjectSectionHeading>Close</ProjectSectionHeading>
+              <ProjectSectionHeading>How it is estimated</ProjectSectionHeading>
+              <ProjectSectionText>
+                Item quality is integrated out by marginal maximum likelihood
+                over a 20-node Gauss&#8211;Hermite quadrature, and the judge
+                parameters are optimized with L-BFGS-B. Gradients come from JAX
+                autodiff. The IRT core is written from scratch rather than
+                pulled from an existing package.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Four identifiability constraints make the parameters mean
+                something rather than merely fit: severities sum to zero,
+                log-discriminations sum to zero, thresholds are centred per
+                judge so severity is not double-counted, and thresholds are
+                built from positive increments so they stay ordered.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Item quality then comes back as a posterior mean by the same
+                quadrature, with credible intervals approximated by sampling.
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection className={styles.section} light>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>Reproducible by construction</ProjectSectionHeading>
+              <ProjectSectionText>
+                Every LLM response is content-addressed on a SHA-256 of the
+                provider, model, prompt, temperature and token limit, then
+                written to a sharded cache. A study reproduces exactly even
+                after the underlying models have moved on, and re-running one
+                costs nothing. Every source of randomness is seeded explicitly.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                One OpenAI-compatible client covers Groq, Cerebras, Gemini and
+                OpenRouter, with bounded concurrency and exponential backoff
+                with jitter on retryable status codes.
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection className={styles.section}>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>What has been checked</ProjectSectionHeading>
+              <dl className={styles.ledger}>
+                <div className={styles.ledgerRow}>
+                  <dt>59</dt>
+                  <dd>Unit tests across core types, matrix, metrics, providers, judges and datasets.</dd>
+                </div>
+                <div className={styles.ledgerRow}>
+                  <dt>&#961; &gt; 0.70</dt>
+                  <dd>Spearman correlation for recovered item quality ordering, at 5 judges and 400 items.</dd>
+                </div>
+                <div className={styles.ledgerRow}>
+                  <dt>&#961; &gt; 0.9</dt>
+                  <dd>Spearman correlation for recovered judge severity, at 4 judges and 600 items.</dd>
+                </div>
+                <div className={styles.ledgerRow}>
+                  <dt>1e&#8722;9</dt>
+                  <dd>Agreement between this Krippendorff &#945; implementation, written from first principles, and the reference package.</dd>
+                </div>
+              </dl>
+              <ProjectSectionText>
+                Recovery accuracy tracks the information ceiling rather than
+                beating it, and adding judges strictly improves it. The
+                benchmark is SummEval: 100 CNN/DailyMail articles across 16
+                summarization systems, three expert annotators each.
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection className={styles.section} light>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>Where it stands</ProjectSectionHeading>
+              <div className={styles.statusGroup}>
+                <div>
+                  <h3 className={styles.statusHeading}>Working now</h3>
+                  <ul className={styles.statusList}>
+                    <li>Core types, rating matrix and posterior</li>
+                    <li>SummEval loader for coherence and fluency</li>
+                    <li>Cached provider layer with three free-tier judges</li>
+                    <li>Krippendorff &#945; and Spearman &#961;</li>
+                    <li>GRM estimator with parameter recovery tests</li>
+                    <li>Rubric-driven async panel runner</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className={styles.statusHeading}>Still ahead</h3>
+                  <ul className={styles.statusList}>
+                    <li>Mean-score baseline for comparison</li>
+                    <li>The flagship SummEval experiment</li>
+                    <li>Rank-flip analysis: how often calibration changes top-k</li>
+                    <li>One-command reproduction</li>
+                    <li>CLI</li>
+                  </ul>
+                </div>
+              </div>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection className={styles.section}>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>Read the code</ProjectSectionHeading>
+              <ProjectSectionText>
+                Apache-2.0, built on free-tier models and a public benchmark so
+                anyone can reproduce the result rather than take it on trust.
+              </ProjectSectionText>
               <ProjectSectionText>
                 <Button
                   secondary

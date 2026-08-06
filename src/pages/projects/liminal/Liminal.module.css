@@ -116,3 +116,37 @@
   font-family: var(--monoFontStack);
   font-size: 13px;
 }
+
+.statusGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space2XL);
+  margin-top: var(--spaceL);
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+    gap: var(--spaceXL);
+  }
+}
+
+.statusHeading {
+  margin: 0 0 var(--spaceM);
+  padding-bottom: var(--spaceS);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--monoFontStack);
+  font-size: var(--fontSizeBodyXS);
+  font-weight: var(--fontWeightRegular);
+  letter-spacing: 0.04em;
+  color: rgb(var(--rgbPrimary));
+}
+
+.statusList {
+  margin: 0;
+  padding-left: var(--spaceL);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceS);
+  font-size: var(--fontSizeBodyS);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.75);
+}
