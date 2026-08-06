@@ -40,3 +40,15 @@
   position: relative;
   z-index: 1;
 }
+
+.depth {
+  perspective: var(--perspective, 1200px);
+}
+
+/* Holds the 3D context for the layers. `overflow`, `opacity` below 1, and
+   `filter` all flatten it, so none of them belong here or on any ancestor
+   between this and a `data-depth` layer. */
+.depthInner {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
