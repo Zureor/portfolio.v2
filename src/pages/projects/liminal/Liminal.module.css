@@ -1,0 +1,40 @@
+.liminal {
+  --hairline: rgb(var(--rgbText) / 0.12);
+  --hairlineSoft: rgb(var(--rgbText) / 0.07);
+}
+
+.section {
+  opacity: 0;
+
+  /* css-loader scopes keyframe identifiers per module, so a bare
+     `animation: fadeIn` would never match the global keyframe and the section
+     would stay invisible. */
+  &:global {
+    animation: fadeIn var(--durationXL) ease 400ms forwards;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceS);
+  margin: var(--spaceXL) 0;
+  padding-left: var(--spaceL);
+  border-left: 2px solid rgb(var(--rgbPrimary));
+}
+
+.statFigure {
+  margin: 0;
+  font-size: var(--fontSizeH2);
+  font-weight: var(--fontWeightMedium);
+  line-height: 1;
+  color: var(--colorTextTitle);
+}
+
+.statCopy {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--fontSizeBodyS);
+  line-height: var(--lineHeightBody);
+  color: rgb(var(--rgbText) / 0.7);
+}
