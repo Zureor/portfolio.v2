@@ -101,19 +101,6 @@
   margin-top: var(--spaceXL);
 }
 
-/* Depth renders its children inside its own wrapper div (`.depthInner` in
-   Motion.module.css), which carries `will-change: transform`. Per the CSS
-   Transforms spec that makes the wrapper a containing block for absolutely
-   positioned descendants, same as an actual `transform` would. The wrapper
-   itself has no explicit height and no in-flow content (every `.figureLayer`
-   below is `position: absolute`, so none of them contribute to its auto
-   height), so without this rule it collapses to 0px and every `inset: 0`
-   layer collapses with it. Sizing that one direct child to the aspect-ratio
-   box above restores the height the layers position against. */
-.figure > * {
-  height: 100%;
-}
-
 .figureLayer {
   position: absolute;
   inset: 0;

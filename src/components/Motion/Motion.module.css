@@ -49,6 +49,11 @@
    `filter` all flatten it, so none of them belong here or on any ancestor
    between this and a `data-depth` layer. */
 .depthInner {
+  height: 100%;
+
+  /* Without explicit height, this wrapper collapses to zero when all children
+     are absolutely positioned, hiding the layers. With an auto-height parent,
+     `height: 100%` resolves to auto and is safe for in-flow content. */
   transform-style: preserve-3d;
   will-change: transform;
 }
