@@ -12,6 +12,7 @@ import perfume_dashboard from 'assets/projects/perfume_dash.png';
 import { Footer } from 'components/Footer';
 import { Image } from 'components/Image';
 import { Meta } from 'components/Meta';
+import { Depth } from 'components/Motion';
 
 import { Button } from 'components/Button';
 import {
@@ -49,6 +50,33 @@ export const github = () => {
         <ProjectHeader
           description={description}
         />
+        <ProjectSection padding="top">
+          <ProjectSectionContent>
+            <Depth className={styles.featured} perspective={1100} travel={18}>
+              <p className={styles.featuredLabel} data-depth="20">
+                Currently building
+              </p>
+              <h2 className={styles.featuredTitle} data-depth="60">
+                liminal
+              </h2>
+              <p className={styles.featuredCopy} data-depth="30">
+                Calibrating LLM judges against human labels with Item Response
+                Theory, so a judge&#8217;s severity and length bias can be
+                separated from the quality it was supposed to be measuring.
+              </p>
+              <div data-depth="10">
+                <Button
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="/projects/liminal"
+                >
+                  Read the write-up
+                </Button>
+              </div>
+            </Depth>
+          </ProjectSectionContent>
+        </ProjectSection>
         <ProjectSection>
           <ProjectSectionColumns centered className={styles.columns}>
             <div className={styles.sidebarImages}>
@@ -235,6 +263,44 @@ export const github = () => {
               />
             </div>
           </ProjectSectionColumns>
+        </ProjectSection>
+        <ProjectSection light>
+          <ProjectSectionContent>
+            <ProjectTextRow width="m">
+              <ProjectSectionHeading>InvenTrack</ProjectSectionHeading>
+              <ProjectSectionText>
+                A full-stack inventory system for small and mid-sized
+                businesses: product catalogue with SKUs and reorder levels,
+                suppliers, purchase orders, and a dashboard that values the
+                whole inventory and flags what is running low.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                The part worth naming is the stock ledger. Every movement in,
+                out or as a correction writes through to the product&#8217;s
+                on-hand count in the same operation that records it, so the
+                audit trail and the quantity can never disagree with each
+                other. Stock is clamped at zero rather than allowed to go
+                negative.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Django 5 and Django REST Framework on the back end with JWT
+                auth against PostgreSQL, React 18 and Vite on the front, and an
+                Axios interceptor that refreshes an expired token and retries
+                the original request rather than bouncing the user to the login
+                screen.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                <Button
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/InvenTrack"
+                >
+                  View Source Code
+                </Button>
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>
       <Footer />

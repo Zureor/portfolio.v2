@@ -290,6 +290,118 @@ export const Tilt = ({
 };
 
 /**
+ * Scroll-driven 3D parallax. Descendants carrying `data-depth` sit at different
+ * Z offsets and travel different distances as the container crosses the
+ * viewport, so they pull apart from each other instead of sliding as one plane.
+ * That separation is the difference between this and `Parallax`, which moves a
+ * whole block flat.
+ *
+ * Reads the same `data-depth` attribute as `Tilt`, but the two are mutually
+ * exclusive on the same layers: both drive `z`, so they fight over one
+ * property, `Tilt`'s cleanup clears the transform this one is mid-way through
+ * scrubbing, and nesting their two `perspective` containers double-projects.
+ *
+ * Everything between this and a `data-depth` layer must keep
+ * `transform-style: preserve-3d` and avoid `overflow`, `opacity` below 1, and
+ * `filter`. Each of those flattens the 3D space and collapses the effect to a
+ * plain vertical slide.
+ */
+export const Depth = ({
+  as: Component = 'div',
+  perspective = 1200,
+  minWidth = 1040,
+  scrub = 0.6,
+  travel = 80,
+  className,
+  children,
+  ...rest
+}) => {
+  const ref = useRef(null);
+  const innerRef = useRef(null);
+
+  // Depth separation between layers is meaningless once a narrow viewport has
+  // stacked them, and the offsets just read as uneven gaps.
+  const query = `${motionQuery} and (min-width: ${minWidth}px)`;
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia(ref);
+
+      mm.add(query, () => {
+        const layers = gsap.utils.toArray(
+          innerRef.current.querySelectorAll('[data-depth]')
+        );
+
+        if (!layers.length) return;
+
+        const depths = layers.map(layer => Number(layer.dataset.depth) || 0);
+        const maxDepth = Math.max(...depths.map(Math.abs));
+
+        if (!maxDepth) return;
+
+        // One trigger for the container rather than one per layer. Per-layer
+        // triggers multiply the work done on every scroll by the layer count
+        // and buy nothing, since they would all share these bounds anyway.
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: ref.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        layers.forEach((layer, index) => {
+          const depth = depths[index];
+
+          timeline.fromTo(
+            layer,
+            { z: 0, y: 0 },
+            {
+              z: depth,
+              // Z on its own reads as a size change rather than as movement.
+              // Pairing it with a proportional Y offset is what makes the
+              // layers look like they are passing each other.
+              y: travel * (depth / maxDepth),
+              ease: 'none',
+              force3D: true,
+            },
+            0
+          );
+        });
+
+        return () => {
+          // Belt and braces. GSAP registers every ScrollTrigger with the
+          // active context on construction, so `mm.revert()` below already
+          // kills this one; killing it here keeps the teardown legible next
+          // to the sibling components, which do need their manual cleanup.
+          timeline.scrollTrigger?.kill();
+          timeline.kill();
+          gsap.set(layers, { clearProps: 'transform' });
+        };
+      });
+
+      return () => mm.revert();
+    },
+    { scope: ref, dependencies: [query, scrub, travel] }
+  );
+
+  return (
+    <Component
+      className={classes(styles.depth, className)}
+      style={cssProps({ perspective })}
+      ref={ref}
+      {...rest}
+    >
+      <div className={styles.depthInner} ref={innerRef}>
+        {children}
+      </div>
+    </Component>
+  );
+};
+
+/**
  * Panel with a light that follows the cursor. Use it to mark the one thing on a
  * section worth looking at first.
  */

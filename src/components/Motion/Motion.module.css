@@ -40,3 +40,21 @@
   position: relative;
   z-index: 1;
 }
+
+.depth {
+  perspective: var(--perspective, 1200px);
+}
+
+/* Holds the 3D context for the layers. `overflow`, `opacity` below 1, and
+   `filter` all flatten it, so none of them belong here or on any ancestor
+   between this and a `data-depth` layer. */
+.depthInner {
+  /* `transform-style: preserve-3d` makes this element a containing block for
+     absolutely positioned descendants in this browser, the same way
+     `transform` does. Without an explicit height, that containing block
+     resolves to an auto height — and since every `data-depth` layer is
+     itself absolutely positioned, none of them contribute to that auto
+     height, so it collapses to zero and every layer collapses with it. */
+  height: 100%;
+  transform-style: preserve-3d;
+}
