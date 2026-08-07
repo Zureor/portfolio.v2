@@ -111,8 +111,8 @@
   }
 }
 
-.featuredSection {
-  position: relative;
+.github {
+  --hairline: rgb(var(--rgbText) / 0.12);
 }
 
 /* No `overflow` and no `opacity` below 1: both would flatten the 3D space
@@ -120,8 +120,8 @@
 .featured {
   width: 100%;
   padding: var(--space2XL) 0;
-  border-top: 1px solid rgb(var(--rgbText) / 0.12);
-  border-bottom: 1px solid rgb(var(--rgbText) / 0.12);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .featuredLabel {

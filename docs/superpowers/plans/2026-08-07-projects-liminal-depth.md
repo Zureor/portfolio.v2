@@ -17,7 +17,7 @@
 - **Keep every `ProjectSectionContent` at the default `width="l"`.** `.sectionInner` uses `align-items: center`, so a `width="xl"` block sits ~50px left of its `width="l"` neighbours. That is the desktop alignment defect already fixed once on the Stack and About pages.
 - **3D space flattens** if any element between `Depth` and a `data-depth` layer sets `overflow` to anything but `visible`, sets `opacity` below 1, applies a `filter`, or omits `transform-style: preserve-3d`.
 - **`data-depth` only ever goes on an HTML element, never on an SVG `<g>`, `<path>`, or `<text>`.** SVG child elements do not render 3D transforms — a `translateZ` on them is silently dropped by every major browser, and the layer comes out flat with no error to notice. To give a drawing depth, split it into stacked, absolutely-positioned `div`s that each hold their own `<svg>`.
-- **Exact figures only.** Every number and claim on the liminal page comes from `/Users/evanahmedshoaib/Downloads/liminal-Project-Description.md`. Do not round, estimate, extrapolate, or invent metrics. No progress bars, no completion percentages.
+- **Exact figures only.** Every number and claim on the liminal page comes from `liminal-Project-Description.md`. Do not round, estimate, extrapolate, or invent metrics. No progress bars, no completion percentages.
 - **Commit after every task.** End commit messages with `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`.
 
 ---

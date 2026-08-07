@@ -50,9 +50,9 @@ export const github = () => {
         <ProjectHeader
           description={description}
         />
-        <ProjectSection className={styles.featuredSection} padding="top">
+        <ProjectSection padding="top">
           <ProjectSectionContent>
-            <Depth className={styles.featured} perspective={1100} travel={50}>
+            <Depth className={styles.featured} perspective={1100} travel={18}>
               <p className={styles.featuredLabel} data-depth="20">
                 Currently building
               </p>
@@ -266,7 +266,7 @@ export const github = () => {
         </ProjectSection>
         <ProjectSection light>
           <ProjectSectionContent>
-            <ProjectTextRow width="l" stretch>
+            <ProjectTextRow width="m">
               <ProjectSectionHeading>InvenTrack</ProjectSectionHeading>
               <ProjectSectionText>
                 A full-stack inventory system for small and mid-sized

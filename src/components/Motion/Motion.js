@@ -296,8 +296,10 @@ export const Tilt = ({
  * That separation is the difference between this and `Parallax`, which moves a
  * whole block flat.
  *
- * Reads the same `data-depth` attribute as `Tilt`, so a block wrapped in both
- * gets depth on scroll and tilt on hover out of one set of markup.
+ * Reads the same `data-depth` attribute as `Tilt`, but the two are mutually
+ * exclusive on the same layers: both drive `z`, so they fight over one
+ * property, `Tilt`'s cleanup clears the transform this one is mid-way through
+ * scrubbing, and nesting their two `perspective` containers double-projects.
  *
  * Everything between this and a `data-depth` layer must keep
  * `transform-style: preserve-3d` and avoid `overflow`, `opacity` below 1, and
@@ -370,9 +372,10 @@ export const Depth = ({
         });
 
         return () => {
-          // The timeline is created inside the matchMedia callback, so its
-          // ScrollTrigger has to be killed explicitly rather than left to
-          // revert().
+          // Belt and braces. GSAP registers every ScrollTrigger with the
+          // active context on construction, so `mm.revert()` below already
+          // kills this one; killing it here keeps the teardown legible next
+          // to the sibling components, which do need their manual cleanup.
           timeline.scrollTrigger?.kill();
           timeline.kill();
           gsap.set(layers, { clearProps: 'transform' });

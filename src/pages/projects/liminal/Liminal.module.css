@@ -115,6 +115,23 @@
 .figureLabels {
   font-family: var(--monoFontStack);
   font-size: 13px;
+
+  @media (--mediaTablet) {
+    font-size: 17px;
+  }
+
+  @media (--mediaMobile) {
+    font-size: 22px;
+  }
+}
+
+/* The rows stay at `l` so the ledger, figure and status grid keep the full
+   measure, but prose needs a readable line. `--maxWidthM` is what every other
+   project page's body copy gets via `ProjectTextRow width="m"`, so this lands
+   on the same measure instead of a number picked by eye. A `ch` value is no
+   good here: this font's `0` is wide enough that 70ch exceeds the column. */
+.prose {
+  max-width: var(--maxWidthM);
 }
 
 .statusGroup {

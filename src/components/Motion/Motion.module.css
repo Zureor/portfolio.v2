@@ -49,11 +49,12 @@
    `filter` all flatten it, so none of them belong here or on any ancestor
    between this and a `data-depth` layer. */
 .depthInner {
+  /* `transform-style: preserve-3d` makes this element a containing block for
+     absolutely positioned descendants in this browser, the same way
+     `transform` does. Without an explicit height, that containing block
+     resolves to an auto height — and since every `data-depth` layer is
+     itself absolutely positioned, none of them contribute to that auto
+     height, so it collapses to zero and every layer collapses with it. */
   height: 100%;
-
-  /* Without explicit height, this wrapper collapses to zero when all children
-     are absolutely positioned, hiding the layers. With an auto-height parent,
-     `height: 100%` resolves to auto and is safe for in-flow content. */
   transform-style: preserve-3d;
-  will-change: transform;
 }
