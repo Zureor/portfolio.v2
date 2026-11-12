@@ -141,29 +141,30 @@ export const Navbar = () => {
 
   return (
     <header className={styles.navbar} ref={headerRef}>
-      <RouterLink href={route === '/' ? '/#intro' : '/'} scroll={false}>
-        <a
-          data-navbar-item
-          className={styles.logo}
-          aria-label="Shoaib,"
-          onClick={handleMobileNavClick}
-        >
-          <Monogram highlight />
-        </a>
+      <RouterLink
+        href={route === '/' ? '/#intro' : '/'}
+        scroll={false}
+        data-navbar-item
+        className={styles.logo}
+        aria-label="Shoaib,"
+        onClick={handleMobileNavClick}
+      >
+        <Monogram highlight />
       </RouterLink>
       <NavToggle onClick={() => dispatch({ type: 'toggleMenu' })} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
-            <RouterLink href={pathname} scroll={false} key={label}>
-              <a
-                data-navbar-item
-                className={styles.navLink}
-                aria-current={getCurrent(pathname)}
-                onClick={handleNavItemClick}
-              >
-                {label}
-              </a>
+            <RouterLink
+              href={pathname}
+              scroll={false}
+              key={label}
+              data-navbar-item
+              className={styles.navLink}
+              aria-current={getCurrent(pathname)}
+              onClick={handleNavItemClick}
+            >
+              {label}
             </RouterLink>
           ))}
         </div>
@@ -173,20 +174,21 @@ export const Navbar = () => {
         {visible => (
           <nav className={styles.mobileNav} data-visible={visible}>
             {navLinks.map(({ label, pathname }, index) => (
-              <RouterLink href={pathname} scroll={false} key={label}>
-                <a
-                  className={styles.mobileNavLink}
-                  data-visible={visible}
-                  aria-current={getCurrent(pathname)}
-                  onClick={handleMobileNavClick}
-                  style={cssProps({
-                    transitionDelay: numToMs(
-                      Number(msToNum(tokens.base.durationS)) + index * 50
-                    ),
-                  })}
-                >
-                  {label}
-                </a>
+              <RouterLink
+                href={pathname}
+                scroll={false}
+                key={label}
+                className={styles.mobileNavLink}
+                data-visible={visible}
+                aria-current={getCurrent(pathname)}
+                onClick={handleMobileNavClick}
+                style={cssProps({
+                  transitionDelay: numToMs(
+                    Number(msToNum(tokens.base.durationS)) + index * 50
+                  ),
+                })}
+              >
+                {label}
               </RouterLink>
             ))}
             <NavbarIcons />

@@ -80,7 +80,7 @@ export const ProjectSummary = ({
         {description}
       </Text>
       <div className={styles.button} data-visible={visible}>
-        <Button iconHoverShift href={buttonLink} iconEnd="arrowRight">
+        <Button iconHoverShift href={buttonLink || undefined} iconEnd="arrowRight">
           {buttonText}
         </Button>
       </div>
