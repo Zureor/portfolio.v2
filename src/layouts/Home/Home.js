@@ -9,7 +9,7 @@ import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app.jpg';
 import campushubTexture from 'assets/campushub/homepage-dark.png';
 import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
-import campushubTexturePlaceholder from 'assets/campushub/homepage-dark.png';
+import campushubTexturePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
 import github from 'assets/github.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
@@ -40,7 +40,6 @@ export const Home = () => {
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
-            if (visibleSections.includes(section)) return;
             setVisibleSections(prevSections => [...prevSections, section]);
           }
         });
@@ -65,7 +64,7 @@ export const Home = () => {
       sectionObserver.disconnect();
       indicatorObserver.disconnect();
     };
-  }, [visibleSections]);
+  }, []);
 
   return (
     <div className={styles.home}>
@@ -127,8 +126,8 @@ export const Home = () => {
         visible={visibleSections.includes(projectFour.current)}
         index={3}
         title="Relive"
-        description="Introducing 'Relieve' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
-        buttonText="Comming Soon"
+        description="Introducing 'Relive' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
+        buttonText="Coming Soon"
         buttonLink=""
         model={{
           type: 'phone',

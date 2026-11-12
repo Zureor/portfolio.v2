@@ -1,18 +1,17 @@
-
 import campushubHomepage from 'assets/campushub/homepage-dark.png';
-import campushubHomepagePlaceholder from 'assets/campushub/homepage-dark.png';
+import campushubHomepagePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
 import campushubBackground from 'assets/campushub/homepage-light.png';
-import campushubBackgroundPlaceholder from 'assets/campushub/homepage-light.png';
+import campushubBackgroundPlaceholder from 'assets/campushub/homepage-light-placeholder.jpg';
 import campushubDashboard from 'assets/campushub/dashboard.png';
-import campushubDashboardPlaceholder from 'assets/campushub/dashboard.png';
+import campushubDashboardPlaceholder from 'assets/campushub/dashboard-placeholder.jpg';
 import campushubSignIn from 'assets/campushub/sign-in-light.png';
-import campushubSignInPlaceholder from 'assets/campushub/sign-in-light.png';
+import campushubSignInPlaceholder from 'assets/campushub/sign-in-light-placeholder.jpg';
 import campushubSignUp from 'assets/campushub/sign-up-dark.png';
-import campushubSignUpPlaceholder from 'assets/campushub/sign-up-dark.png';
+import campushubSignUpPlaceholder from 'assets/campushub/sign-up-dark-placeholder.jpg';
 import campushubEventsView from 'assets/campushub/events-list-view.png';
-import campushubEventsViewPlaceholder from 'assets/campushub/events-list-view.png';
+import campushubEventsViewPlaceholder from 'assets/campushub/events-list-view-placeholder.jpg';
 import campushubAdminPanel from 'assets/campushub/admin-panel.png';
-import campushubAdminPanelPlaceholder from 'assets/campushub/admin-panel.png';
+import campushubAdminPanelPlaceholder from 'assets/campushub/admin-panel-placeholder.jpg';
 import { Footer } from 'components/Footer';
 import { Image } from 'components/Image';
 import { Meta } from 'components/Meta';
@@ -69,14 +68,14 @@ export const CampusHub = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Technical Stack</ProjectSectionHeading>
               <ProjectSectionText>
-                Built using React with Vite for blazing-fast development and TypeScript 
-                for type-safe code. The UI is crafted with Tailwind CSS and Shadcn UI 
+                Built using React with Vite for blazing-fast development and TypeScript
+                for type-safe code. The UI is crafted with Tailwind CSS and Shadcn UI
                 components for a modern, consistent design.
               </ProjectSectionText>
               <ProjectSectionText>
-                Framer Motion powers the smooth animations, while Firebase handles 
-                authentication, database, and storage. TanStack Query manages 
-                server state efficiently.
+                Framer Motion powers the smooth animations, while Firebase handles
+                authentication, database, and storage. TanStack Query manages server state
+                efficiently.
               </ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
@@ -102,13 +101,13 @@ export const CampusHub = () => {
             <ProjectTextRow>
               <ProjectSectionHeading>Student Features</ProjectSectionHeading>
               <ProjectSectionText>
-                Browse upcoming, past, and featured events in a beautiful grid layout. 
-                One-click registration for events, personal dashboard to track 
+                Browse upcoming, past, and featured events in a beautiful grid layout.
+                One-click registration for events, personal dashboard to track
                 registrations, and interactive UI with smooth animations.
               </ProjectSectionText>
               <ProjectSectionText>
-                The responsive design looks great on any device, with cursor effects 
-                and dynamic elements that make the experience engaging.
+                The responsive design looks great on any device, with cursor effects and
+                dynamic elements that make the experience engaging.
               </ProjectSectionText>
             </ProjectTextRow>
             <Image
@@ -124,12 +123,12 @@ export const CampusHub = () => {
             <ProjectTextRow>
               <ProjectSectionHeading>Admin Dashboard</ProjectSectionHeading>
               <ProjectSectionText>
-                Comprehensive dashboard for administrators with insights into platform 
-                usage and event statistics. Create, edit, and delete events with rich 
-                text descriptions and banners.
+                Comprehensive dashboard for administrators with insights into platform
+                usage and event statistics. Create, edit, and delete events with rich text
+                descriptions and banners.
               </ProjectSectionText>
               <ProjectSectionText>
-                Features include category control, user management, and registration 
+                Features include category control, user management, and registration
                 tracking to oversee platform operations efficiently.
               </ProjectSectionText>
             </ProjectTextRow>
@@ -146,7 +145,7 @@ export const CampusHub = () => {
             <ProjectTextRow>
               <ProjectSectionHeading>User Dashboard</ProjectSectionHeading>
               <ProjectSectionText>
-                Personal dashboard for students to track their registrations, interested 
+                Personal dashboard for students to track their registrations, interested
                 events, and history. Update personal details and preferences easily.
               </ProjectSectionText>
             </ProjectTextRow>
