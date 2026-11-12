@@ -11,11 +11,11 @@ import {
   MeshPhongMaterial,
   PerspectiveCamera,
   Scene,
-  SphereBufferGeometry,
+  SphereGeometry,
   UniformsUtils,
   Vector2,
   WebGLRenderer,
-  sRGBEncoding,
+  SRGBColorSpace,
 } from 'three';
 import { media, rgbToThreeColor } from 'utils/style';
 import { cleanRenderer, cleanScene, removeLights } from 'utils/three';
@@ -61,7 +61,7 @@ export const DisplacementSphere = props => {
     });
     renderer.current.setSize(innerWidth, innerHeight);
     renderer.current.setPixelRatio(1);
-    renderer.current.outputEncoding = sRGBEncoding;
+    renderer.current.outputColorSpace = SRGBColorSpace;
 
     camera.current = new PerspectiveCamera(54, innerWidth / innerHeight, 0.1, 100);
     camera.current.position.z = 52;
@@ -81,7 +81,7 @@ export const DisplacementSphere = props => {
     };
 
     startTransition(() => {
-      geometry.current = new SphereBufferGeometry(32, 128, 128);
+      geometry.current = new SphereGeometry(32, 128, 128);
       sphere.current = new Mesh(geometry.current, material.current);
       sphere.current.position.z = 0;
       sphere.current.modifier = Math.random();
@@ -95,15 +95,21 @@ export const DisplacementSphere = props => {
   }, []);
 
   useEffect(() => {
-    const dirLight = new DirectionalLight(colorWhite, 0.6);
-    const ambientLight = new AmbientLight(colorWhite, themeId === 'light' ? 0.8 : 0.1);
+    const dirLight = new DirectionalLight(colorWhite, 0.6 * Math.PI);
+    const ambientLight = new AmbientLight(
+      colorWhite,
+      (themeId === 'light' ? 0.8 : 0.1) * Math.PI
+    );
 
     dirLight.position.z = 200;
     dirLight.position.x = 100;
     dirLight.position.y = 100;
 
     lights.current = [dirLight, ambientLight];
-    scene.current.background = new Color(...rgbToThreeColor(rgbBackground));
+    scene.current.background = new Color().setRGB(
+      ...rgbToThreeColor(rgbBackground),
+      SRGBColorSpace
+    );
     lights.current.forEach(light => scene.current.add(light));
 
     return () => {

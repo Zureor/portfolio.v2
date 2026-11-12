@@ -62,3 +62,4 @@ public/og
 .serverless
 .next
 .DS_Store
+.claude/
