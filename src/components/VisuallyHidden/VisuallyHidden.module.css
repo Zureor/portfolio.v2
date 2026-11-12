@@ -12,6 +12,6 @@
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
-    word-wrap: normal;
+    overflow-wrap: normal;
   }
 }

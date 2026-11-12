@@ -1,5 +1,9 @@
 module.exports = {
   plugins: {
+    // Makes the @custom-media definitions in media.css visible to every CSS module
+    '@csstools/postcss-global-data': {
+      files: ['src/layouts/App/media.css'],
+    },
     'postcss-flexbugs-fixes': {},
     'postcss-preset-env': {
       autoprefixer: {
@@ -8,9 +12,7 @@ module.exports = {
       stage: 3,
       features: {
         'nesting-rules': true,
-        'custom-media-queries': {
-          importFrom: 'src/layouts/App/global.css',
-        },
+        'custom-media-queries': true,
       },
     },
   },

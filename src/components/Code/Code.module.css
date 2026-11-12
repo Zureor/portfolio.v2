@@ -46,11 +46,11 @@
 
   &[data-theme='light'] {
     --background: rgb(255 255 255);
-    --comment: rgba(0 0 0 / 0.6);
+    --comment: rgb(0 0 0 / 0.6);
     --keyword: #00378c;
     --string: rgb(4 98 108);
     --boolean: rgb(4 98 108);
-    --punctuation: rgba(0 0 0 / 0.4);
+    --punctuation: rgb(0 0 0 / 0.4);
     --function: rgb(4 98 108);
     --className: rgb(4 98 108);
     --operator: #a8093f;
@@ -162,7 +162,7 @@
   opacity: 0;
   transition: opacity var(--durationS) var(--bezierFastoutSlowin);
 
-  @nest .code:hover &, &:focus-within {
+  .code:hover &, &:focus-within {
     opacity: 1;
   }
 

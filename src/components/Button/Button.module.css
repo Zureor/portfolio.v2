@@ -166,12 +166,12 @@
   }
 
   @media (--mediaUseMotion) {
-    @nest .button:hover &[data-shift='true'] {
+    .button:hover &[data-shift='true'] {
       transform: translate3d(var(--spaceXS), 0, 0);
     }
   }
 
-  @nest .button[data-loading='true'] & {
+  .button[data-loading='true'] & {
     opacity: 0;
   }
 }

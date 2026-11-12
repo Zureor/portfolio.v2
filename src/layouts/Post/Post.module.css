@@ -12,7 +12,7 @@
     --gutterWidth: 60px;
   }
 
-  @media (max-width: 1096px) {
+  @media (width <= 1096px) {
     --contentWidth: 660px;
     --gutterWidth: 50px;
   }
