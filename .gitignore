@@ -61,3 +61,4 @@ public/draco/
 public/og
 .serverless
 .next
+.DS_Store
