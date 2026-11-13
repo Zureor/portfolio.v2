@@ -7,8 +7,8 @@ import gamestackTexture from 'assets/gamestack-login.jpg';
 import sliceTextureLarge from 'assets/slice-app.jpg';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app.jpg';
-import cartonConnectTexture from 'assets/carton-connect/dashboard-dark.webp';
-import cartonConnectTexturePlaceholder from 'assets/carton-connect/dashboard-dark-placeholder.jpg';
+import cartonConnectTexture from 'assets/carton-connect/signin-desktop.webp';
+import cartonConnectTexturePlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
 import campushubTexture from 'assets/campushub/homepage-dark.png';
 import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
 import campushubTexturePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
@@ -96,12 +96,12 @@ export const Home = () => {
         visible={visibleSections.includes(projectOne.current)}
         index={1}
         title="Carton Connect"
-        description="A carton ordering and supply portal for Primark's export carton programme, run by PAC-D. Planned, designed, built and deployed single-handedly."
+        description="A carton ordering and supply portal for Primark's export carton programme, run by PAC-D."
         buttonText="View project"
         buttonLink="/projects/carton-connect"
         model={{
           type: 'laptop',
-          alt: 'Carton Connect order dashboard',
+          alt: 'Carton Connect sign-in page',
           textures: [
             {
               srcSet: [cartonConnectTexture, cartonConnectTexture],

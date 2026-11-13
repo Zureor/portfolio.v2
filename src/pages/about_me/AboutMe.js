@@ -2,6 +2,7 @@ import { useGSAP } from '@gsap/react';
 import { Button } from 'components/Button';
 import { Footer } from 'components/Footer';
 import { Icon } from 'components/Icon';
+import { Link } from 'components/Link';
 import { Meta } from 'components/Meta';
 import { Text } from 'components/Text';
 import gsap from 'gsap';
@@ -121,8 +122,9 @@ const publication = {
   paperTitle:
     'A Sensitivity-Optimised Ensemble Framework for Explainable Chronic Kidney Disease Screening',
   venue:
-    '2026 IEEE International Conference on Circuit, Systems and Communication (ICCSC)',
-  status: 'Accepted for publication',
+    '2026 International Conference on Circuit, Systems and Communication (ICCSC), Fez, Morocco, 2-3 July 2026. Published by IEEE.',
+  doi: '10.1109/ICCSC71566.2026.11650312',
+  status: 'Published',
   contribution:
     'Led the technical work: research concept, model design and implementation of the sensitivity-optimised ensemble, explainability analysis and reference framework.',
 };
@@ -600,6 +602,12 @@ export function AboutMe() {
                 <h3 className={styles.paperTitle}>{publication.paperTitle}</h3>
                 <p className={styles.paperAuthors}>{publication.authors}</p>
                 <p className={styles.paperVenue}>{publication.venue}</p>
+                <p className={styles.paperVenue}>
+                  DOI{' '}
+                  <Link href={`https://doi.org/${publication.doi}`}>
+                    {publication.doi}
+                  </Link>
+                </p>
                 <p className={styles.paperContribution}>{publication.contribution}</p>
               </div>
             </article>

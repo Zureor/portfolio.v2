@@ -1,6 +1,7 @@
 import { useReducedMotion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useCallback, useRef } from 'react';
+import { getLenis } from './useSmoothScroll';
 
 export function useScrollToHash() {
   const scrollTimeout = useRef();
@@ -14,7 +15,13 @@ export function useScrollToHash() {
       const route = asPath.split('#')[0];
       const newPath = `${route}#${id}`;
 
-      targetElement.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      // Native smooth scrolling fights Lenis, so let Lenis animate when it is running.
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(targetElement);
+      } else {
+        targetElement.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
 
       const handleScroll = () => {
         clearTimeout(scrollTimeout.current);
