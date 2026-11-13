@@ -10,10 +10,19 @@ import { Image } from 'components/Image';
 import { Link } from 'components/Link';
 import { Section } from 'components/Section';
 import { Text } from 'components/Text';
+import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
+import { useHasMounted } from 'hooks';
+import dynamic from 'next/dynamic';
 import { Fragment, useState } from 'react';
 import { media } from 'utils/style';
+import { hasWebGL, rgbTokenToHex } from 'utils/webgl';
 import styles from './Profile.module.css';
+
+const DitherVeil = dynamic(
+  () => import('components/DitherVeil').then(mod => mod.DitherVeil),
+  { ssr: false }
+);
 
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
@@ -55,6 +64,10 @@ const ProfileText = ({ visible, titleId }) => (
 export const Profile = ({ id, visible, sectionRef }) => {
   const [focused, setFocused] = useState(false);
   const titleId = `${id}-title`;
+  const theme = useTheme();
+  const light = theme.themeId === 'light';
+  // The plain photo renders on the server and without WebGL; the veil swaps in after mount.
+  const veil = useHasMounted() && hasWebGL();
 
   return (
     <Section
@@ -95,14 +108,40 @@ export const Profile = ({ id, visible, sectionRef }) => {
                 </div>
               </div>
               <div className={styles.image}>
-                <Image
-                  reveal
-                  delay={100}
-                  placeholder={profileImgPlaceholder}
-                  srcSet={[profileImg, profileImgLarge]}
-                  sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
-                  alt="Overdressed as always."
-                />
+                {veil ? (
+                  // Dithered portrait; hovering reveals the photo in full colour.
+                  <div
+                    className={styles.veil}
+                    role="img"
+                    aria-label="Overdressed as always."
+                  >
+                    <DitherVeil
+                      src={profileImgLarge.src}
+                      fit="cover"
+                      pattern="floyd"
+                      pixelSize={2}
+                      // Ink is the darkest tone, so it is the dark colour in either theme.
+                      inkColor={rgbTokenToHex(
+                        light ? theme.rgbText : theme.rgbBackground
+                      )}
+                      paperColor={rgbTokenToHex(
+                        light ? theme.rgbBackground : theme.rgbText
+                      )}
+                      rimColor={rgbTokenToHex(theme.rgbAccent)}
+                      rim={0.15}
+                      revealRadius={160}
+                    />
+                  </div>
+                ) : (
+                  <Image
+                    reveal
+                    delay={100}
+                    placeholder={profileImgPlaceholder}
+                    srcSet={[profileImg, profileImgLarge]}
+                    sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
+                    alt="Overdressed as always."
+                  />
+                )}
                 <svg
                   aria-hidden="true"
                   width="135"

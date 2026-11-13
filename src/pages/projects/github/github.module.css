@@ -115,6 +115,19 @@
   --hairline: rgb(var(--rgbText) / 0.12);
 }
 
+/* Hyperspeed sits where the video background was: behind the header, fading
+   out before the content. */
+.hyperspeed {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 800px;
+  opacity: 0.75;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, rgb(0 0 0) 55%, transparent 100%);
+}
+
 /* No `overflow` and no `opacity` below 1: both would flatten the 3D space
    Depth establishes and collapse the layers onto one plane. */
 .featured {

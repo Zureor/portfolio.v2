@@ -397,7 +397,7 @@
   padding-top: var(--spaceM);
   border-top: 1px solid var(--hairline);
 
-  /* Tools closes the grid as a full-width row so no cell is left empty */
+  /* Every group is a full-width scrolling row */
   &[data-span='full'] {
     grid-column: 1 / -1;
   }
@@ -416,29 +416,9 @@
   color: var(--colorTextTitle);
 }
 
-.chipList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spaceS);
-}
-
-.chip {
-  font-size: var(--fontSizeBodyXS);
-  line-height: 1;
-  padding: 7px var(--spaceS);
+.skillLoop {
+  /* Logos and names share the body text colour; LogoLoop turns the hovered one cyan. */
   color: rgb(var(--rgbText) / 0.75);
-  border: 1px solid var(--hairline);
-  background: rgb(var(--rgbText) / 0.03);
-  transition: border-color var(--durationS) var(--bezierFastoutSlowin),
-    color var(--durationS) var(--bezierFastoutSlowin);
-
-  &:hover {
-    border-color: rgb(var(--rgbPrimary) / 0.55);
-    color: var(--colorTextTitle);
-  }
 }
 
 /* --------------------------------------------------------------------------

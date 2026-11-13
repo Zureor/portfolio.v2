@@ -116,6 +116,12 @@
   width: 100%;
 }
 
+.veil {
+  /* profile.jpg is 1440 × 1800 */
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+
 .svg {
   position: absolute;
   right: 0;

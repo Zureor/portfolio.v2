@@ -1,6 +1,10 @@
 import 'layouts/App/reset.css';
 import 'layouts/App/global.css';
 import 'lenis/dist/lenis.css';
+// React Bits components ship plain global stylesheets (prefixed class names).
+import 'components/DitherVeil/DitherVeil.css';
+import 'components/Hyperspeed/Hyperspeed.css';
+import 'components/LogoLoop/LogoLoop.css';
 
 import { Navbar } from 'components/Navbar';
 import { ThemeProvider } from 'components/ThemeProvider';

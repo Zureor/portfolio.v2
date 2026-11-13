@@ -1,6 +1,3 @@
-
-import githubBackgroundPlaceholder from 'assets/github.png';
-import githubBackground from 'assets/coding_video.mp4';
 import ulms_back from 'assets/projects/ULMS_Back.png';
 import ulms from 'assets/projects/ULMS.png';
 import student_dashboard from 'assets/projects/excel_dashboard.png';
@@ -16,7 +13,6 @@ import { Depth } from 'components/Motion';
 
 import { Button } from 'components/Button';
 import {
-  ProjectBackground,
   ProjectContainer,
   ProjectHeader,
   ProjectImage,
@@ -27,10 +23,42 @@ import {
   ProjectSectionText,
   ProjectTextRow,
 } from 'layouts/Project';
+import { useTheme } from 'components/ThemeProvider';
+import { useHasMounted, useWindowSize } from 'hooks';
+import dynamic from 'next/dynamic';
 import { Fragment } from 'react';
 import { media } from 'utils/style';
+import { hasWebGL } from 'utils/webgl';
 import styles from './github.module.css';
 
+const Hyperspeed = dynamic(
+  () => import('components/Hyperspeed').then(mod => mod.Hyperspeed),
+  { ssr: false }
+);
+
+// Light-trail road behind the header. Decorative, non-interactive (click-and-hold
+// boost would fight the links on top), lighter on phones, skipped without WebGL.
+const HyperspeedBackground = () => {
+  const { themeId } = useTheme();
+  const { width } = useWindowSize();
+  const show = useHasMounted() && hasWebGL();
+  if (!show) return null;
+  const phone = width <= media.mobile;
+
+  return (
+    <div className={styles.hyperspeed} aria-hidden>
+      <Hyperspeed
+        theme={themeId}
+        interactive={false}
+        headColors={['#00e5ff', '#0e5ea5', '#324555']}
+        poleColors={['#00e5ff']}
+        density={phone ? 20 : 40}
+        glow={phone ? 0 : 0.6}
+        dust={phone ? 40 : 100}
+      />
+    </div>
+  );
+};
 
 const description =
   'These are small projects I’ve worked on over the years—some for university assignments, others just for fun. They weren’t built for commercial use, but they helped me learn a lot and explore different tools and ideas.';
@@ -39,17 +67,10 @@ const description =
 export const github = () => {
   return (
     <Fragment>
-      <Meta title='Other Projects' prefix="Projects" description={description} />
+      <Meta title="Other Projects" prefix="Projects" description={description} />
       <ProjectContainer className={styles.github}>
-        <ProjectBackground
-          src={githubBackground}
-          srcSet={`${githubBackground.src} 1280w, ${githubBackground.src} 2560w`}
-          placeholder={githubBackgroundPlaceholder}
-          opacity={0.8}
-        />
-        <ProjectHeader
-          description={description}
-        />
+        <HyperspeedBackground />
+        <ProjectHeader description={description} />
         <ProjectSection padding="top">
           <ProjectSectionContent>
             <Depth className={styles.featured} perspective={1100} travel={18}>
@@ -60,9 +81,9 @@ export const github = () => {
                 liminal
               </h2>
               <p className={styles.featuredCopy} data-depth="30">
-                Calibrating LLM judges against human labels with Item Response
-                Theory, so a judge&#8217;s severity and length bias can be
-                separated from the quality it was supposed to be measuring.
+                Calibrating LLM judges against human labels with Item Response Theory, so
+                a judge&#8217;s severity and length bias can be separated from the quality
+                it was supposed to be measuring.
               </p>
               <div data-depth="10">
                 <Button
@@ -96,26 +117,30 @@ export const github = () => {
               />
             </div>
             <div className={styles.imagesText}>
-              <ProjectSectionHeading>University Library Management System</ProjectSectionHeading>
+              <ProjectSectionHeading>
+                University Library Management System
+              </ProjectSectionHeading>
               <ProjectSectionText>
-              This University Library Management System is a handy web app that makes library life easier 
-              for everyone. Students can quickly reserve the books they need and keep track of any fines 
-              they might have. Librarians get a simple way to manage books and handle reservations, while 
-              admins take care of user accounts. There’s even a feature to add lots of books at once using 
-              an API. It’s built with PHP and MySQL, with a clean HTML/CSS frontend—basically, everything 
-              you need to keep the library running smoothly!
+                This University Library Management System is a handy web app that makes
+                library life easier for everyone. Students can quickly reserve the books
+                they need and keep track of any fines they might have. Librarians get a
+                simple way to manage books and handle reservations, while admins take care
+                of user accounts. There’s even a feature to add lots of books at once
+                using an API. It’s built with PHP and MySQL, with a clean HTML/CSS
+                frontend—basically, everything you need to keep the library running
+                smoothly!
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://github.com/Zureor/ULMS">
-                        View Source Code
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/ULMS"
+                >
+                  View Source Code
                 </Button>
               </ProjectSectionText>
             </div>
-            
           </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection light>
@@ -123,20 +148,22 @@ export const github = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Student Dashboard</ProjectSectionHeading>
               <ProjectSectionText>
-              This interactive student dashboard is developed using Excel Macros (VBA) and 
-              provides a clear overview of academic performance. It includes a visual representation
-               of credit completion progress, a grade distribution chart showing the count of each 
-               letter grade, and a combined graph displaying semester-wise GPA, CGPA trends, and credit 
-               summary. The dashboard offers a clean and efficient way for students to track their 
-               academic journey and make informed decisions.
+                This interactive student dashboard is developed using Excel Macros (VBA)
+                and provides a clear overview of academic performance. It includes a
+                visual representation of credit completion progress, a grade distribution
+                chart showing the count of each letter grade, and a combined graph
+                displaying semester-wise GPA, CGPA trends, and credit summary. The
+                dashboard offers a clean and efficient way for students to track their
+                academic journey and make informed decisions.
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://github.com/Zureor/Student_dashboard">
-                        View Source Code
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/Student_dashboard"
+                >
+                  View Source Code
                 </Button>
               </ProjectSectionText>
             </div>
@@ -158,32 +185,35 @@ export const github = () => {
             </div>
           </ProjectSectionColumns>
         </ProjectSection>
-        
+
         <ProjectSection>
           <ProjectSectionContent>
             <ProjectTextRow>
               <ProjectSectionHeading>Portfolio Website</ProjectSectionHeading>
               <ProjectSectionText>
-                This is a simple portfolio website I built to showcase web development skills. 
-                It features a clean, responsive design that works well across all devices—desktops, 
-                tablets, and phones. The site includes smooth scrolling, hover effects, and 
-                well-organized sections to present skills, experience, and project highlights clearly. 
-                It was built using HTML5, CSS3, and JavaScript, and served as a personal branding site during its time.
+                This is a simple portfolio website I built to showcase web development
+                skills. It features a clean, responsive design that works well across all
+                devices—desktops, tablets, and phones. The site includes smooth scrolling,
+                hover effects, and well-organized sections to present skills, experience,
+                and project highlights clearly. It was built using HTML5, CSS3, and
+                JavaScript, and served as a personal branding site during its time.
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://github.com/Zureor/portfolio">
-                        View Source Code
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/portfolio"
+                >
+                  View Source Code
                 </Button>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://zureor.github.io/portfolio/">
-                        View Live Site
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://zureor.github.io/portfolio/"
+                >
+                  View Live Site
                 </Button>
               </ProjectSectionText>
             </ProjectTextRow>
@@ -216,22 +246,23 @@ export const github = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Perfume Sales Dashboard</ProjectSectionHeading>
               <ProjectSectionText>
-              An interactive Power BI dashboard that explores perfume sales by product,
-              brand, and season. It highlights revenue trends, seasonal patterns, and lets
-               you filter the data for deeper insights. The project also includes data cleaning steps 
-               like splitting multi-season entries, and features a clean, polished layout for better storytelling.
+                An interactive Power BI dashboard that explores perfume sales by product,
+                brand, and season. It highlights revenue trends, seasonal patterns, and
+                lets you filter the data for deeper insights. The project also includes
+                data cleaning steps like splitting multi-season entries, and features a
+                clean, polished layout for better storytelling.
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://github.com/Zureor/PerfumeSalesDashboard">
-                        View Source Code
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/PerfumeSalesDashboard"
+                >
+                  View Source Code
                 </Button>
               </ProjectSectionText>
             </div>
-            
           </ProjectSectionColumns>
         </ProjectSection>
         <ProjectSection>
@@ -239,17 +270,18 @@ export const github = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Monty Expense Tracker</ProjectSectionHeading>
               <ProjectSectionText>
-              A simple finance tracker built with Java, Spring Web, and MySQL. 
-              It lets you log income and expenses, organize them by category, and 
-              view your full transaction history.
+                A simple finance tracker built with Java, Spring Web, and MySQL. It lets
+                you log income and expenses, organize them by category, and view your full
+                transaction history.
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
-                    secondary
-                    iconHoverShift
-                    icon="chevronRight"                            
-                    href="https://github.com/Zureor/Monty-Expense-Tracker">
-                        View Source Code
+                  secondary
+                  iconHoverShift
+                  icon="chevronRight"
+                  href="https://github.com/Zureor/Monty-Expense-Tracker"
+                >
+                  View Source Code
                 </Button>
               </ProjectSectionText>
             </div>
@@ -269,25 +301,22 @@ export const github = () => {
             <ProjectTextRow width="m">
               <ProjectSectionHeading>InvenTrack</ProjectSectionHeading>
               <ProjectSectionText>
-                A full-stack inventory system for small and mid-sized
-                businesses: product catalogue with SKUs and reorder levels,
-                suppliers, purchase orders, and a dashboard that values the
-                whole inventory and flags what is running low.
+                A full-stack inventory system for small and mid-sized businesses: product
+                catalogue with SKUs and reorder levels, suppliers, purchase orders, and a
+                dashboard that values the whole inventory and flags what is running low.
               </ProjectSectionText>
               <ProjectSectionText>
-                The part worth naming is the stock ledger. Every movement in,
-                out or as a correction writes through to the product&#8217;s
-                on-hand count in the same operation that records it, so the
-                audit trail and the quantity can never disagree with each
-                other. Stock is clamped at zero rather than allowed to go
-                negative.
+                The part worth naming is the stock ledger. Every movement in, out or as a
+                correction writes through to the product&#8217;s on-hand count in the same
+                operation that records it, so the audit trail and the quantity can never
+                disagree with each other. Stock is clamped at zero rather than allowed to
+                go negative.
               </ProjectSectionText>
               <ProjectSectionText>
-                Django 5 and Django REST Framework on the back end with JWT
-                auth against PostgreSQL, React 18 and Vite on the front, and an
-                Axios interceptor that refreshes an expired token and retries
-                the original request rather than bouncing the user to the login
-                screen.
+                Django 5 and Django REST Framework on the back end with JWT auth against
+                PostgreSQL, React 18 and Vite on the front, and an Axios interceptor that
+                refreshes an expired token and retries the original request rather than
+                bouncing the user to the login screen.
               </ProjectSectionText>
               <ProjectSectionText>
                 <Button
