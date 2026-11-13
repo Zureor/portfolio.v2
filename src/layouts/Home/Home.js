@@ -1,9 +1,6 @@
-import gamestackTexture2Large from 'assets/gamestack-list-1150.webp';
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from 'assets/gamestack-list-640.webp';
-import gamestackTextureLarge from 'assets/gamestack-login-1150.webp';
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from 'assets/gamestack-login-640.webp';
+import liminalTextureLarge from 'assets/liminal/liminal-2048.webp';
+import liminalTexturePlaceholder from 'assets/liminal/liminal-placeholder.jpg';
+import liminalTexture from 'assets/liminal/liminal-1280.webp';
 import sliceTextureLarge from 'assets/slice-app-2048.webp';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app-1280.webp';
@@ -245,21 +242,17 @@ export const Home = () => {
             sectionRef={projectFour}
             visible={visibleSections.includes(projectFour.current)}
             index={4}
-            title="Relive"
-            description="Introducing 'Relive' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
-            buttonText="Coming Soon"
-            buttonLink=""
+            title="liminal"
+            description="A Python library that calibrates LLM judges against human labels using Item Response Theory, treating each judge as a measured instrument rather than an oracle."
+            buttonText="View project"
+            buttonLink="/projects/liminal"
             model={{
-              type: 'phone',
-              alt: 'App login screen',
+              type: 'laptop',
+              alt: 'liminal project page',
               textures: [
                 {
-                  srcSet: [gamestackTexture, gamestackTextureLarge],
-                  placeholder: gamestackTexturePlaceholder,
-                },
-                {
-                  srcSet: [gamestackTexture2, gamestackTexture2Large],
-                  placeholder: gamestackTexture2Placeholder,
+                  srcSet: [liminalTexture, liminalTextureLarge],
+                  placeholder: liminalTexturePlaceholder,
                 },
               ],
             }}

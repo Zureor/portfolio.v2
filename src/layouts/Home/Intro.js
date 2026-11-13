@@ -11,11 +11,11 @@ import { useInterval, usePrevious, useScrollToHash } from 'hooks';
 import dynamic from 'next/dynamic';
 import RouterLink from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
-
-// Let the intro text paint and hydrate first; the sphere fades in just after.
-const SPHERE_DELAY = 600;
 import { cssProps } from 'utils/style';
 import styles from './Intro.module.css';
+
+// Fallback delay for browsers without requestIdleCallback (Safari).
+const SPHERE_DELAY = 600;
 
 const DisplacementSphere = dynamic(() =>
   import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
@@ -33,9 +33,24 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
   const scrollToHash = useScrollToHash();
   const [showSphere, setShowSphere] = useState(false);
 
+  // Start the WebGL sphere (and fetch three.js) only after the page has loaded and the
+  // main thread is idle, so it never competes with first paint or hydration.
   useEffect(() => {
-    const timer = setTimeout(() => setShowSphere(true), SPHERE_DELAY);
-    return () => clearTimeout(timer);
+    const requestIdle =
+      window.requestIdleCallback || (cb => setTimeout(cb, SPHERE_DELAY));
+    const cancelIdle = window.cancelIdleCallback || clearTimeout;
+    let idleId;
+    const start = () => {
+      idleId = requestIdle(() => setShowSphere(true), { timeout: 2000 });
+    };
+
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+
+    return () => {
+      window.removeEventListener('load', start);
+      cancelIdle(idleId);
+    };
   }, []);
 
   useInterval(
