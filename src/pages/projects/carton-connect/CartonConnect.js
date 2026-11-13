@@ -29,7 +29,7 @@ import styles from './CartonConnect.module.css';
 
 const title = 'Carton Connect';
 const description =
-  "A carton ordering and supply portal for Primark's export carton programme, run by PAC-D. I planned, designed, built and deployed it on my own.";
+  "A carton ordering and supply portal for Primark's export carton programme, run by PAC-D.";
 const roles = ['Product Design', 'Full-stack Development', 'Cloud Infrastructure'];
 const siteUrl = 'https://cartonconnect.pac-d.com/';
 
