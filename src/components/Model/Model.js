@@ -384,6 +384,7 @@ const Device = ({
       const { texture, position, url } = model;
       let loadFullResTexture;
       let playAnimation;
+      let screenReady;
 
       const [placeholder, gltf] = await Promise.all([
         await textureLoader.loadAsync(texture.placeholder.src),
@@ -406,7 +407,7 @@ const Device = ({
           placeholderScreen.current.material.opacity = 1;
           placeholderScreen.current.position.z += 0.001;
 
-          applyScreenTexture(placeholder, placeholderScreen.current);
+          screenReady = applyScreenTexture(placeholder, placeholderScreen.current);
 
           loadFullResTexture = async () => {
             const image = await resolveSrcFromSrcSet(texture);
@@ -422,6 +423,16 @@ const Device = ({
           };
         }
       });
+
+      // Compile the shaders in the background (KHR_parallel_shader_compile) instead of
+      // on the first render, where it blocked the main thread mid-scroll. After the
+      // placeholder texture is on (a map changes the shader), and with the whole scene
+      // so its lights are part of the compiled program.
+      await screenReady;
+      await renderer.current.compileAsync(
+        modelGroup.current.parent || modelGroup.current,
+        new PerspectiveCamera()
+      );
 
       const targetPosition = new Vector3(position.x, position.y, position.z);
 

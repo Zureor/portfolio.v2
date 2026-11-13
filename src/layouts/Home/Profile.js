@@ -12,15 +12,17 @@ import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
-import { useInViewport } from 'hooks';
+import { useInViewport, useScrollPause } from 'hooks';
 import dynamic from 'next/dynamic';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { media } from 'utils/style';
 import { hasWebGL, rgbTokenToHex } from 'utils/webgl';
 import styles from './Profile.module.css';
 
 // Start the veil (and fetch the full photo) once the photo is within a screen of view.
 const nearView = { rootMargin: '100% 0px' };
+// Or earlier, during a scroll pause (the horizontal projects sit above Details).
+const aheadView = { rootMargin: '300% 0px' };
 
 const DitherVeil = dynamic(
   () => import('components/DitherVeil').then(mod => mod.DitherVeil),
@@ -71,7 +73,14 @@ export const Profile = ({ id, visible, sectionRef }) => {
   const light = theme.themeId === 'light';
   // The plain photo renders on the server and without WebGL; the veil swaps in after mount.
   const imageRef = useRef();
-  const veil = useInViewport(imageRef, true, nearView) && hasWebGL();
+  const near = useInViewport(imageRef, true, nearView);
+  const ahead = useInViewport(imageRef, true, aheadView);
+  const pause = useScrollPause();
+  const [veil, setVeil] = useState(false);
+
+  useEffect(() => {
+    if ((near || (ahead && pause)) && hasWebGL()) setVeil(true);
+  }, [near, ahead, pause]);
 
   return (
     <Section

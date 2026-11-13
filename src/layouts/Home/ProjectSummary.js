@@ -7,15 +7,18 @@ import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
-import { useInViewport, useWindowSize } from 'hooks';
+import { useInViewport, useScrollPause, useWindowSize } from 'hooks';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cssProps, media } from 'utils/style';
 import styles from './ProjectSummary.module.css';
 
-// Half a screen of margin both ways, so a model is ready just before it slides or
-// scrolls in, and its WebGL scene is disposed once it is well out of view.
-const nearView = { rootMargin: '50% 50%' };
+// A model mounts once and then stays: re-creating it each time it came back into view
+// caused a jitter after every project. It mounts early, while the visitor pauses on an
+// earlier project (aheadView + scroll pause), or at the latest when it comes within a
+// screen (nearView).
+const nearView = { rootMargin: '100% 100%' };
+const aheadView = { rootMargin: '200% 300%' };
 
 const Model = dynamic(() => import('components/Model').then(mod => mod.Model));
 
@@ -37,7 +40,14 @@ export const ProjectSummary = ({
   const { width } = useWindowSize();
   const titleId = `${id}-title`;
   const isMobile = width <= media.tablet;
-  const near = useInViewport(sectionRef, false, nearView);
+  const near = useInViewport(sectionRef, true, nearView);
+  const ahead = useInViewport(sectionRef, true, aheadView);
+  const pause = useScrollPause();
+  const [showModel, setShowModel] = useState(false);
+
+  useEffect(() => {
+    if (near || (ahead && pause)) setShowModel(true);
+  }, [near, ahead, pause]);
   const svgOpacity = theme.themeId === 'light' ? 0.7 : 1;
   const indexText = index < 10 ? `0${index}` : index;
   const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
@@ -100,7 +110,7 @@ export const ProjectSummary = ({
           <div className={styles.model} data-device="laptop">
             {/* Each model is its own WebGL scene with downloads; start it only once
                 its section is revealed rather than all five on page load. */}
-            {visible && near && (
+            {showModel && (
               <Model
                 alt={model.alt}
                 cameraPosition={{ x: 0, y: 0, z: 8 }}
@@ -124,7 +134,7 @@ export const ProjectSummary = ({
         <>
           {renderKatakana('phone', visible)}
           <div className={styles.model} data-device="phone">
-            {visible && near && (
+            {showModel && (
               <Model
                 alt={model.alt}
                 cameraPosition={{ x: 0, y: 0, z: 11.5 }}
