@@ -201,10 +201,3 @@
     0 0 0 1px var(--hairline),
     0 24px 64px rgb(0 0 0 / 0.18);
 }
-
-/* The page background reuses the sign-in screenshot, blurred until its text is
-   unreadable, leaving only the portal's blue gradient behind the header. */
-.background img {
-  filter: blur(40px);
-  transform: scale(1.15);
-}

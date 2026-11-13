@@ -112,9 +112,8 @@ export const CartonConnect = () => {
       <Meta title={title} prefix="Projects" description={description} />
       <ProjectContainer className={styles.cartonConnect}>
         <ProjectBackground
-          className={styles.background}
-          src={signinDesktop}
-          srcSet={`${signinDesktop.src} 1280w, ${signinDesktop.src} 2560w`}
+          src={signinDesktopPlaceholder}
+          srcSet={`${signinDesktopPlaceholder.src} 1280w`}
           placeholder={signinDesktopPlaceholder}
           opacity={0.5}
         />
