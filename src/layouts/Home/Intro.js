@@ -81,7 +81,21 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>
-                <div className={styles.row} component="span">
+                <div className={styles.disciplineRow}>
+                  {/* Invisible copies of every discipline share one grid cell, so the
+                      row is always as tall as the longest one (no jump when a long
+                      discipline wraps to two lines on small screens). */}
+                  {disciplines.map(item => (
+                    <span
+                      aria-hidden
+                      className={styles.word}
+                      data-plus={true}
+                      data-sizer
+                      key={`sizer-${item}`}
+                    >
+                      {item}
+                    </span>
+                  ))}
                   <AnimatePresence>
                     {disciplines.map(item => (
                       <Transition

@@ -1,6 +1,14 @@
 import { useIsPresent } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { getLenis } from 'hooks/useSmoothScroll';
 import { useEffect } from 'react';
+
+// Jump instantly, cancelling any Lenis momentum left over from the previous page.
+const jumpTo = y => {
+  const lenis = getLenis();
+  if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+  else window.scrollTo(0, y);
+};
 
 // Custom scroll restoration to avoid jank during page transitions
 export const ScrollRestore = () => {
@@ -30,10 +38,10 @@ export const ScrollRestore = () => {
     if (hash && targetElement) {
       // If there's a hash in the url and a matching element
       // id, scroll to and focus it
-      window.scrollTo(0, targetElement.offsetTop);
+      jumpTo(targetElement.offsetTop);
       targetElement.focus({ preventScroll: true });
     } else {
-      window.scrollTo(0, 0);
+      jumpTo(0);
       document.body.focus({ preventScroll: true });
     }
   }, [asPath, isPresent]);

@@ -108,6 +108,16 @@
   }
 }
 
+.disciplineRow {
+  display: grid;
+  position: relative;
+  align-items: start;
+
+  & > * {
+    grid-area: 1 / 1;
+  }
+}
+
 @keyframes introTextReveal {
   0% {
     color: rgb(var(--rgbText) / 0);
@@ -158,6 +168,18 @@
     content: '+';
     margin-right: 10px;
     opacity: 0.4;
+  }
+
+  &[data-sizer] {
+    visibility: hidden;
+  }
+
+  /* The incoming word always paints above the outgoing one. Without this, the
+     wrap from the last discipline back to the first flickered, because the
+     first one comes earlier in the DOM and was painted underneath. */
+  &[data-status='entering'],
+  &[data-status='entered'] {
+    z-index: var(--zIndex1);
   }
 
   &[data-status='entering'] {

@@ -7,6 +7,9 @@ import gamestackTexture from 'assets/gamestack-login.jpg';
 import sliceTextureLarge from 'assets/slice-app.jpg';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app.jpg';
+import cartonConnectTexture from 'assets/carton-connect/signin-desktop.webp';
+import cartonConnectTextureSmall from 'assets/carton-connect/signin-desktop-sm.webp';
+import cartonConnectTexturePlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
 import campushubTexture from 'assets/campushub/homepage-dark.png';
 import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
 import campushubTexturePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
@@ -19,12 +22,13 @@ import { ProjectSummary } from 'layouts/Home/ProjectSummary';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 
-const disciplines = ['Developer', 'Data Analyst', 'Animator', 'Techie'];
+const disciplines = ['Developer', 'Data Analyst', 'System Designer', 'Techie'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
   const intro = useRef();
+  const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
   const projectFour = useRef();
@@ -32,7 +36,15 @@ export const Home = () => {
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectTwo, projectThree, projectFour, projectFive, details];
+    const sections = [
+      intro,
+      projectOne,
+      projectTwo,
+      projectThree,
+      projectFour,
+      projectFive,
+      details,
+    ];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -70,8 +82,8 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         title="Portfolio"
-        description="Portfolio of Md. Shoaib Rana, a Computer Science graduate working in
-          business intelligence, data analytics and workflow automation."
+        description="Portfolio of Md. Shoaib Rana, a Computer Science graduate who designs
+          and builds internal systems, live dashboards and cloud-hosted web apps."
       />
       <Intro
         id="intro"
@@ -81,9 +93,30 @@ export const Home = () => {
       />
       <ProjectSummary
         id="project-1"
+        sectionRef={projectOne}
+        visible={visibleSections.includes(projectOne.current)}
+        index={1}
+        title="Carton Connect"
+        description="A carton ordering and supply portal for Primark's export carton programme, run by PAC-D."
+        buttonText="View project"
+        buttonLink="/projects/carton-connect"
+        model={{
+          type: 'laptop',
+          alt: 'Carton Connect sign-in page',
+          textures: [
+            {
+              srcSet: [cartonConnectTextureSmall, cartonConnectTexture],
+              placeholder: cartonConnectTexturePlaceholder,
+            },
+          ],
+        }}
+      />
+      <ProjectSummary
+        id="project-2"
+        alternate
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
-        index={1}
+        index={2}
         title="SEU CampusHub"
         description="A modern, dynamic event management platform tailored for Southeast University students and administrators. Discover, Register, and Manage Campus Events."
         buttonText="View project"
@@ -100,11 +133,10 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-2"
-        alternate
+        id="project-3"
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
-        index={2}
+        index={3}
         title="Zahoor"
         description="Zahoor is a Bangladeshi e-commerce destination, curating a diverse selection of products for discerning customers nationwide."
         buttonText="View project"
@@ -121,10 +153,11 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-3"
+        id="project-4"
+        alternate
         sectionRef={projectFour}
         visible={visibleSections.includes(projectFour.current)}
-        index={3}
+        index={4}
         title="Relive"
         description="Introducing 'Relive' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
         buttonText="Coming Soon"
@@ -145,11 +178,10 @@ export const Home = () => {
         }}
       />
       <ProjectSummary
-        id="project-4"
-        alternate
+        id="project-5"
         sectionRef={projectFive}
         visible={visibleSections.includes(projectFive.current)}
-        index={4}
+        index={5}
         title="Other Projects"
         description=""
         buttonText="View project"
