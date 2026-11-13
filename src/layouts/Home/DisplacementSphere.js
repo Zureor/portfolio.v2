@@ -60,7 +60,8 @@ export const DisplacementSphere = props => {
       failIfMajorPerformanceCaveat: true,
     });
     renderer.current.setSize(innerWidth, innerHeight);
-    renderer.current.setPixelRatio(1);
+    // 0.75 on phones: the sphere is soft-edged, so the lower resolution doesn't show.
+    renderer.current.setPixelRatio(innerWidth <= media.mobile ? 0.75 : 1);
     renderer.current.outputColorSpace = SRGBColorSpace;
 
     camera.current = new PerspectiveCamera(54, innerWidth / innerHeight, 0.1, 100);

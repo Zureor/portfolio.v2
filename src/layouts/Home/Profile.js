@@ -12,12 +12,15 @@ import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
-import { useHasMounted } from 'hooks';
+import { useInViewport } from 'hooks';
 import dynamic from 'next/dynamic';
-import { Fragment, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { media } from 'utils/style';
 import { hasWebGL, rgbTokenToHex } from 'utils/webgl';
 import styles from './Profile.module.css';
+
+// Start the veil (and fetch the full photo) once the photo is within a screen of view.
+const nearView = { rootMargin: '100% 0px' };
 
 const DitherVeil = dynamic(
   () => import('components/DitherVeil').then(mod => mod.DitherVeil),
@@ -67,7 +70,8 @@ export const Profile = ({ id, visible, sectionRef }) => {
   const theme = useTheme();
   const light = theme.themeId === 'light';
   // The plain photo renders on the server and without WebGL; the veil swaps in after mount.
-  const veil = useHasMounted() && hasWebGL();
+  const imageRef = useRef();
+  const veil = useInViewport(imageRef, true, nearView) && hasWebGL();
 
   return (
     <Section
@@ -107,7 +111,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   About Me
                 </div>
               </div>
-              <div className={styles.image}>
+              <div className={styles.image} ref={imageRef}>
                 {veil ? (
                   // Dithered portrait; hovering reveals the photo in full colour.
                   <div

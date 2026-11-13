@@ -99,10 +99,18 @@ const PostStrong = props => {
   return <strong className={styles.strong} {...props} />;
 };
 
-const PostImage = ({ src, alt, width, height, ...rest }) => {
+// Local images get their 32px `<name>-placeholder.jpg` as a background, so a light
+// blurred preview shows until the full image paints over it.
+const placeholderFor = src =>
+  src?.startsWith('/static/')
+    ? `url(${src.replace(/\.\w+$/, '-placeholder.jpg')})`
+    : undefined;
+
+const PostImage = ({ src, alt, width, height, style, ...rest }) => {
   return (
     <img
       className={styles.image}
+      style={{ backgroundImage: placeholderFor(src), backgroundSize: 'cover', ...style }}
       src={src}
       decoding="async"
       loading="lazy"

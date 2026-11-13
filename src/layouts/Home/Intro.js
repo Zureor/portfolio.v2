@@ -11,6 +11,9 @@ import { useInterval, usePrevious, useScrollToHash } from 'hooks';
 import dynamic from 'next/dynamic';
 import RouterLink from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
+
+// Let the intro text paint and hydrate first; the sphere fades in just after.
+const SPHERE_DELAY = 600;
 import { cssProps } from 'utils/style';
 import styles from './Intro.module.css';
 
@@ -28,6 +31,12 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
   const currentDiscipline = disciplines.find((item, index) => index === disciplineIndex);
   const titleId = `${id}-title`;
   const scrollToHash = useScrollToHash();
+  const [showSphere, setShowSphere] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSphere(true), SPHERE_DELAY);
+    return () => clearTimeout(timer);
+  }, []);
 
   useInterval(
     () => {
@@ -62,7 +71,7 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
       <Transition in key={theme.themeId} timeout={3000}>
         {(visible, status) => (
           <Fragment>
-            <DisplacementSphere />
+            {showSphere && <DisplacementSphere />}
             <header className={styles.text}>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
                 <DecoderText text="Md. Shoaib Rana" delay={300} />

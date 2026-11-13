@@ -1,19 +1,20 @@
-import gamestackTexture2Large from 'assets/gamestack-list.jpg';
+import gamestackTexture2Large from 'assets/gamestack-list-1150.webp';
 import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from 'assets/gamestack-list.jpg';
-import gamestackTextureLarge from 'assets/gamestack-login.jpg';
+import gamestackTexture2 from 'assets/gamestack-list-640.webp';
+import gamestackTextureLarge from 'assets/gamestack-login-1150.webp';
 import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from 'assets/gamestack-login.jpg';
-import sliceTextureLarge from 'assets/slice-app.jpg';
+import gamestackTexture from 'assets/gamestack-login-640.webp';
+import sliceTextureLarge from 'assets/slice-app-2048.webp';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-import sliceTexture from 'assets/slice-app.jpg';
+import sliceTexture from 'assets/slice-app-1280.webp';
 import cartonConnectTexture from 'assets/carton-connect/signin-desktop.webp';
 import cartonConnectTextureSmall from 'assets/carton-connect/signin-desktop-sm.webp';
 import cartonConnectTexturePlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
-import campushubTexture from 'assets/campushub/homepage-dark.png';
-import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
+import campushubTexture from 'assets/campushub/homepage-dark-1280.webp';
+import campushubTextureLarge from 'assets/campushub/homepage-dark-2048.webp';
 import campushubTexturePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
-import github from 'assets/github.png';
+import githubPlaceholder from 'assets/github-placeholder.jpg';
+import github from 'assets/github.webp';
 import { useGSAP } from '@gsap/react';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
@@ -134,8 +135,22 @@ export const Home = () => {
 
         track.addEventListener('focusin', handleFocus);
 
-        // Re-measure once the page transition has settled.
-        const refresh = setTimeout(() => ScrollTrigger.refresh(), 500);
+        // Re-measure once the page transition has settled. Arriving at /#details, the
+        // first jump happened before the pin added its scroll space, so it landed around
+        // project 2: jump again to wherever the target is now.
+        const refresh = setTimeout(() => {
+          ScrollTrigger.refresh();
+          const target = document.getElementById(window.location.hash.slice(1));
+          const belowPin =
+            target &&
+            projectsRef.current.compareDocumentPosition(target) &
+              Node.DOCUMENT_POSITION_FOLLOWING;
+          if (!belowPin || projectsRef.current.contains(target)) return;
+          const y = target.getBoundingClientRect().top + window.scrollY;
+          const lenis = getLenis();
+          if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+          else window.scrollTo(0, y);
+        }, 500);
 
         return () => {
           clearTimeout(refresh);
@@ -264,7 +279,7 @@ export const Home = () => {
               textures: [
                 {
                   srcSet: [github, github],
-                  placeholder: sliceTexturePlaceholder,
+                  placeholder: githubPlaceholder,
                 },
               ],
             }}

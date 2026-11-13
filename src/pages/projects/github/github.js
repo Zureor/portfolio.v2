@@ -1,11 +1,19 @@
-import ulms_back from 'assets/projects/ULMS_Back.png';
-import ulms from 'assets/projects/ULMS.png';
-import student_dashboard from 'assets/projects/excel_dashboard.png';
-import student_dashboard_back from 'assets/projects/excel_dashboard_back.png';
-import expense_dashboard from 'assets/projects/expense.jpg';
-import portfolio from 'assets/projects/portfolio.png';
-import perfume_dashboard_bg from 'assets/projects/perfume_dash_bg.png';
-import perfume_dashboard from 'assets/projects/perfume_dash.png';
+import ulms_back from 'assets/projects/ULMS_Back.webp';
+import ulms_back_placeholder from 'assets/projects/ULMS_Back-placeholder.jpg';
+import ulms from 'assets/projects/ULMS.webp';
+import ulms_placeholder from 'assets/projects/ULMS-placeholder.jpg';
+import student_dashboard from 'assets/projects/excel_dashboard.webp';
+import student_dashboard_placeholder from 'assets/projects/excel_dashboard-placeholder.jpg';
+import student_dashboard_back from 'assets/projects/excel_dashboard_back.webp';
+import student_dashboard_back_placeholder from 'assets/projects/excel_dashboard_back-placeholder.jpg';
+import expense_dashboard from 'assets/projects/expense.webp';
+import expense_dashboard_placeholder from 'assets/projects/expense-placeholder.jpg';
+import portfolio from 'assets/projects/portfolio.webp';
+import portfolio_placeholder from 'assets/projects/portfolio-placeholder.jpg';
+import perfume_dashboard_bg from 'assets/projects/perfume_dash_bg.webp';
+import perfume_dashboard_bg_placeholder from 'assets/projects/perfume_dash_bg-placeholder.jpg';
+import perfume_dashboard from 'assets/projects/perfume_dash.webp';
+import perfume_dashboard_placeholder from 'assets/projects/perfume_dash-placeholder.jpg';
 import { Footer } from 'components/Footer';
 import { Image } from 'components/Image';
 import { Meta } from 'components/Meta';
@@ -104,14 +112,14 @@ export const github = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={[ulms_back, ulms_back]}
-                placeholder={ulms_back}
+                placeholder={ulms_back_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[ulms, ulms]}
-                placeholder={ulms}
+                placeholder={ulms_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -171,14 +179,14 @@ export const github = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={[student_dashboard_back, student_dashboard_back]}
-                placeholder={student_dashboard_back}
+                placeholder={student_dashboard_back_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[student_dashboard, student_dashboard]}
-                placeholder={student_dashboard}
+                placeholder={student_dashboard_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -219,7 +227,7 @@ export const github = () => {
             </ProjectTextRow>
             <Image
               srcSet={[portfolio, portfolio]}
-              placeholder={portfolio}
+              placeholder={portfolio_placeholder}
               alt="Interface of a category."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
@@ -231,14 +239,14 @@ export const github = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={[perfume_dashboard_bg, perfume_dashboard_bg]}
-                placeholder={perfume_dashboard_bg}
+                placeholder={perfume_dashboard_bg_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[perfume_dashboard, perfume_dashboard]}
-                placeholder={perfume_dashboard}
+                placeholder={perfume_dashboard_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
@@ -289,7 +297,7 @@ export const github = () => {
               <Image
                 className={styles.sidebarImage}
                 srcSet={[expense_dashboard, expense_dashboard]}
-                placeholder={expense_dashboard}
+                placeholder={expense_dashboard_placeholder}
                 alt="Mobile view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
