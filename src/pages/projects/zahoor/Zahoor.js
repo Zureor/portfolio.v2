@@ -1,4 +1,3 @@
-
 import sliceAppPlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceApp from 'assets/slice-app.jpg';
 import sliceBackgroundPlaceholder from 'assets/slice-background-placeholder.jpg';
@@ -36,7 +35,16 @@ const roles = ['User Research', 'Interface Design', 'Backend Development'];
 export const Zahoor = () => {
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title="Zahoor: Fashion E-commerce Website"
+        description={description}
+        schema={{
+          '@type': 'CreativeWork',
+          name: title,
+          description,
+          creator: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <ProjectContainer className={styles.zahoor}>
         <ProjectBackground
           src={sliceBackground}
@@ -65,12 +73,12 @@ export const Zahoor = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Technical Specifications</ProjectSectionHeading>
               <ProjectSectionText>
-              Built using WordPress, a user-friendly content management system, for easy 
-              updates and content management.
+                Built using WordPress, a user-friendly content management system, for easy
+                updates and content management.
               </ProjectSectionText>
               <ProjectSectionText>
-              WooCommerce, a powerful e-commerce plugin for WordPress, provides a robust 
-              online store functionality.
+                WooCommerce, a powerful e-commerce plugin for WordPress, provides a robust
+                online store functionality.
               </ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
@@ -96,11 +104,11 @@ export const Zahoor = () => {
             <ProjectTextRow>
               <ProjectSectionHeading>Improving the experience</ProjectSectionHeading>
               <ProjectSectionText>
-                Designed a mobile application to simplify product upload, organization, 
+                Designed a mobile application to simplify product upload, organization,
                 and management account.
               </ProjectSectionText>
               <ProjectSectionText>
-                Features include easy product import, cost and profit tracking, coupon 
+                Features include easy product import, cost and profit tracking, coupon
                 management, and potentially inventory management (if applicable).
               </ProjectSectionText>
             </ProjectTextRow>

@@ -76,8 +76,8 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
               <h1 className={styles.name} data-visible={visible} id={titleId}>
                 <DecoderText text="Md. Shoaib Rana" delay={300} />
               </h1>
-              <Heading level={0} as="h2" className={styles.title}>
-                <VisuallyHidden className={styles.label}>
+              <Heading level={0} as="div" className={styles.title}>
+                <VisuallyHidden as="h2" className={styles.label}>
                   {`Programmer + ${introLabel}`}
                 </VisuallyHidden>
                 <span aria-hidden className={styles.row}>
@@ -90,7 +90,7 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>
-                <div className={styles.disciplineRow}>
+                <div aria-hidden className={styles.disciplineRow}>
                   {/* Invisible copies of every discipline share one grid cell, so the
                       row is always as tall as the longest one (no jump when a long
                       discipline wraps to two lines on small screens). */}

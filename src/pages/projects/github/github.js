@@ -75,10 +75,13 @@ const description =
 export const github = () => {
   return (
     <Fragment>
-      <Meta title="Other Projects" prefix="Projects" description={description} />
+      <Meta
+        title="Other Projects"
+        description="Smaller projects from university and personal work: a library management system, student and sales dashboards, an expense tracker, an inventory app and more."
+      />
       <ProjectContainer className={styles.github}>
         <HyperspeedBackground />
-        <ProjectHeader description={description} />
+        <ProjectHeader title="Other Projects" description={description} />
         <ProjectSection padding="top">
           <ProjectSectionContent>
             <Depth className={styles.featured} perspective={1100} travel={18}>
@@ -113,14 +116,14 @@ export const github = () => {
                 className={styles.sidebarImage}
                 srcSet={[ulms_back, ulms_back]}
                 placeholder={ulms_back_placeholder}
-                alt="Mobile view."
+                alt="University Library Management System, back view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[ulms, ulms]}
                 placeholder={ulms_placeholder}
-                alt="Mobile view."
+                alt="University Library Management System interface."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
@@ -180,14 +183,14 @@ export const github = () => {
                 className={styles.sidebarImage}
                 srcSet={[student_dashboard_back, student_dashboard_back]}
                 placeholder={student_dashboard_back_placeholder}
-                alt="Mobile view."
+                alt="Student Dashboard in Excel, data sheet view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[student_dashboard, student_dashboard]}
                 placeholder={student_dashboard_placeholder}
-                alt="Mobile view."
+                alt="Student Dashboard in Excel, overview."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
@@ -240,14 +243,14 @@ export const github = () => {
                 className={styles.sidebarImage}
                 srcSet={[perfume_dashboard_bg, perfume_dashboard_bg]}
                 placeholder={perfume_dashboard_bg_placeholder}
-                alt="Mobile view."
+                alt="Perfume Sales Dashboard, background data view."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[perfume_dashboard, perfume_dashboard]}
                 placeholder={perfume_dashboard_placeholder}
-                alt="Mobile view."
+                alt="Perfume Sales Dashboard overview."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
@@ -298,7 +301,7 @@ export const github = () => {
                 className={styles.sidebarImage}
                 srcSet={[expense_dashboard, expense_dashboard]}
                 placeholder={expense_dashboard_placeholder}
-                alt="Mobile view."
+                alt="Monty Expense Tracker dashboard."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>

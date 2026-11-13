@@ -39,7 +39,16 @@ const roles = ['Frontend Development', 'Backend Development', 'UI/UX Design'];
 export const CampusHub = () => {
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title="SEU CampusHub: Campus Event Platform"
+        description="Event management platform for Southeast University: students discover and register for campus events, admins manage them from a dedicated dashboard."
+        schema={{
+          '@type': 'CreativeWork',
+          name: title,
+          description,
+          creator: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <ProjectContainer className={styles.campushub}>
         <ProjectBackground
           src={campushubBackground}

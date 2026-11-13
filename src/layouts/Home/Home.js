@@ -166,7 +166,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Portfolio"
+        title="Systems Developer & Data Analyst"
         description="Portfolio of Md. Shoaib Rana, a Computer Science graduate who designs
           and builds internal systems, live dashboards and cloud-hosted web apps."
       />

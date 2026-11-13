@@ -114,7 +114,16 @@ export const CartonConnect = () => {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title="Carton Connect: Carton Ordering Portal"
+        description={description}
+        schema={{
+          '@type': 'CreativeWork',
+          name: title,
+          description,
+          creator: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <ProjectContainer className={styles.cartonConnect}>
         <ProjectBackground
           src={signinDesktopPlaceholder}

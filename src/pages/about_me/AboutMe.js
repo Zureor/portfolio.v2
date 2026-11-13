@@ -580,7 +580,21 @@ export function AboutMe() {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="About" description={description} />
+      <Meta
+        title={title}
+        description="Computer Science graduate building internal systems, live dashboards and cloud-hosted web apps, with a background in BI and workflow automation."
+        schema={{
+          '@type': 'ProfilePage',
+          mainEntity: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+          hasPart: {
+            '@type': 'ScholarlyArticle',
+            headline: publication.paperTitle,
+            datePublished: publication.year,
+            sameAs: `https://doi.org/${publication.doi}`,
+            author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+          },
+        }}
+      />
       <ProjectContainer className={styles.aboutMe} ref={root}>
         <ProjectBackground
           src={{ src: usesBackground }}

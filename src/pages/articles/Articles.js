@@ -117,7 +117,7 @@ const SkeletonPost = ({ index }) => {
           </div>
           <Heading
             className={styles.skeletonBone}
-            as="h2"
+            as="div"
             level={4}
             style={{ height: 24, width: '70%' }}
           />

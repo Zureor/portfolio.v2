@@ -171,7 +171,7 @@ const KeyedRow = ({ item }) => (
 
 export const Stack = () => (
   <Fragment>
-    <Meta title={title} description={description} />
+    <Meta title="Stack: Tools, Models & Hardware" description={description} />
     <ProjectContainer className={styles.stack}>
       <ProjectBackground
         src={{ src: usesBackground }}
