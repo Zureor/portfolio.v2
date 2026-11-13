@@ -1,3 +1,27 @@
 .home {
-  overflow-x: hidden;
+  /* clip, not hidden: a hidden box can still be scrolled sideways by focus. */
+  overflow-x: clip;
+}
+
+/* Must match `horizontalMedia` in Home.js. GSAP pins `.projects` and moves
+   `.track` sideways; each project is one viewport wide. */
+@media (width >= 1041px) and (prefers-reduced-motion: no-preference) {
+  .projects {
+    /* clip, not hidden: focusing an off-screen button would otherwise scroll this
+       box sideways and knock the track out of line. */
+    overflow: clip;
+  }
+
+  .track {
+    display: flex;
+    width: max-content;
+
+    & > * {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      max-height: none;
+      margin: 0;
+    }
+  }
 }
