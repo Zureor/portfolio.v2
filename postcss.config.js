@@ -13,6 +13,8 @@ module.exports = {
       features: {
         'nesting-rules': true,
         'custom-media-queries': true,
+        // Rewrite `(width <= x)` to `(max-width: x)` for Safari < 16.4
+        'media-query-ranges': true,
       },
     },
   },
