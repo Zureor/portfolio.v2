@@ -13,6 +13,7 @@ import { Image } from 'components/Image';
 import { Meta } from 'components/Meta';
 import { useTheme } from 'components/ThemeProvider';
 import {
+  ProjectBackground,
   ProjectContainer,
   ProjectHeader,
   ProjectImage,
@@ -110,6 +111,13 @@ export const CartonConnect = () => {
     <Fragment>
       <Meta title={title} prefix="Projects" description={description} />
       <ProjectContainer className={styles.cartonConnect}>
+        <ProjectBackground
+          className={styles.background}
+          src={signinDesktop}
+          srcSet={`${signinDesktop.src} 1280w, ${signinDesktop.src} 2560w`}
+          placeholder={signinDesktopPlaceholder}
+          opacity={0.5}
+        />
         <ProjectHeader
           title={title}
           description={description}
@@ -120,6 +128,7 @@ export const CartonConnect = () => {
         <ProjectSection className={styles.section} padding="top">
           <ProjectSectionContent>
             <ProjectImage
+              className={styles.screenshot}
               srcSet={[signinDesktop, signinDesktop]}
               placeholder={signinDesktopPlaceholder}
               alt="Carton Connect sign-in page showing the order steps: placed, accepted, delivered, completed."
@@ -189,8 +198,9 @@ export const CartonConnect = () => {
               </dl>
             </ProjectTextRow>
           </ProjectSectionContent>
-          <ProjectSectionContent>
+          <ProjectSectionContent className={styles.media}>
             <ProjectImage
+              className={styles.screenshot}
               srcSet={[dashboard, dashboard]}
               placeholder={dashboardPlaceholder}
               alt="Carton Connect home dashboard with order counts by status, recent reports and announcements."
@@ -212,8 +222,9 @@ export const CartonConnect = () => {
               </ProjectSectionText>
             </ProjectTextRow>
           </ProjectSectionContent>
-          <ProjectSectionContent>
+          <ProjectSectionContent className={styles.media}>
             <ProjectImage
+              className={styles.screenshot}
               srcSet={[queryBuilder, queryBuilder]}
               placeholder={queryBuilderPlaceholder}
               alt="The report query builder with available fields, selected fields and filters."

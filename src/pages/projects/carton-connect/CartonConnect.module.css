@@ -137,6 +137,9 @@
   max-width: 320px;
   border-radius: 24px;
   overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--hairline),
+    0 24px 64px rgb(0 0 0 / 0.18);
 
   @media (--mediaTablet) {
     max-width: 260px;
@@ -178,4 +181,30 @@
 .timelineTitle {
   font-weight: var(--fontWeightMedium);
   color: var(--colorTextTitle);
+}
+
+/* Gap between a section's text and the screenshot that follows it. */
+.media {
+  margin-top: var(--space3XL);
+
+  @media (--mediaMobile) {
+    margin-top: var(--space2XL);
+  }
+}
+
+/* Light screenshots vanish into the light theme without an edge, so every
+   screenshot gets a frame and a soft shadow. */
+.screenshot {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px var(--hairline),
+    0 24px 64px rgb(0 0 0 / 0.18);
+}
+
+/* The page background reuses the sign-in screenshot, blurred until its text is
+   unreadable, leaving only the portal's blue gradient behind the header. */
+.background img {
+  filter: blur(40px);
+  transform: scale(1.15);
 }
