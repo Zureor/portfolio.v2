@@ -23,28 +23,41 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const title = 'About Me';
 const description =
-  'Computer Science graduate working across business intelligence, data analytics and workflow automation.';
+  'Computer Science graduate building internal systems, live dashboards and cloud-hosted web apps, with a background in business intelligence and workflow automation.';
 // Kept distinct from the profile copy below so the page does not open by saying
 // the same sentence twice.
 const headline =
-  'My experience in analytics and automation, published research, and qualifications.';
+  'My experience in systems, analytics and automation, published research, and qualifications.';
 
 const profile = [
-  'Computer Science graduate with experience in business intelligence, data analytics, and workflow automation. Skilled in Python, SQL, Power BI, and Excel, with hands-on experience developing reporting systems and data-driven solutions.',
+  'Computer Science graduate who designs and builds internal systems end to end, from requirements to cloud deployment. Skilled in Python, SQL, PostgreSQL, Next.js and AWS, with a background in business intelligence, data analytics and workflow automation.',
   'Actively exploring generative AI and local model deployment through personal projects, applying automation to real-world coding and productivity workflows.',
 ];
 
 const snapshot = [
   { label: 'Based in', value: 'Gulshan, Dhaka, Bangladesh' },
-  { label: 'Focus', value: 'Business intelligence, analytics, automation' },
+  { label: 'Focus', value: 'Internal systems, live dashboards, automation' },
   { label: 'Degree', value: 'BSc Computer Science & Engineering, CGPA 3.71' },
   { label: 'Research', value: 'Explainable ML for clinical screening' },
 ];
 
 const experience = [
   {
+    id: 'pacd-dev',
+    period: '10/2026 - Present',
+    role: 'Packaging Infrastructure System Developer',
+    org: 'PACD, Allport Cargo Services USA',
+    location: 'Remote',
+    url: 'https://allportcs.com/pac-d/',
+    points: [
+      "Develops the team's new internal systems, taking each project from requirements to production.",
+      'Replaced most of the traditional Excel reporting with live dashboards backed by PostgreSQL and hosted on AWS.',
+      'Designed, built and deployed Carton Connect single-handedly: a carton ordering and supply portal used by factories, garment suppliers, packaging suppliers, PAC-D and Primark.',
+    ],
+  },
+  {
     id: 'pacd',
-    period: '06/2025 - 08/2026',
+    period: '06/2025 - 09/2026',
     role: 'Packaging Coordinator',
     org: 'PACD, Allport Cargo Services USA',
     location: 'Remote',
@@ -122,6 +135,22 @@ const affiliation = {
 
 const skillGroups = [
   {
+    id: 'web',
+    span: 'half',
+    name: 'Web & Cloud',
+    items: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Node.js',
+      'PostgreSQL',
+      'AWS',
+      'Docker',
+      'Infrastructure as code (AWS CDK)',
+      'Automated testing',
+    ],
+  },
+  {
     id: 'programming',
     span: 'half',
     name: 'Programming',
@@ -178,7 +207,7 @@ const skillGroups = [
   },
   {
     id: 'tools',
-    span: 'full',
+    span: 'half',
     name: 'Tools',
     items: [
       'Git',
@@ -536,7 +565,7 @@ export function AboutMe() {
               <div className={styles.spineAside}>
                 <ProjectSectionHeading>Experience</ProjectSectionHeading>
                 <Text as="p" size="s" secondary className={styles.spineNote}>
-                  Analytics, automation and delivery roles since 2021.
+                  Systems, analytics and automation roles since 2021.
                 </Text>
               </div>
               <div className={styles.spineTrack}>
