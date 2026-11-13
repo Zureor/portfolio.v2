@@ -8,11 +8,11 @@ import {
   LinearFilter,
   Mesh,
   OrthographicCamera,
-  PlaneBufferGeometry,
+  PlaneGeometry,
   Scene,
   ShaderMaterial,
   WebGLRenderer,
-  sRGBEncoding,
+  SRGBColorSpace,
 } from 'three';
 import { resolveSrcFromSrcSet } from 'utils/image';
 import { cssProps } from 'utils/style';
@@ -103,7 +103,7 @@ export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
         const imageSrc = image.srcSet ? await resolveSrcFromSrcSet(image) : image.src.src;
         const imageTexture = await textureLoader.loadAsync(imageSrc);
         await renderer.current.initTexture(imageTexture);
-        imageTexture.encoding = sRGBEncoding;
+        imageTexture.colorSpace = SRGBColorSpace;
         imageTexture.minFilter = LinearFilter;
         imageTexture.magFilter = LinearFilter;
         imageTexture.anisotropy = anisotropy;
@@ -130,7 +130,7 @@ export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
         opacity: 1,
       });
 
-      geometry.current = new PlaneBufferGeometry(width, height, 1);
+      geometry.current = new PlaneGeometry(width, height, 1);
       imagePlane.current = new Mesh(geometry.current, material.current);
       imagePlane.current.position.set(0, 0, 0);
       scene.current.add(imagePlane.current);

@@ -1,12 +1,13 @@
 import 'layouts/App/reset.css';
 import 'layouts/App/global.css';
+import 'lenis/dist/lenis.css';
 
 import { Navbar } from 'components/Navbar';
 import { ThemeProvider } from 'components/ThemeProvider';
 import { tokens } from 'components/ThemeProvider/theme';
 import { VisuallyHidden } from 'components/VisuallyHidden';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFoucFix, useLocalStorage } from 'hooks';
+import { useFoucFix, useLocalStorage, useSmoothScroll } from 'hooks';
 import styles from 'layouts/App/App.module.css';
 import { initialState, reducer } from 'layouts/App/reducer';
 import Head from 'next/head';
@@ -29,6 +30,7 @@ const App = ({ Component, pageProps }) => {
   const { route, asPath } = useRouter();
   const canonicalRoute = route === '/' ? '' : `${asPath}`;
   useFoucFix();
+  useSmoothScroll();
 
   useEffect(() => {
     console.info(`${repoPrompt}\n\n`);
@@ -59,7 +61,7 @@ const App = ({ Component, pageProps }) => {
             </VisuallyHidden>
             <Navbar />
             <main className={styles.app} tabIndex={-1} id="MainContent">
-              <AnimatePresence exitBeforeEnter>
+              <AnimatePresence mode="wait">
                 <m.div
                   key={route}
                   className={styles.page}

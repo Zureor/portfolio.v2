@@ -20,7 +20,7 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
   const [dateTime, setDateTime] = useState(null);
-  
+
   useEffect(() => {
     setDateTime(formatDate(date));
   }, [date, dateTime]);
@@ -86,14 +86,13 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
               ))}
             </Heading>
             <div className={styles.details}>
-              <RouterLink href="#postContent">
-                <a
-                  className={styles.arrow}
-                  aria-label="Scroll to post content"
-                  onClick={handleScrollIndicatorClick}
-                >
-                  <ArrowDown aria-hidden />
-                </a>
+              <RouterLink
+                href="#postContent"
+                className={styles.arrow}
+                aria-label="Scroll to post content"
+                onClick={handleScrollIndicatorClick}
+              >
+                <ArrowDown aria-hidden />
               </RouterLink>
               <div className={styles.timecode}>{timecode}</div>
             </div>

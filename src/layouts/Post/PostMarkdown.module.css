@@ -6,11 +6,11 @@
     scroll-margin-top: var(--mobileNavOffset);
   }
 
-  @nest .heading + & {
+  .heading + & {
     margin-top: 0.8em;
   }
 
-  @nest :where(.paragraph, .list, .image) + & {
+  :where(.paragraph, .list, .image) + & {
     margin-top: 1.6em;
   }
 }
@@ -24,7 +24,7 @@
   opacity: 0;
   transition: opacity var(--durationS) ease;
 
-  @nest .heading:hover &, &:focus {
+  .heading:hover &, &:focus {
     opacity: 1;
   }
 
@@ -37,7 +37,7 @@
 .list {
   --lineHeightBody: 1.7;
 
-  @nest .heading + & {
+  .heading + & {
     margin-top: 1.2em;
   }
 
@@ -144,7 +144,7 @@
   grid-column: 2 / span 3;
   margin: var(--space3XL) 0;
 
-  @nest .pre + &, & + & {
+  .pre + &, & + & {
     margin-top: 0;
   }
 

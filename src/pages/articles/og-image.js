@@ -1,7 +1,7 @@
-const puppeteer = require('puppeteer');
-const path = require('path');
-const fs = require('fs');
-const { createHash } = require('crypto');
+import puppeteer from 'puppeteer';
+import path from 'path';
+import fs from 'fs';
+import { createHash } from 'crypto';
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);

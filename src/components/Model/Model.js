@@ -19,13 +19,13 @@ import {
   MeshDepthMaterial,
   OrthographicCamera,
   PerspectiveCamera,
-  PlaneBufferGeometry,
+  PlaneGeometry,
   Scene,
   ShaderMaterial,
   Vector3,
   WebGLRenderTarget,
   WebGLRenderer,
-  sRGBEncoding,
+  SRGBColorSpace,
 } from 'three';
 import { HorizontalBlurShader, VerticalBlurShader } from 'three-stdlib';
 import { resolveSrcFromSrcSet } from 'utils/image';
@@ -99,8 +99,7 @@ export const Model = ({
 
     renderer.current.setPixelRatio(2);
     renderer.current.setSize(clientWidth, clientHeight);
-    renderer.current.outputEncoding = sRGBEncoding;
-    renderer.current.physicallyCorrectLights = true;
+    renderer.current.outputColorSpace = SRGBColorSpace;
 
     camera.current = new PerspectiveCamera(36, clientWidth / clientHeight, 0.1, 100);
     camera.current.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
@@ -141,9 +140,7 @@ export const Model = ({
     renderTargetBlur.current.texture.generateMipmaps = false;
 
     // Make a plane and make it face up
-    const planeGeometry = new PlaneBufferGeometry(planeWidth, planeHeight).rotateX(
-      Math.PI / 2
-    );
+    const planeGeometry = new PlaneGeometry(planeWidth, planeHeight).rotateX(Math.PI / 2);
 
     const planeMaterial = new MeshBasicMaterial({
       map: renderTarget.current.texture,
@@ -208,8 +205,8 @@ export const Model = ({
     verticalBlurMaterial.current = new ShaderMaterial(VerticalBlurShader);
     verticalBlurMaterial.current.depthTest = false;
 
-    const unsubscribeX = rotationX.onChange(renderFrame);
-    const unsubscribeY = rotationY.onChange(renderFrame);
+    const unsubscribeX = rotationX.on('change', renderFrame);
+    const unsubscribeY = rotationY.on('change', renderFrame);
 
     return () => {
       renderTarget.current.dispose();
@@ -369,7 +366,7 @@ const Device = ({
 
   useEffect(() => {
     const applyScreenTexture = async (texture, node) => {
-      texture.encoding = sRGBEncoding;
+      texture.colorSpace = SRGBColorSpace;
       texture.flipY = false;
       texture.anisotropy = renderer.current.capabilities.getMaxAnisotropy();
       texture.generateMipmaps = false;
@@ -398,7 +395,6 @@ const Device = ({
       gltf.scene.traverse(async node => {
         if (node.material) {
           node.material.color = new Color(0x1f2025);
-          node.material.color.convertSRGBToLinear();
         }
 
         if (node.name === MeshType.Screen) {

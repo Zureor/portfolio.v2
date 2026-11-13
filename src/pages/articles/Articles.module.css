@@ -232,7 +232,7 @@
     --linkPadding: var(--space2XL);
   }
 
-  @nest [data-featured='false'] & {
+  [data-featured='false'] &{
     &::before {
       content: '';
       position: absolute;
@@ -251,7 +251,7 @@
     }
   }
 
-  @nest [data-featured='true'] & {
+  [data-featured='true'] &{
     padding: var(--featuredPostPadding);
     clip-path: var(--featuredPostClip);
 
@@ -314,7 +314,7 @@
   }
 
   @media (--mediaUseMotion) {
-    @nest .post:hover & :where(img, video) {
+    .post:hover & :where(img, video){
       transform: scale(1.06);
     }
   }
@@ -334,7 +334,7 @@
   gap: var(--spaceL);
   width: 100%;
 
-  @nest [data-featured='true'] & {
+  [data-featured='true'] &{
     opacity: 0;
 
     &:global {

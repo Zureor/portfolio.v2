@@ -21,12 +21,12 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Greetings" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I'm Shoaib, a Computer Science graduate working at the intersection of business
-      intelligence, data analytics, and automation. Most of my professional work involves
-      taking manual, repetitive processes and rebuilding them into systems that run on
-      their own, using Python, SQL, and Power BI as my main tools. I like the kind of work
-      where you find a process someone's been doing by hand for years and figure out how
-      to make it disappear into the background.
+      I'm Shoaib, a Computer Science graduate who designs and builds internal systems.
+      Most of my professional work involves taking manual, repetitive processes and
+      rebuilding them into systems that run on their own, from live dashboards on
+      PostgreSQL to full web apps on AWS. I like the kind of work where you find a process
+      someone's been doing by hand for years and figure out how to make it disappear into
+      the background.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       Outside of that, I spend a lot of time on generative AI, particularly running models

@@ -1,3 +1,7 @@
 # The uses page was renamed to /stack. Keeps old links and search results working.
 /uses     /stack   301!
 /uses/    /stack/  301!
+
+# The DeepSeek article's filename (and URL) had spaces and an apostrophe. Keep old links working.
+/articles/deepseek's%20disruptive%20influence%20on%20the%20american%20ec    /articles/deepseek-american-economy  301!
+/articles/deepseek's%20disruptive%20influence%20on%20the%20american%20ec/   /articles/deepseek-american-economy  301!

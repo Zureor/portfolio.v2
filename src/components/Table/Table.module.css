@@ -12,7 +12,7 @@
     border-bottom: var(--rowBorder);
   }
 
-  @nest .head & {
+  .head & {
     border-top: 0;
   }
 }

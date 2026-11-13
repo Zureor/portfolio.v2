@@ -41,7 +41,7 @@
     fill: white;
   }
 
-  @nest body[data-theme='dark'] & {
+  body[data-theme='dark'] & {
     transform: none;
 
     @media (--mediaUseMotion) {
@@ -59,7 +59,7 @@
     transition-delay: 0s;
   }
 
-  @nest body[data-theme='dark'] & {
+  body[data-theme='dark'] & {
     transform: none;
 
     @media (--mediaUseMotion) {
@@ -84,7 +84,7 @@
     transition-delay: 0.3s;
   }
 
-  @nest body[data-theme='dark'] & {
+  body[data-theme='dark'] & {
     stroke-dashoffset: 7;
     opacity: 0;
 

@@ -45,7 +45,7 @@
   }
 
   @media (--mediaReduceMotion) {
-    @nest #root & {
+    #root & {
       transition: background-color 5000s linear 0s;
     }
   }

@@ -35,7 +35,8 @@ function shuffle(content, output, position) {
       return { type: CharType.Value, value };
     }
 
-    if (position % 1 < 0.5) {
+    // The first frame has no previous output to hold, so it shuffles too.
+    if (position % 1 < 0.5 || !output[index]) {
       const rand = Math.floor(Math.random() * glyphs.length);
       return { type: CharType.Glyph, value: glyphs[rand] };
     }
@@ -64,7 +65,7 @@ export const DecoderText = memo(
         containerInstance.innerHTML = characterMap.join('');
       };
 
-      const unsubscribeSpring = decoderSpring.onChange(value => {
+      const unsubscribeSpring = decoderSpring.on('change', value => {
         output.current = shuffle(content, output.current, value);
         renderOutput();
       });

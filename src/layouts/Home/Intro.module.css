@@ -28,7 +28,7 @@
     top: calc(var(--spaceXL) * -1);
   }
 
-  @media (max-width: 820px) and (max-height: 420px) {
+  @media (width <= 820px) and (height <= 420px) {
     top: calc(var(--spaceM) * -1);
   }
 }
@@ -61,8 +61,7 @@
     overflow: hidden;
   }
 
-  @media (max-width: 820px) and (max-height: 420px) {
-    margin-bottom: var(--spaceL);
+  @media (width <= 820px) and (height <= 420px) {
     margin-bottom: var(--spaceXL);
   }
 
@@ -85,7 +84,7 @@
     font-size: calc((100 / 16) * 1rem);
   }
 
-  @media (max-width: 860px) {
+  @media (width <= 860px) {
     font-size: calc((80 / 16) * 1rem);
   }
 
@@ -106,6 +105,16 @@
 
   &[data-hidden='true'] {
     opacity: 0;
+  }
+}
+
+.disciplineRow {
+  display: grid;
+  position: relative;
+  align-items: start;
+
+  & > * {
+    grid-area: 1 / 1;
   }
 }
 
@@ -159,6 +168,18 @@
     content: '+';
     margin-right: 10px;
     opacity: 0.4;
+  }
+
+  &[data-sizer] {
+    visibility: hidden;
+  }
+
+  /* The incoming word always paints above the outgoing one. Without this, the
+     wrap from the last discipline back to the first flickered, because the
+     first one comes earlier in the DOM and was painted underneath. */
+  &[data-status='entering'],
+  &[data-status='entered'] {
+    z-index: var(--zIndex1);
   }
 
   &[data-status='entering'] {

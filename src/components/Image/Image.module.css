@@ -110,7 +110,7 @@
     background-color: rgb(var(--rgbBlack) / 0.8);
   }
 
-  @nest .elementWrapper:hover &, &:focus {
+  .elementWrapper:hover &, &:focus {
     opacity: 1;
   }
 }
