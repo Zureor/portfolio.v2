@@ -8,6 +8,7 @@ import sliceTextureLarge from 'assets/slice-app.jpg';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceTexture from 'assets/slice-app.jpg';
 import cartonConnectTexture from 'assets/carton-connect/signin-desktop.webp';
+import cartonConnectTextureSmall from 'assets/carton-connect/signin-desktop-sm.webp';
 import cartonConnectTexturePlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
 import campushubTexture from 'assets/campushub/homepage-dark.png';
 import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
@@ -104,7 +105,7 @@ export const Home = () => {
           alt: 'Carton Connect sign-in page',
           textures: [
             {
-              srcSet: [cartonConnectTexture, cartonConnectTexture],
+              srcSet: [cartonConnectTextureSmall, cartonConnectTexture],
               placeholder: cartonConnectTexturePlaceholder,
             },
           ],

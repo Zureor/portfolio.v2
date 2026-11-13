@@ -1,10 +1,14 @@
 import dashboardDark from 'assets/carton-connect/dashboard-dark.webp';
+import dashboardDarkSmall from 'assets/carton-connect/dashboard-dark-sm.webp';
 import dashboardDarkPlaceholder from 'assets/carton-connect/dashboard-dark-placeholder.jpg';
 import dashboardLight from 'assets/carton-connect/dashboard-light.webp';
+import dashboardLightSmall from 'assets/carton-connect/dashboard-light-sm.webp';
 import dashboardLightPlaceholder from 'assets/carton-connect/dashboard-light-placeholder.jpg';
 import queryBuilder from 'assets/carton-connect/query-builder.webp';
+import queryBuilderSmall from 'assets/carton-connect/query-builder-sm.webp';
 import queryBuilderPlaceholder from 'assets/carton-connect/query-builder-placeholder.jpg';
 import signinDesktop from 'assets/carton-connect/signin-desktop.webp';
+import signinDesktopSmall from 'assets/carton-connect/signin-desktop-sm.webp';
 import signinDesktopPlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
 import signinMobile from 'assets/carton-connect/signin-mobile.webp';
 import signinMobilePlaceholder from 'assets/carton-connect/signin-mobile-placeholder.jpg';
@@ -104,6 +108,7 @@ const stack = [
 export const CartonConnect = () => {
   const { themeId } = useTheme();
   const dashboard = themeId === 'light' ? dashboardLight : dashboardDark;
+  const dashboardSmall = themeId === 'light' ? dashboardLightSmall : dashboardDarkSmall;
   const dashboardPlaceholder =
     themeId === 'light' ? dashboardLightPlaceholder : dashboardDarkPlaceholder;
 
@@ -128,7 +133,7 @@ export const CartonConnect = () => {
           <ProjectSectionContent>
             <ProjectImage
               className={styles.screenshot}
-              srcSet={[signinDesktop, signinDesktop]}
+              srcSet={[signinDesktopSmall, signinDesktop]}
               placeholder={signinDesktopPlaceholder}
               alt="Carton Connect sign-in page showing the order steps: placed, accepted, delivered, completed."
               sizes={wideSizes}
@@ -200,7 +205,7 @@ export const CartonConnect = () => {
           <ProjectSectionContent className={styles.media}>
             <ProjectImage
               className={styles.screenshot}
-              srcSet={[dashboard, dashboard]}
+              srcSet={[dashboardSmall, dashboard]}
               placeholder={dashboardPlaceholder}
               alt="Carton Connect home dashboard with order counts by status, recent reports and announcements."
               sizes={wideSizes}
@@ -224,7 +229,7 @@ export const CartonConnect = () => {
           <ProjectSectionContent className={styles.media}>
             <ProjectImage
               className={styles.screenshot}
-              srcSet={[queryBuilder, queryBuilder]}
+              srcSet={[queryBuilderSmall, queryBuilder]}
               placeholder={queryBuilderPlaceholder}
               alt="The report query builder with available fields, selected fields and filters."
               sizes={wideSizes}
