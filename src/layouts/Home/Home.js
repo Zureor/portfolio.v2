@@ -1,19 +1,17 @@
-import gamestackTexture2Large from 'assets/gamestack-list.jpg';
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from 'assets/gamestack-list.jpg';
-import gamestackTextureLarge from 'assets/gamestack-login.jpg';
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from 'assets/gamestack-login.jpg';
-import sliceTextureLarge from 'assets/slice-app.jpg';
+import liminalTextureLarge from 'assets/liminal/liminal-2048.webp';
+import liminalTexturePlaceholder from 'assets/liminal/liminal-placeholder.jpg';
+import liminalTexture from 'assets/liminal/liminal-1280.webp';
+import sliceTextureLarge from 'assets/slice-app-2048.webp';
 import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-import sliceTexture from 'assets/slice-app.jpg';
+import sliceTexture from 'assets/slice-app-1280.webp';
 import cartonConnectTexture from 'assets/carton-connect/signin-desktop.webp';
 import cartonConnectTextureSmall from 'assets/carton-connect/signin-desktop-sm.webp';
 import cartonConnectTexturePlaceholder from 'assets/carton-connect/signin-desktop-placeholder.jpg';
-import campushubTexture from 'assets/campushub/homepage-dark.png';
-import campushubTextureLarge from 'assets/campushub/homepage-dark.png';
+import campushubTexture from 'assets/campushub/homepage-dark-1280.webp';
+import campushubTextureLarge from 'assets/campushub/homepage-dark-2048.webp';
 import campushubTexturePlaceholder from 'assets/campushub/homepage-dark-placeholder.jpg';
-import github from 'assets/github.png';
+import githubPlaceholder from 'assets/github-placeholder.jpg';
+import github from 'assets/github.webp';
 import { useGSAP } from '@gsap/react';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
@@ -134,8 +132,22 @@ export const Home = () => {
 
         track.addEventListener('focusin', handleFocus);
 
-        // Re-measure once the page transition has settled.
-        const refresh = setTimeout(() => ScrollTrigger.refresh(), 500);
+        // Re-measure once the page transition has settled. Arriving at /#details, the
+        // first jump happened before the pin added its scroll space, so it landed around
+        // project 2: jump again to wherever the target is now.
+        const refresh = setTimeout(() => {
+          ScrollTrigger.refresh();
+          const target = document.getElementById(window.location.hash.slice(1));
+          const belowPin =
+            target &&
+            projectsRef.current.compareDocumentPosition(target) &
+              Node.DOCUMENT_POSITION_FOLLOWING;
+          if (!belowPin || projectsRef.current.contains(target)) return;
+          const y = target.getBoundingClientRect().top + window.scrollY;
+          const lenis = getLenis();
+          if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+          else window.scrollTo(0, y);
+        }, 500);
 
         return () => {
           clearTimeout(refresh);
@@ -151,7 +163,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Portfolio"
+        title="Systems Developer & Data Analyst"
         description="Portfolio of Md. Shoaib Rana, a Computer Science graduate who designs
           and builds internal systems, live dashboards and cloud-hosted web apps."
       />
@@ -230,21 +242,17 @@ export const Home = () => {
             sectionRef={projectFour}
             visible={visibleSections.includes(projectFour.current)}
             index={4}
-            title="Relive"
-            description="Introducing 'Relive' - your soon-to-be stress-relief companion. Powered by AI, this Android app is your ticket to relaxation in the palm of your hand. Stay tuned for updates as we work on bringing you personalized stress-busting techniques and mindfulness exercises. Coming soon to help you find your calm amidst the chaos."
-            buttonText="Coming Soon"
-            buttonLink=""
+            title="liminal"
+            description="A Python library that calibrates LLM judges against human labels using Item Response Theory, treating each judge as a measured instrument rather than an oracle."
+            buttonText="View project"
+            buttonLink="/projects/liminal"
             model={{
-              type: 'phone',
-              alt: 'App login screen',
+              type: 'laptop',
+              alt: 'liminal project page',
               textures: [
                 {
-                  srcSet: [gamestackTexture, gamestackTextureLarge],
-                  placeholder: gamestackTexturePlaceholder,
-                },
-                {
-                  srcSet: [gamestackTexture2, gamestackTexture2Large],
-                  placeholder: gamestackTexture2Placeholder,
+                  srcSet: [liminalTexture, liminalTextureLarge],
+                  placeholder: liminalTexturePlaceholder,
                 },
               ],
             }}
@@ -264,7 +272,7 @@ export const Home = () => {
               textures: [
                 {
                   srcSet: [github, github],
-                  placeholder: sliceTexturePlaceholder,
+                  placeholder: githubPlaceholder,
                 },
               ],
             }}

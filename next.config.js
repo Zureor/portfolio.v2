@@ -1,5 +1,6 @@
 module.exports = {
   reactStrictMode: true,
+  poweredByHeader: false,
   trailingSlash: true,
   pageExtensions: ['page.js', 'api.js'],
   webpack(config, { isServer }) {

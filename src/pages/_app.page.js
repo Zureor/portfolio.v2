@@ -1,6 +1,10 @@
 import 'layouts/App/reset.css';
 import 'layouts/App/global.css';
 import 'lenis/dist/lenis.css';
+// React Bits components ship plain global stylesheets (prefixed class names).
+import 'components/DitherVeil/DitherVeil.css';
+import 'components/Hyperspeed/Hyperspeed.css';
+import 'components/LogoLoop/LogoLoop.css';
 
 import { Navbar } from 'components/Navbar';
 import { ThemeProvider } from 'components/ThemeProvider';
@@ -10,7 +14,6 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import { useFoucFix, useLocalStorage, useSmoothScroll } from 'hooks';
 import styles from 'layouts/App/App.module.css';
 import { initialState, reducer } from 'layouts/App/reducer';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment, createContext, useEffect, useReducer } from 'react';
 import { msToNum } from 'utils/style';
@@ -27,8 +30,7 @@ __  __  __
 const App = ({ Component, pageProps }) => {
   const [storedTheme] = useLocalStorage('theme', 'dark');
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { route, asPath } = useRouter();
-  const canonicalRoute = route === '/' ? '' : `${asPath}`;
+  const { route } = useRouter();
   useFoucFix();
   useSmoothScroll();
 
@@ -45,12 +47,6 @@ const App = ({ Component, pageProps }) => {
       <ThemeProvider themeId={state.theme}>
         <LazyMotion features={domAnimation}>
           <Fragment>
-            <Head>
-              <link
-                rel="canonical"
-                href={`${process.env.NEXT_PUBLIC_WEBSITE_URL}${canonicalRoute}`}
-              />
-            </Head>
             <VisuallyHidden
               showOnFocus
               as="a"

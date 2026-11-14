@@ -14,6 +14,9 @@ import { Fragment, useEffect, useState } from 'react';
 import { cssProps } from 'utils/style';
 import styles from './Intro.module.css';
 
+// Fallback delay for browsers without requestIdleCallback (Safari).
+const SPHERE_DELAY = 600;
+
 const DisplacementSphere = dynamic(() =>
   import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
 );
@@ -28,6 +31,27 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
   const currentDiscipline = disciplines.find((item, index) => index === disciplineIndex);
   const titleId = `${id}-title`;
   const scrollToHash = useScrollToHash();
+  const [showSphere, setShowSphere] = useState(false);
+
+  // Start the WebGL sphere (and fetch three.js) only after the page has loaded and the
+  // main thread is idle, so it never competes with first paint or hydration.
+  useEffect(() => {
+    const requestIdle =
+      window.requestIdleCallback || (cb => setTimeout(cb, SPHERE_DELAY));
+    const cancelIdle = window.cancelIdleCallback || clearTimeout;
+    let idleId;
+    const start = () => {
+      idleId = requestIdle(() => setShowSphere(true), { timeout: 2000 });
+    };
+
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+
+    return () => {
+      window.removeEventListener('load', start);
+      cancelIdle(idleId);
+    };
+  }, []);
 
   useInterval(
     () => {
@@ -62,13 +86,13 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
       <Transition in key={theme.themeId} timeout={3000}>
         {(visible, status) => (
           <Fragment>
-            <DisplacementSphere />
+            {showSphere && <DisplacementSphere />}
             <header className={styles.text}>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
                 <DecoderText text="Md. Shoaib Rana" delay={300} />
               </h1>
-              <Heading level={0} as="h2" className={styles.title}>
-                <VisuallyHidden className={styles.label}>
+              <Heading level={0} as="div" className={styles.title}>
+                <VisuallyHidden as="h2" className={styles.label}>
                   {`Programmer + ${introLabel}`}
                 </VisuallyHidden>
                 <span aria-hidden className={styles.row}>
@@ -81,7 +105,7 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>
-                <div className={styles.disciplineRow}>
+                <div aria-hidden className={styles.disciplineRow}>
                   {/* Invisible copies of every discipline share one grid cell, so the
                       row is always as tall as the longest one (no jump when a long
                       discipline wraps to two lines on small screens). */}

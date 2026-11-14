@@ -10,7 +10,7 @@ import { tokens } from 'components/ThemeProvider/theme';
 import { Transition } from 'components/Transition';
 import { useParallax, useScrollToHash } from 'hooks';
 import RouterLink from 'next/link';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { clamp } from 'utils/clamp';
 import { formatDate } from 'utils/date';
 import { cssProps, msToNum, numToMs } from 'utils/style';
@@ -19,12 +19,6 @@ import styles from './Post.module.css';
 export const Post = ({ children, title, date, abstract, banner, timecode, ogImage }) => {
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
-  const [dateTime, setDateTime] = useState(null);
-
-  useEffect(() => {
-    setDateTime(formatDate(date));
-  }, [date, dateTime]);
-
   useParallax(0.004, value => {
     if (!imageRef.current) return;
     imageRef.current.style.setProperty('--blurOpacity', clamp(value, 0, 1));
@@ -37,7 +31,22 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
 
   return (
     <article className={styles.post}>
-      <Meta title={title} prefix="" description={abstract} ogImage={ogImage} />
+      <Meta
+        title={title}
+        description={abstract}
+        ogImage={ogImage}
+        type="article"
+        publishedTime={date}
+        schema={{
+          '@type': 'BlogPosting',
+          headline: title,
+          description: abstract,
+          image: ogImage,
+          datePublished: date,
+          author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+          publisher: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <Section>
         {banner && (
           <div className={styles.banner} ref={imageRef}>
@@ -66,7 +75,7 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
                 <div className={styles.date}>
                   <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
                   <Text className={styles.dateText} data-visible={visible}>
-                    {dateTime}
+                    <time dateTime={date}>{formatDate(date)}</time>
                   </Text>
                 </div>
               )}

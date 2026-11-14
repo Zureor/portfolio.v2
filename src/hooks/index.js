@@ -7,6 +7,7 @@ export * from './useInViewport';
 export * from './useLocalStorage';
 export * from './useParallax';
 export * from './usePrevious';
+export * from './useScrollPause';
 export * from './useScrollToHash';
 export * from './useSmoothScroll';
 export * from './useWindowSize';

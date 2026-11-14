@@ -10,15 +10,34 @@
     "keyframes-name-pattern": "^[a-z][a-zA-Z0-9]+$",
     "selector-id-pattern": null,
     "declaration-block-no-redundant-longhand-properties": null,
-    "value-keyword-case": ["lower", { "camelCaseSvgKeywords": true }],
+    "value-keyword-case": [
+      "lower",
+      {
+        "camelCaseSvgKeywords": true
+      }
+    ],
     "alpha-value-notation": "number",
     "no-descending-specificity": null,
-    "property-no-deprecated": [true, { "ignoreProperties": ["clip"] }],
+    "property-no-deprecated": [
+      true,
+      {
+        "ignoreProperties": [
+          "clip"
+        ]
+      }
+    ],
     "selector-pseudo-class-no-unknown": [
       true,
       {
-        "ignorePseudoClasses": ["global"]
+        "ignorePseudoClasses": [
+          "global"
+        ]
       }
     ]
-  }
+  },
+  "ignoreFiles": [
+    "src/components/DitherVeil/*.css",
+    "src/components/Hyperspeed/*.css",
+    "src/components/LogoLoop/*.css"
+  ]
 }

@@ -10,10 +10,24 @@ import { Image } from 'components/Image';
 import { Link } from 'components/Link';
 import { Section } from 'components/Section';
 import { Text } from 'components/Text';
+import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
-import { Fragment, useState } from 'react';
+import { useInViewport, useScrollPause } from 'hooks';
+import dynamic from 'next/dynamic';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { media } from 'utils/style';
+import { hasWebGL, rgbTokenToHex } from 'utils/webgl';
 import styles from './Profile.module.css';
+
+// Start the veil (and fetch the full photo) once the photo is within a screen of view.
+const nearView = { rootMargin: '100% 0px' };
+// Or earlier, during a scroll pause (the horizontal projects sit above Details).
+const aheadView = { rootMargin: '300% 0px' };
+
+const DitherVeil = dynamic(
+  () => import('components/DitherVeil').then(mod => mod.DitherVeil),
+  { ssr: false }
+);
 
 const ProfileText = ({ visible, titleId }) => (
   <Fragment>
@@ -55,6 +69,18 @@ const ProfileText = ({ visible, titleId }) => (
 export const Profile = ({ id, visible, sectionRef }) => {
   const [focused, setFocused] = useState(false);
   const titleId = `${id}-title`;
+  const theme = useTheme();
+  const light = theme.themeId === 'light';
+  // The plain photo renders on the server and without WebGL; the veil swaps in after mount.
+  const imageRef = useRef();
+  const near = useInViewport(imageRef, true, nearView);
+  const ahead = useInViewport(imageRef, true, aheadView);
+  const pause = useScrollPause();
+  const [veil, setVeil] = useState(false);
+
+  useEffect(() => {
+    if ((near || (ahead && pause)) && hasWebGL()) setVeil(true);
+  }, [near, ahead, pause]);
 
   return (
     <Section
@@ -94,15 +120,41 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   About Me
                 </div>
               </div>
-              <div className={styles.image}>
-                <Image
-                  reveal
-                  delay={100}
-                  placeholder={profileImgPlaceholder}
-                  srcSet={[profileImg, profileImgLarge]}
-                  sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
-                  alt="Overdressed as always."
-                />
+              <div className={styles.image} ref={imageRef}>
+                {veil ? (
+                  // Dithered portrait; hovering reveals the photo in full colour.
+                  <div
+                    className={styles.veil}
+                    role="img"
+                    aria-label="Overdressed as always."
+                  >
+                    <DitherVeil
+                      src={profileImgLarge.src}
+                      fit="cover"
+                      pattern="floyd"
+                      pixelSize={2}
+                      // Ink is the darkest tone, so it is the dark colour in either theme.
+                      inkColor={rgbTokenToHex(
+                        light ? theme.rgbText : theme.rgbBackground
+                      )}
+                      paperColor={rgbTokenToHex(
+                        light ? theme.rgbBackground : theme.rgbText
+                      )}
+                      rimColor={rgbTokenToHex(theme.rgbAccent)}
+                      rim={0.15}
+                      revealRadius={160}
+                    />
+                  </div>
+                ) : (
+                  <Image
+                    reveal
+                    delay={100}
+                    placeholder={profileImgPlaceholder}
+                    srcSet={[profileImg, profileImgLarge]}
+                    sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
+                    alt="Overdressed as always."
+                  />
+                )}
                 <svg
                   aria-hidden="true"
                   width="135"

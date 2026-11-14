@@ -3,6 +3,7 @@ import { Button } from 'components/Button';
 import { Footer } from 'components/Footer';
 import { Icon } from 'components/Icon';
 import { Link } from 'components/Link';
+import { LogoLoop } from 'components/LogoLoop';
 import { Meta } from 'components/Meta';
 import { Text } from 'components/Text';
 import gsap from 'gsap';
@@ -16,6 +17,31 @@ import {
   ProjectSectionHeading,
 } from 'layouts/Project';
 import { Fragment, useRef } from 'react';
+import { FaAws, FaRobot } from 'react-icons/fa';
+import { PiMicrosoftExcelLogo } from 'react-icons/pi';
+import {
+  SiCinema4D,
+  SiCisco,
+  SiCplusplus,
+  SiDocker,
+  SiGit,
+  SiHtml5,
+  SiJavascript,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiNumpy,
+  SiPandas,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiScikitlearn,
+  SiSharp,
+  SiTypescript,
+  SiUbuntu,
+  SiUnrealengine,
+  SiVitest,
+} from 'react-icons/si';
+import { TbBrandAdobePhotoshop, TbBrandOpenai, TbSql } from 'react-icons/tb';
 import styles from './AboutMe.module.css';
 import usesBackgroundPlaceholder from 'assets/uses-background-placeholder.jpg';
 import usesBackground from 'assets/uses-background.mp4';
@@ -135,10 +161,51 @@ const affiliation = {
   org: 'RoboLife Technologies',
 };
 
+// Brand icons for the skill loops; skills without a logo show their name only.
+const skillIcons = {
+  'Next.js': SiNextdotjs,
+  React: SiReact,
+  TypeScript: SiTypescript,
+  'Node.js': SiNodedotjs,
+  PostgreSQL: SiPostgresql,
+  AWS: FaAws,
+  Docker: SiDocker,
+  'Automated testing': SiVitest,
+  Python: SiPython,
+  pandas: SiPandas,
+  NumPy: SiNumpy,
+  SQL: TbSql,
+  'C++': SiCplusplus,
+  'C#': SiSharp,
+  JavaScript: SiJavascript,
+  'HTML/CSS': SiHtml5,
+  'Excel (advanced)': PiMicrosoftExcelLogo,
+  'LLM APIs (OpenAI, Claude, Gemini)': TbBrandOpenai,
+  'AI agents & chatbots': FaRobot,
+  'scikit-learn': SiScikitlearn,
+  'Python scripting': SiPython,
+  'WSL2 integration': SiUbuntu,
+  Git: SiGit,
+  'Cisco networking': SiCisco,
+  'Photoshop & Lightroom': TbBrandAdobePhotoshop,
+  'Cinema 4D': SiCinema4D,
+  'Unreal Engine': SiUnrealengine,
+};
+
+const toLogos = items =>
+  items.map(title => {
+    const SkillIcon = skillIcons[title];
+    return {
+      // No logo: an empty 1em strut keeps the name level with the logo'd items.
+      node: SkillIcon ? <SkillIcon /> : <span style={{ height: '1em' }} />,
+      title,
+      hoverColor: 'rgb(var(--rgbPrimary))',
+    };
+  });
+
 const skillGroups = [
   {
     id: 'web',
-    span: 'half',
     name: 'Web & Cloud',
     items: [
       'Next.js',
@@ -154,7 +221,6 @@ const skillGroups = [
   },
   {
     id: 'programming',
-    span: 'half',
     name: 'Programming',
     items: [
       'Python',
@@ -170,7 +236,6 @@ const skillGroups = [
   },
   {
     id: 'analytics',
-    span: 'half',
     name: 'Analytics & BI',
     items: [
       'Power BI',
@@ -183,7 +248,6 @@ const skillGroups = [
   },
   {
     id: 'ai',
-    span: 'half',
     name: 'AI & Machine Learning',
     items: [
       'Prompt engineering',
@@ -197,7 +261,6 @@ const skillGroups = [
   },
   {
     id: 'automation',
-    span: 'half',
     name: 'Automation',
     items: [
       'Power Automate',
@@ -209,7 +272,6 @@ const skillGroups = [
   },
   {
     id: 'tools',
-    span: 'half',
     name: 'Tools',
     items: [
       'Git',
@@ -221,6 +283,9 @@ const skillGroups = [
     ],
   },
 ];
+
+// Built once so the loops don't re-measure on every render.
+const skillLoops = skillGroups.map(group => ({ ...group, logos: toLogos(group.items) }));
 
 const education = [
   {
@@ -442,19 +507,6 @@ export function AboutMe() {
           on(row, 'pointerleave', leave);
         });
 
-        // Chips: a light lift confirms which one you are reading in a dense
-        // field of similar labels.
-        const chips = query('[data-hover="chip"]');
-
-        chips.forEach(chip => {
-          on(chip, 'pointerenter', () =>
-            gsap.to(chip, { y: -4, duration: 0.3, ease: 'power3.out' })
-          );
-          on(chip, 'pointerleave', () =>
-            gsap.to(chip, { y: 0, duration: 0.4, ease: 'power3.out' })
-          );
-        });
-
         // Publication: a light that tracks the cursor, so the page's strongest
         // credential is the one panel that reacts to you.
         const paper = paperRef.current;
@@ -513,7 +565,7 @@ export function AboutMe() {
 
           // Hover tweens are created after this context runs, so revert()
           // does not know about them. Drop their inline styles by hand.
-          const hovered = [...rows, ...chips, magnet, glow].filter(Boolean);
+          const hovered = [...rows, magnet, glow].filter(Boolean);
           const markers = query('[data-hover-marker], [data-hover-grade]');
 
           gsap.killTweensOf([...hovered, ...markers]);
@@ -528,7 +580,21 @@ export function AboutMe() {
 
   return (
     <Fragment>
-      <Meta title={title} prefix="About" description={description} />
+      <Meta
+        title={title}
+        description="Computer Science graduate building internal systems, live dashboards and cloud-hosted web apps, with a background in BI and workflow automation."
+        schema={{
+          '@type': 'ProfilePage',
+          mainEntity: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+          hasPart: {
+            '@type': 'ScholarlyArticle',
+            headline: publication.paperTitle,
+            datePublished: publication.year,
+            sameAs: `https://doi.org/${publication.doi}`,
+            author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+          },
+        }}
+      />
       <ProjectContainer className={styles.aboutMe} ref={root}>
         <ProjectBackground
           src={{ src: usesBackground }}
@@ -620,21 +686,25 @@ export function AboutMe() {
             <div className={styles.stack}>
               <ProjectSectionHeading>Skills</ProjectSectionHeading>
               <div className={styles.stackGrid}>
-                {skillGroups.map(group => (
+                {skillLoops.map((group, index) => (
                   <section
                     className={styles.stackGroup}
                     data-reveal="stack"
-                    data-span={group.span}
+                    data-span="full"
                     key={group.id}
                   >
                     <h3 className={styles.stackName}>{group.name}</h3>
-                    <ul className={styles.chipList}>
-                      {group.items.map(item => (
-                        <li className={styles.chip} data-hover="chip" key={item}>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                    <LogoLoop
+                      className={styles.skillLoop}
+                      logos={group.logos}
+                      direction={index % 2 ? 'right' : 'left'}
+                      speed={40}
+                      hoverSpeed={12}
+                      logoHeight={22}
+                      gap={40}
+                      labels="inline"
+                      ariaLabel={`${group.name} skills`}
+                    />
                   </section>
                 ))}
               </div>

@@ -1,3 +1,6 @@
+# The Netlify subdomain is a duplicate of the custom domain. Send it to the canonical host.
+https://ev1shoaib.netlify.app/*  https://ev1shoaib.com/:splat  301!
+
 # The uses page was renamed to /stack. Keeps old links and search results working.
 /uses     /stack   301!
 /uses/    /stack/  301!

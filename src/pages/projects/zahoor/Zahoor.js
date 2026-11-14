@@ -1,4 +1,3 @@
-
 import sliceAppPlaceholder from 'assets/slice-app-placeholder.jpg';
 import sliceApp from 'assets/slice-app.jpg';
 import sliceBackgroundPlaceholder from 'assets/slice-background-placeholder.jpg';
@@ -36,7 +35,16 @@ const roles = ['User Research', 'Interface Design', 'Backend Development'];
 export const Zahoor = () => {
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title="Zahoor: Fashion E-commerce Website"
+        description={description}
+        schema={{
+          '@type': 'CreativeWork',
+          name: title,
+          description,
+          creator: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <ProjectContainer className={styles.zahoor}>
         <ProjectBackground
           src={sliceBackground}
@@ -44,12 +52,7 @@ export const Zahoor = () => {
           placeholder={sliceBackgroundPlaceholder}
           opacity={0.8}
         />
-        <ProjectHeader
-          title={title}
-          description={description}
-          url="https://zahoorbd.com"
-          roles={roles}
-        />
+        <ProjectHeader title={title} description={description} roles={roles} />
         <ProjectSection padding="top">
           <ProjectSectionContent>
             <ProjectImage
@@ -65,12 +68,12 @@ export const Zahoor = () => {
             <div className={styles.imagesText}>
               <ProjectSectionHeading>Technical Specifications</ProjectSectionHeading>
               <ProjectSectionText>
-              Built using WordPress, a user-friendly content management system, for easy 
-              updates and content management.
+                Built using WordPress, a user-friendly content management system, for easy
+                updates and content management.
               </ProjectSectionText>
               <ProjectSectionText>
-              WooCommerce, a powerful e-commerce plugin for WordPress, provides a robust 
-              online store functionality.
+                WooCommerce, a powerful e-commerce plugin for WordPress, provides a robust
+                online store functionality.
               </ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
@@ -78,14 +81,14 @@ export const Zahoor = () => {
                 className={styles.sidebarImage}
                 srcSet={[sliceSidebarLayers, sliceSidebarLayers]}
                 placeholder={sliceSidebarLayersPlaceholder}
-                alt="Mobile view."
+                alt="Zahoor mobile homepage with Eid campaign banners and featured products."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
               <Image
                 className={styles.sidebarImage}
                 srcSet={[sliceSidebarAnnotations, sliceSidebarAnnotations]}
                 placeholder={sliceSidebarAnnotationsPlaceholder}
-                alt="Mobile view."
+                alt="Zahoor mobile category page for women's wear: kurta, co-ord set, salwar kameez and partywear."
                 sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
               />
             </div>
@@ -96,12 +99,12 @@ export const Zahoor = () => {
             <ProjectTextRow>
               <ProjectSectionHeading>Improving the experience</ProjectSectionHeading>
               <ProjectSectionText>
-                Designed a mobile application to simplify product upload, organization, 
-                and management account.
+                Designed a mobile application so the shop team could upload, organise and
+                manage products without opening the WordPress dashboard.
               </ProjectSectionText>
               <ProjectSectionText>
-                Features include easy product import, cost and profit tracking, coupon 
-                management, and potentially inventory management (if applicable).
+                Features include product import, cost and profit tracking, and coupon
+                management.
               </ProjectSectionText>
             </ProjectTextRow>
             <Image
@@ -110,6 +113,25 @@ export const Zahoor = () => {
               alt="Interface of a category."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionContent>
+            <ProjectTextRow>
+              <ProjectSectionHeading>Built for shopping on a phone</ProjectSectionHeading>
+              <ProjectSectionText>
+                On mobile the store keeps its main actions in a fixed bottom bar: Home,
+                Wishlist, Search, Cart and Contact, with a chat button within reach of the
+                thumb. Nothing important sits behind the menu.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Categories branch into the cuts customers actually shop by. Women&apos;s
+                wear, for example, opens on kurta, co-ord set, salwar kameez and
+                partywear. Seasonal campaigns such as the Eid Fest 2024 sale run as
+                full-width banners at the top of the homepage, above the featured
+                products.
+              </ProjectSectionText>
+            </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>

@@ -14,6 +14,7 @@ export function Page404() {
     <section className={styles.page}>
       <Meta
         title="404 Not Found"
+        noindex
         description="404 page not found. This page doesn't exist"
       />
       <Transition in>

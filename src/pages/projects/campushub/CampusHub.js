@@ -39,7 +39,16 @@ const roles = ['Frontend Development', 'Backend Development', 'UI/UX Design'];
 export const CampusHub = () => {
   return (
     <Fragment>
-      <Meta title={title} prefix="Projects" description={description} />
+      <Meta
+        title="SEU CampusHub: Campus Event Platform"
+        description="Event management platform for Southeast University: students discover and register for campus events, admins manage them from a dedicated dashboard."
+        schema={{
+          '@type': 'CreativeWork',
+          name: title,
+          description,
+          creator: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
+        }}
+      />
       <ProjectContainer className={styles.campushub}>
         <ProjectBackground
           src={campushubBackground}
@@ -74,8 +83,8 @@ export const CampusHub = () => {
               </ProjectSectionText>
               <ProjectSectionText>
                 Framer Motion powers the smooth animations, while Firebase handles
-                authentication, database, and storage. TanStack Query manages server state
-                efficiently.
+                authentication, database, and storage. TanStack Query manages server
+                state, and routing runs on wouter to keep the bundle small.
               </ProjectSectionText>
             </div>
             <div className={styles.sidebarImages}>
@@ -155,6 +164,43 @@ export const CampusHub = () => {
               alt="User dashboard showing registered events."
               sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
             />
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection>
+          <ProjectSectionContent>
+            <ProjectTextRow>
+              <ProjectSectionHeading>
+                Three roles, enforced in the database
+              </ProjectSectionHeading>
+              <ProjectSectionText>
+                Every account is a student, an admin or a super user. The checks do not
+                live only in the interface: Firestore security rules read the role from
+                the user&apos;s own record on every write, so hiding a button is never the
+                only thing between a student and the admin tools.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                New accounts can only be created as students, and people can edit their
+                own profile but not their role. A signed-in student can change an event
+                only to update its registration and interest counts. Everything else on an
+                event, along with categories and user management, is reserved for admins
+                and super users.
+              </ProjectSectionText>
+            </ProjectTextRow>
+            <ProjectTextRow>
+              <ProjectSectionHeading>How the data is shaped</ProjectSectionHeading>
+              <ProjectSectionText>
+                Four Firestore collections carry the app: events, categories,
+                registrations and users. An event has a venue, organiser, banner, an
+                optional capacity and a Draft or Published status, so admins can prepare
+                an event before publishing it.
+              </ProjectSectionText>
+              <ProjectSectionText>
+                Categories live in the database rather than in code, each with its own
+                name, colour and icon, so admins can add one without a redeploy.
+                Registrations are separate documents tied to a user and an event, which is
+                what lets admins pull the attendee list for any event.
+              </ProjectSectionText>
+            </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>

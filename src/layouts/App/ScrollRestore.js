@@ -38,7 +38,8 @@ export const ScrollRestore = () => {
     if (hash && targetElement) {
       // If there's a hash in the url and a matching element
       // id, scroll to and focus it
-      jumpTo(targetElement.offsetTop);
+      // Page position, not offsetTop (which is relative to the nearest positioned parent).
+      jumpTo(targetElement.getBoundingClientRect().top + window.scrollY);
       targetElement.focus({ preventScroll: true });
     } else {
       jumpTo(0);
