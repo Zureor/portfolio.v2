@@ -33,7 +33,7 @@ import styles from './CampusHub.module.css';
 
 const title = 'SEU CampusHub';
 const description =
-  'A modern, dynamic event management platform tailored for Southeast University students and administrators. Discover, Register, and Manage Campus Events with Ease.';
+  'SEU CampusHub is an event platform for Southeast University: students find and register for campus events, and admins run them from a dashboard. Roles are enforced in Firestore security rules, not just the interface.';
 const roles = ['Frontend Development', 'Backend Development', 'UI/UX Design'];
 
 export const CampusHub = () => {

@@ -34,7 +34,7 @@ import styles from './CartonConnect.module.css';
 
 const title = 'Carton Connect';
 const description =
-  "A carton ordering and supply portal for Primark's export carton programme, run by PAC-D.";
+  "Carton Connect is the carton ordering and supply portal for Primark's export carton programme, run by PAC-D. I built it solo, and it was load-tested against ten million order lines.";
 const roles = ['Product Design', 'Full-stack Development', 'Cloud Infrastructure'];
 const siteUrl = 'https://cartonconnect.pac-d.com/';
 
@@ -116,7 +116,7 @@ export const CartonConnect = () => {
     <Fragment>
       <Meta
         title="Carton Connect: Carton Ordering Portal"
-        description={description}
+        description="Carton Connect: the carton ordering portal for Primark's export programme at PAC-D, built solo and load-tested against ten million order lines."
         schema={{
           '@type': 'CreativeWork',
           name: title,
