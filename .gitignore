@@ -63,3 +63,6 @@ public/og
 .next
 .DS_Store
 .claude/
+
+# Local Netlify folder
+.netlify
