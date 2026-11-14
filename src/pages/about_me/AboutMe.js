@@ -590,7 +590,9 @@ export function AboutMe() {
             '@type': 'ScholarlyArticle',
             headline: publication.paperTitle,
             datePublished: publication.year,
+            url: `https://doi.org/${publication.doi}`,
             sameAs: `https://doi.org/${publication.doi}`,
+            publisher: { '@type': 'Organization', name: 'IEEE' },
             author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
           },
         }}

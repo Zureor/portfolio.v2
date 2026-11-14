@@ -71,12 +71,19 @@
 
 .dateText {
   color: rgb(var(--rgbPrimary));
+
+  & a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
   opacity: 0;
   transform: translate3d(-5%, 0, 0);
   transition: opacity var(--durationXL) ease;
 
   @media (--mediaUseMotion) {
-    transition: opacity var(--durationXL) ease,
+    transition:
+      opacity var(--durationXL) ease,
       transform var(--durationXL) var(--bezierFastoutSlowin);
   }
 

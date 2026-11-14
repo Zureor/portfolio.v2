@@ -13,11 +13,22 @@ import { formatTimecode } from 'utils/timecode';
 import rehypePrism from '@mapbox/rehype-prism';
 import { generateOgImage } from './og-image';
 
-export default function PostPage({ frontmatter, code, timecode, ogImage }) {
+export default function PostPage({
+  frontmatter,
+  code,
+  timecode,
+  readingMinutes,
+  ogImage,
+}) {
   const MDXComponent = useMemo(() => getMDXComponent(code), [code]);
 
   return (
-    <Post timecode={timecode} ogImage={ogImage} {...frontmatter}>
+    <Post
+      timecode={timecode}
+      readingMinutes={readingMinutes}
+      ogImage={ogImage}
+      {...frontmatter}
+    >
       <MDXComponent components={postMarkdown} />
     </Post>
   );
@@ -45,6 +56,7 @@ export const getStaticProps = async ({ params }) => {
 
   const { time } = readingTime(matter.content);
   const timecode = formatTimecode(time);
+  const readingMinutes = Math.max(1, Math.round(time / 60000));
 
   const ogImage = await generateOgImage({
     title: frontmatter.title,
@@ -54,7 +66,7 @@ export const getStaticProps = async ({ params }) => {
   });
 
   return {
-    props: { code, frontmatter, timecode, ogImage },
+    props: { code, frontmatter, timecode, readingMinutes, ogImage },
     notFound: process.env.NODE_ENV === 'production' && frontmatter.draft,
   };
 };

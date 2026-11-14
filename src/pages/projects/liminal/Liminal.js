@@ -1,5 +1,6 @@
 import { Button } from 'components/Button';
 import { Footer } from 'components/Footer';
+import { Link } from 'components/Link';
 import { Meta } from 'components/Meta';
 import { Depth } from 'components/Motion';
 import {
@@ -16,22 +17,30 @@ import styles from './Liminal.module.css';
 
 const title = 'liminal';
 const description =
-  'A Python library that calibrates LLM judges against human labels using Item Response Theory, treating each judge as a measured instrument rather than an oracle.';
+  'liminal is a Python library that calibrates LLM judges against human labels using Item Response Theory, treating each judge as a measured instrument rather than an oracle.';
 const roles = ['Statistical Modeling', 'Python Library', 'Research Tooling'];
 const repoUrl = 'https://github.com/Zureor/liminal';
+const priorWorkUrl = 'https://arxiv.org/abs/2602.00521';
 
 export const Liminal = () => {
   return (
     <Fragment>
       <Meta
         title="liminal: LLM Judge Calibration with IRT"
-        description={description}
+        description="liminal is a Python library that calibrates LLM judges against human labels with Item Response Theory, separating judge bias from true quality."
         schema={{
           '@type': 'SoftwareSourceCode',
           name: title,
           description,
           codeRepository: repoUrl,
           programmingLanguage: 'Python',
+          license: 'https://www.apache.org/licenses/LICENSE-2.0',
+          citation: {
+            '@type': 'ScholarlyArticle',
+            headline:
+              'Diagnosing the Reliability of LLM-as-a-Judge via Item Response Theory',
+            url: priorWorkUrl,
+          },
           author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
         }}
       />
@@ -277,6 +286,32 @@ export const Liminal = () => {
         <ProjectSection className={styles.section} light>
           <ProjectSectionContent>
             <ProjectTextRow width="l" stretch>
+              <ProjectSectionHeading>How it relates to prior work</ProjectSectionHeading>
+              <ProjectSectionText className={styles.prose}>
+                liminal is not the only project to treat LLM judges with Item Response
+                Theory.{' '}
+                <Link href={priorWorkUrl}>
+                  Choi et al., &#8220;Diagnosing the Reliability of LLM-as-a-Judge via
+                  Item Response Theory&#8221; (ICML 2026)
+                </Link>{' '}
+                also uses a Graded Response Model, and asks whether a judge is a
+                trustworthy instrument: how stable it stays when the prompt is reworded,
+                and how closely it tracks human ratings.
+              </ProjectSectionText>
+              <ProjectSectionText className={styles.prose}>
+                liminal starts from the same model but aims at calibration rather than
+                diagnosis. It puts a length covariate inside the model, so a judge&#8217;s
+                taste for verbosity is estimated separately from item quality, and it
+                reports corrected scores and rankings instead of a reliability verdict.
+                Every judge call is cached by content hash, so the result can be
+                reproduced exactly from free-tier models and a public benchmark.
+              </ProjectSectionText>
+            </ProjectTextRow>
+          </ProjectSectionContent>
+        </ProjectSection>
+        <ProjectSection className={styles.section}>
+          <ProjectSectionContent>
+            <ProjectTextRow width="l" stretch>
               <ProjectSectionHeading>Where it stands</ProjectSectionHeading>
               <div className={styles.statusGroup}>
                 <div>
@@ -304,7 +339,7 @@ export const Liminal = () => {
             </ProjectTextRow>
           </ProjectSectionContent>
         </ProjectSection>
-        <ProjectSection className={styles.section}>
+        <ProjectSection className={styles.section} light>
           <ProjectSectionContent>
             <ProjectTextRow width="l" stretch>
               <ProjectSectionHeading>Read the code</ProjectSectionHeading>

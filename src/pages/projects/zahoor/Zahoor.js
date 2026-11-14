@@ -29,7 +29,7 @@ import styles from './Zahoor.module.css';
 
 const title = 'Zahoor';
 const description =
-  'In collaboration with Zahoor, a Bangladeshi online fashion boutique, I designed and developed their e-commerce website.';
+  'I designed and developed the online store for Zahoor, a Bangladeshi fashion boutique: a WordPress and WooCommerce site built around shopping on a phone, plus the design for a product-management app.';
 const roles = ['User Research', 'Interface Design', 'Backend Development'];
 
 export const Zahoor = () => {
@@ -37,7 +37,7 @@ export const Zahoor = () => {
     <Fragment>
       <Meta
         title="Zahoor: Fashion E-commerce Website"
-        description={description}
+        description="Case study: a mobile-first WordPress and WooCommerce store for Zahoor, a Bangladeshi fashion boutique, plus a product-management app design."
         schema={{
           '@type': 'CreativeWork',
           name: title,

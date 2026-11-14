@@ -10,13 +10,23 @@ import { tokens } from 'components/ThemeProvider/theme';
 import { Transition } from 'components/Transition';
 import { useParallax, useScrollToHash } from 'hooks';
 import RouterLink from 'next/link';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { clamp } from 'utils/clamp';
 import { formatDate } from 'utils/date';
 import { cssProps, msToNum, numToMs } from 'utils/style';
 import styles from './Post.module.css';
 
-export const Post = ({ children, title, date, abstract, banner, timecode, ogImage }) => {
+export const Post = ({
+  children,
+  title,
+  date,
+  updated,
+  abstract,
+  banner,
+  timecode,
+  readingMinutes,
+  ogImage,
+}) => {
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
   useParallax(0.004, value => {
@@ -43,6 +53,8 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
           description: abstract,
           image: ogImage,
           datePublished: date,
+          dateModified: updated || date,
+          timeRequired: `PT${readingMinutes}M`,
           author: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
           publisher: { '@id': `${process.env.NEXT_PUBLIC_WEBSITE_URL}/#person` },
         }}
@@ -75,7 +87,18 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
                 <div className={styles.date}>
                   <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
                   <Text className={styles.dateText} data-visible={visible}>
-                    <time dateTime={date}>{formatDate(date)}</time>
+                    By{' '}
+                    <RouterLink href="/about_me/" rel="author">
+                      Md. Shoaib Rana
+                    </RouterLink>{' '}
+                    &middot; <time dateTime={date}>{formatDate(date)}</time>
+                    {updated && (
+                      <Fragment>
+                        {' '}
+                        &middot; Updated{' '}
+                        <time dateTime={updated}>{formatDate(updated)}</time>
+                      </Fragment>
+                    )}
                   </Text>
                 </div>
               )}
@@ -103,7 +126,13 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
               >
                 <ArrowDown aria-hidden />
               </RouterLink>
-              <div className={styles.timecode}>{timecode}</div>
+              <time
+                className={styles.timecode}
+                dateTime={`PT${readingMinutes}M`}
+                title={`${readingMinutes} min read`}
+              >
+                {timecode}
+              </time>
             </div>
           </div>
         </header>
